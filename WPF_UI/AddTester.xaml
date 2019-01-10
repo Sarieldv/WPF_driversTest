@@ -1,0 +1,131 @@
+﻿<UserControl x:Class="WPF_UI.AddTester"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WPF_UI"
+             mc:Ignorable="d" >
+   
+    
+    <StackPanel Background="White">
+        <StackPanel.Resources>
+            <LinearGradientBrush x:Key="MyBackground" EndPoint="0.504,1.5" StartPoint="0.504,0.03">
+                <GradientStop Color="MediumPurple" Offset="0"/>
+                <GradientStop Color="#FFFFFFFF" Offset="0.567"/>
+            </LinearGradientBrush>
+            <Style TargetType="Label">
+                <Setter Property="Background" Value="{StaticResource MyBackground}"/>
+                <Setter Property="BorderBrush" Value="Black"/>
+                <Setter Property="BorderThickness" Value="1"/>
+            </Style>
+            <Style TargetType="Grid">
+                <Setter Property="Margin" Value="10"/>
+            </Style>
+        </StackPanel.Resources>
+        <Label Content="Add a new tester:"/>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0">
+                <Label Content="First Name:"/>
+                <TextBox Name="FirstName"/>
+                <Label Content="Last Name:"/>
+                <TextBox Name="LastName"/>
+                <Label Content="ID Number:" />
+                <TextBox Name="IDNumber"/>
+                <Label Content="Gender:"/>
+                <ComboBox Name="Gender">
+                    <ComboBoxItem>Male</ComboBoxItem>
+                    <ComboBoxItem>Female</ComboBoxItem>
+                </ComboBox>
+                <Label Content="City Name:"/>
+                <TextBox Name="CityName"/>
+                <Label Content="Address Number: " />
+                <TextBox Name="AddressNumber"/>
+                <Label Content="Street Name: "/>
+                <TextBox Name="StreetName"/>
+                <Label Content="Birth Date:"/>
+                <DatePicker Name="BirthDate"/>
+            </StackPanel>
+            <StackPanel Grid.Column="1">
+                <Label Content="Phone Number:"/>
+                <TextBox Name="PhoneNumber"/>
+                <Label Content="Home Or Mobile:"/>
+                <ComboBox Name="HomeorMobile">
+                    <ComboBoxItem>Mobile Phone</ComboBoxItem>
+                    <ComboBoxItem>Home Phone</ComboBoxItem>
+                </ComboBox>
+                <Label Content="Years of experience:"/>
+                <local:NumberUpDown x:Name="YearsOfExperience" HorizontalAlignment="Center"/>
+                <Label Content="Maximum amount of tests every week:"/>
+                <local:NumberUpDown x:Name="MaxTests" HorizontalAlignment="Center"/>
+                <Label Content="Maximum amount of distance from the test(Km):"/>
+                <local:NumberUpDown x:Name="MaxDistance" HorizontalAlignment="Center"/>
+                <Label Content="Vehicles this tester specializes in:"/>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <StackPanel Grid.Column="0">
+                        <CheckBox Name="AutomaticPrivateVehicle" Content="Automatic Private Vehicle"/>
+                        <CheckBox Name="AutomaticTwoWheelVehicle" Content="Automatic Two Wheel Vehicle"/>
+                        <CheckBox Name="AutomaticMediumTruck" Content="Automatic Medium Truck"/>
+                        <CheckBox Name="AutomaticHeavyTruck" Content="Automatic Heavy Truck"/>
+                    </StackPanel>
+                    <StackPanel Grid.Column="1">
+
+                        <CheckBox Name="ManualPrivateVehicle" Content="Manual Private Vehicle"/>
+                        <CheckBox Name="ManualTwoWheelVehicle" Content="Manual Two Wheel Vehicle"/>
+                        <CheckBox Name="ManualMediumTruck" Content="Manual Medium Truck"/>
+                        <CheckBox Name="ManualHeavyTruck" Content="Manual Heavy Truck"/>
+                    </StackPanel>
+                </Grid>
+            </StackPanel>
+        </Grid>
+       
+     
+        <Button x:Name="addButton" Content="Add" Margin="10" Click="addButton_Click">
+            <Button.Style>
+                <Style>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding ElementName=FirstName, Path=Text}" Value="">
+                            <Setter Property="Button.IsEnabled" Value="false"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding ElementName=LastName, Path=Text}" Value="">
+                            <Setter Property="Button.IsEnabled" Value="false"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding ElementName=IDNumber, Path=Text}" Value="">
+                            <Setter Property="Button.IsEnabled" Value="False"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding ElementName=Gender, Path = SelectedIndex}" Value="-1">
+                            <Setter Property="Button.IsEnabled" Value="False"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding ElementName=CityName, Path = Text}" Value="">
+                            <Setter Property="Button.IsEnabled" Value="False"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding ElementName=AddressNumber, Path = Text}" Value="">
+                            <Setter Property="Button.IsEnabled" Value="False"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding ElementName=StreetName, Path = Text}" Value="">
+                            <Setter Property="Button.IsEnabled" Value="False"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding ElementName=BirthDate, Path = SelectedDate}" Value="null">
+                            <Setter Property="Button.IsEnabled" Value="False"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding ElementName=PhoneNumber, Path=Text}" Value="">
+                            <Setter Property="Button.IsEnabled" Value="False"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding ElementName=HomeorMobile, Path = SelectedIndex}" Value="-1">
+                            <Setter Property="Button.IsEnabled" Value="False"/>
+                        </DataTrigger>
+                        
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
+        <Button x:Name="BackButton" Content="Back" Margin="10" Click="BackButton_Click"/>
+    </StackPanel>
+</UserControl>

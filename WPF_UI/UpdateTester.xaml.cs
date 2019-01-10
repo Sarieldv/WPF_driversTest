@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace WPF_DriversTest
+namespace WPF_UI
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for UpdateTester.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class UpdateTester : UserControl
     {
-        public MainWindow()
+        public UpdateTester()
         {
             InitializeComponent();
         }

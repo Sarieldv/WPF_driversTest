@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace WPF_DriversTest.Properties
+namespace WPF_UI.Properties
 {
 
 

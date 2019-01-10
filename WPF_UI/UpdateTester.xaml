@@ -1,0 +1,71 @@
+﻿<UserControl x:Class="WPF_UI.UpdateTester"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WPF_UI"
+             mc:Ignorable="d">
+    <StackPanel Background="White">
+        <StackPanel.Resources>
+            <LinearGradientBrush x:Key="MyBackground" EndPoint="0.504,1.5" StartPoint="0.504,0.03">
+                <GradientStop Color="MediumPurple" Offset="0"/>
+                <GradientStop Color="#FFFFFFFF" Offset="0.567"/>
+            </LinearGradientBrush>
+            <Style TargetType="Label">
+                <Setter Property="Background" Value="{StaticResource MyBackground}"/>
+                <Setter Property="BorderBrush" Value="Black"/>
+                <Setter Property="BorderThickness" Value="1"/>
+            </Style>
+            <Style TargetType="Grid">
+                <Setter Property="Margin" Value="10"/>
+            </Style>
+        </StackPanel.Resources>
+        <Label Content="Update Tester (all fields are optional)"/>
+        <Label Content="Choose which tester to update:"/>
+        <ListBox x:Name="TesterOptions" BorderThickness="3"/>
+        <Label Content="Update First Name:"/>
+        <TextBox Name="FirstName"/>
+        <Label Content="Update Last Name:"/>
+        <TextBox Name="LastName"/>
+        <Label Content="Update City Name:"/>
+        <TextBox Name="CityName"/>
+        <Label Content="Update Address Number: " />
+        <TextBox Name="AddressNumber"/>
+        <Label Content="Update Street Name: "/>
+        <TextBox Name="StreetName"/>
+        <Label Content="Update Phone Number:"/>
+        <TextBox Name="PhoneNumber"/>
+        <Label Content="Home Or Mobile:"/>
+        <ComboBox Name="HomeorMobile">
+            <ComboBoxItem>Mobile Phone</ComboBoxItem>
+            <ComboBoxItem>Home Phone</ComboBoxItem>
+        </ComboBox>
+        <Label Content="Update Years of experience:"/>
+        <local:NumberUpDown x:Name="YearsOfExperience" HorizontalAlignment="Center"/>
+        <Label Content="Update Maximum amount of tests every week:"/>
+        <local:NumberUpDown x:Name="MaxTests" HorizontalAlignment="Center"/>
+        <Label Content="Update Maximum amount of distance from the test(Km):"/>
+        <local:NumberUpDown x:Name="MaxDistance" HorizontalAlignment="Center"/>
+        <Label Content="Vehicles this tester specializes in:"/>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Grid.Column="0">
+                <CheckBox Name="AutomaticPrivateVehicle" Content="Automatic Private Vehicle"/>
+                <CheckBox Name="AutomaticTwoWheelVehicle" Content="Automatic Two Wheel Vehicle"/>
+                <CheckBox Name="AutomaticMediumTruck" Content="Automatic Medium Truck"/>
+                <CheckBox Name="AutomaticHeavyTruck" Content="Automatic Heavy Truck"/>
+            </StackPanel>
+            <StackPanel Grid.Column="1">
+
+                <CheckBox Name="ManualPrivateVehicle" Content="Manual Private Vehicle"/>
+                <CheckBox Name="ManualTwoWheelVehicle" Content="Manual Two Wheel Vehicle"/>
+                <CheckBox Name="ManualMediumTruck" Content="Manual Medium Truck"/>
+                <CheckBox Name="ManualHeavyTruck" Content="Manual Heavy Truck"/>
+            </StackPanel>
+        </Grid>
+
+    </StackPanel>
+</UserControl>
