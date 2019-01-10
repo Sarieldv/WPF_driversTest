@@ -22,50 +22,72 @@
         </StackPanel.Resources>
         <Label Content="Update Tester (all fields are optional)"/>
         <Label Content="Choose which tester to update:"/>
-        <ListBox x:Name="TesterOptions" BorderThickness="3"/>
-        <Label Content="Update First Name:"/>
-        <TextBox Name="FirstName"/>
-        <Label Content="Update Last Name:"/>
-        <TextBox Name="LastName"/>
-        <Label Content="Update City Name:"/>
-        <TextBox Name="CityName"/>
-        <Label Content="Update Address Number: " />
-        <TextBox Name="AddressNumber"/>
-        <Label Content="Update Street Name: "/>
-        <TextBox Name="StreetName"/>
-        <Label Content="Update Phone Number:"/>
-        <TextBox Name="PhoneNumber"/>
-        <Label Content="Home Or Mobile:"/>
-        <ComboBox Name="HomeorMobile">
-            <ComboBoxItem>Mobile Phone</ComboBoxItem>
-            <ComboBoxItem>Home Phone</ComboBoxItem>
-        </ComboBox>
-        <Label Content="Update Years of experience:"/>
-        <local:NumberUpDown x:Name="YearsOfExperience" HorizontalAlignment="Center"/>
-        <Label Content="Update Maximum amount of tests every week:"/>
-        <local:NumberUpDown x:Name="MaxTests" HorizontalAlignment="Center"/>
-        <Label Content="Update Maximum amount of distance from the test(Km):"/>
-        <local:NumberUpDown x:Name="MaxDistance" HorizontalAlignment="Center"/>
-        <Label Content="Vehicles this tester specializes in:"/>
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <StackPanel Grid.Column="0">
-                <CheckBox Name="AutomaticPrivateVehicle" Content="Automatic Private Vehicle"/>
-                <CheckBox Name="AutomaticTwoWheelVehicle" Content="Automatic Two Wheel Vehicle"/>
-                <CheckBox Name="AutomaticMediumTruck" Content="Automatic Medium Truck"/>
-                <CheckBox Name="AutomaticHeavyTruck" Content="Automatic Heavy Truck"/>
-            </StackPanel>
-            <StackPanel Grid.Column="1">
+        <ListBox x:Name="TesterOptions" BorderThickness="3" SelectionChanged="TesterOptions_SelectionChanged"/>
+        <StackPanel x:Name="FieldsPanel">
+            <StackPanel.Style>
+                <Style>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding ElementName=TesterOptions,  Path=SelectedItem}" Value="null">
+                            <Setter Property="StackPanel.IsEnabled" Value="False"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </StackPanel.Style>
+            <Label Content="Update First Name:"/>
+            <TextBox Name="FirstName" TextChanged="FirstName_TextChanged"/>
+            <Label Content="Update Last Name:"/>
+            <TextBox Name="LastName" TextChanged="LastName_TextChanged"/>
+            <Label Content="Update City Name:"/>
+            <TextBox Name="CityName" TextChanged="CityName_TextChanged"/>
+            <Label Content="Update Address Number: " />
+            <TextBox Name="AddressNumber" TextChanged="AddressNumber_TextChanged"/>
+            <Label Content="Update Street Name: "/>
+            <TextBox Name="StreetName" TextChanged="StreetName_TextChanged"/>
+            <Label Content="Update Phone Number:"/>
+            <TextBox Name="PhoneNumber" TextChanged="PhoneNumber_TextChanged"/>
+            <Label Content="Home Or Mobile:"/>
+            <ComboBox Name="HomeorMobile" SelectionChanged="HomeorMobile_SelectionChanged">
+                <ComboBoxItem>Mobile Phone</ComboBoxItem>
+                <ComboBoxItem>Home Phone</ComboBoxItem>
+            </ComboBox>
+            <Label Content="Update Years of experience:"/>
+            <local:NumberUpDown x:Name="YearsOfExperience" HorizontalAlignment="Center"/>
+            <Label Content="Update Maximum amount of tests every week:"/>
+            <local:NumberUpDown x:Name="MaxTests" HorizontalAlignment="Center"/>
+            <Label Content="Update Maximum amount of distance from the test(Km):"/>
+            <local:NumberUpDown x:Name="MaxDistance" HorizontalAlignment="Center"/>
+            <Label Content="Vehicles this tester specializes in:"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0">
+                    <CheckBox Name="AutomaticPrivateVehicle" Content="Automatic Private Vehicle"/>
+                    <CheckBox Name="AutomaticTwoWheelVehicle" Content="Automatic Two Wheel Vehicle"/>
+                    <CheckBox Name="AutomaticMediumTruck" Content="Automatic Medium Truck"/>
+                    <CheckBox Name="AutomaticHeavyTruck" Content="Automatic Heavy Truck"/>
+                </StackPanel>
+                <StackPanel Grid.Column="1">
 
-                <CheckBox Name="ManualPrivateVehicle" Content="Manual Private Vehicle"/>
-                <CheckBox Name="ManualTwoWheelVehicle" Content="Manual Two Wheel Vehicle"/>
-                <CheckBox Name="ManualMediumTruck" Content="Manual Medium Truck"/>
-                <CheckBox Name="ManualHeavyTruck" Content="Manual Heavy Truck"/>
-            </StackPanel>
-        </Grid>
-
+                    <CheckBox Name="ManualPrivateVehicle" Content="Manual Private Vehicle"/>
+                    <CheckBox Name="ManualTwoWheelVehicle" Content="Manual Two Wheel Vehicle"/>
+                    <CheckBox Name="ManualMediumTruck" Content="Manual Medium Truck"/>
+                    <CheckBox Name="ManualHeavyTruck" Content="Manual Heavy Truck"/>
+                </StackPanel>
+            </Grid>
+        </StackPanel>
+        <Button x:Name="UpdateButton" Content="Update Tester" Margin="10" Click="UpdateButton_Click">
+            <Button.Style>
+                <Style>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding ElementName=TesterOptions, Path=SelectedItem}" Value="null">
+                            <Setter Property="Button.IsEnabled" Value="False"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
+        <Button x:Name="BackButton" Content="Back" Margin="10" Click="BackButton_Click"/>
     </StackPanel>
 </UserControl>

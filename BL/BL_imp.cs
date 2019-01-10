@@ -530,15 +530,15 @@ namespace BL
             }
             if (tester.TestsSignedUpFor > updatedTester.MaximumWeeklyTests)
             {
-                throw new Exception("Tester is already signed up to more tests then will be possible.");
+                throw new Exception("Tester is already signed up to more tests then will be possible. Please manually cancel those tests before changing the amount of tests possible.\n At least "+ (tester.TestsSignedUpFor - updatedTester.MaximumWeeklyTests).ToString() +" will need to be canceled to allow this action.");
             }
             if (tester.MyVehicles != updatedTester.MyVehicles && k.Any(t => updatedTester.hasVehicle(t.TestVehicle) == false))
             {
-                throw new Exception("Tester is signed up to tests he will not be able to do because he will no longer specialize in the needed vehicle. Please cancel those tests before updating the tester.");
+                throw new Exception("Tester is signed up to tests he will not be able to do because he will no longer specialize in the needed vehicle.\n Please manually cancel those tests before updating the tester.");
             }
             if ((tester.MaxDistanceFromTest > updatedTester.MaxDistanceFromTest || tester.MyAddress != updatedTester.MyAddress) && k.Any(t => CalcDistance(updatedTester.MyAddress, t.AddressOfDeparture) > updatedTester.MaxDistanceFromTest))
             {
-                throw new Exception("Tester is signed up to tests he will not be able to do because his address will be too far from the test. Please cancel those tests before updating the tester.");
+                throw new Exception("Tester is signed up to tests he will not be able to do because his address will be too far from the test.\n Please manually cancel those tests before updating the tester.");
             }
             if (updatedTester.Age() > Configuration.MaximumTesterAge)
             {
