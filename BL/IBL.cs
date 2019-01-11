@@ -32,7 +32,7 @@ namespace BL
 
         List<Tester> TestersByDistance(int _distance, Address address);
         List<Tester> TestersBusyByTime(DateTime _dateTime);
-        List<DateTime> GetAvailableDatesForTest(Trainee trainee);
+        List<TesterAndDate> GetAvailableDatesForTest(Trainee trainee);
         List<DateTime> GetAvailableDates(Tester tester);
         List<Tester> TestersFreeByTime(DateTime dateTime);
         List<Tester> TestersByCity(Address address);

@@ -39,7 +39,9 @@
         <Label Content="This test is for trainee:"/>
         <ComboBox x:Name="traineeOptions" SelectionChanged="traineeOptions_SelectionChanged"/>
         <Label Content="Choose a Date:"/>
-        <ComboBox x:Name="dateAndDistanceOptions"/>
+        <Viewbox Height="auto" Width="300">
+            <DatePicker x:Name="datePicker" />
+        </Viewbox>
         <Button Name="addButton" Content="Add test" Margin="10" FontSize="30" Click="addButton_Click">
             <Button.Style>
                 <Style>

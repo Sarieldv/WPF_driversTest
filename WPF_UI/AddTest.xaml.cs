@@ -46,14 +46,13 @@ namespace WPF_UI
 
         private void backButton_Click(object sender, RoutedEventArgs e)
         {
-
+            //go back
         }
 
         private void traineeOptions_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            thisTrainee = (from t in Utilities.ReturnTrainees()
-                           where t.ToString() == (sender as ComboBox).SelectedItem.ToString()
-                           select t).FirstOrDefault();
+            thisTrainee = Utilities.ReturnTrainees().Find(t => t.ToString() == (sender as ComboBox).SelectedItem.ToString());
+            
         }
     }
 }

@@ -44,9 +44,7 @@ namespace WPF_UI
         {
             if (!Utilities.AreYouSureBox("erase this tester"))
                 return;
-            var k = (from t in Utilities.ReturnTesters()
-                     where t.ToString() == TesterOptions.ToString()
-                     select t).FirstOrDefault();
+            var k = Utilities.ReturnTesters().Find(t => t.ToString() == TesterOptions.ToString());
             FactoryBL.Instance.EraseTester(k);
             this.Visibility = Visibility.Collapsed;
         }

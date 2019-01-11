@@ -138,9 +138,7 @@ namespace WPF_UI
 
         private void TesterOptions_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            thisTester = (from t in Utilities.ReturnTesters()
-                                  where t.ToString() == TesterOptions.ToString()
-                                  select t).FirstOrDefault();
+            thisTester = Utilities.ReturnTesters().Find(t => t.ToString() == TesterOptions.ToString());
             copyTester = thisTester;
             AutomaticPrivateVehicle.IsChecked = thisTester.hasVehicle(new VehicleParams(Vehicle.PrivateVehicle, GearBox.Automatic));
             AutomaticTwoWheelVehicle.IsChecked = thisTester.hasVehicle(new VehicleParams(Vehicle.TwoWheelVehicle, GearBox.Automatic));

@@ -222,20 +222,32 @@ namespace BL
             {
                 throw new Exception("Trainee already has a test.");
             }
-            List<Tester> intersection = (List<Tester>)TestersBySpecialty(trainee.TraineeVehicle).Intersect(TestersFreeByTime(dateTime));
-            var k = (from t in intersection
-                     where t.MaxDistanceFromTest >= CalcDistance(t.MyAddress, trainee.MyAddress)
-                     select t).OrderByDescending(t=>CalcDistance(t.MyAddress, trainee.MyAddress));
-            if(k.DefaultIfEmpty() == k)
+            List<Tester> intersection = (List<Tester>)TestersBySpecialty(trainee.TraineeVehicle).Intersect(TestersFreeByTime(dateTime)).OrderBy(t => CalcDistance(t.MyAddress, trainee.MyAddress));
+            //var k = (from t in intersection
+            //         where t.MaxDistanceFromTest >= CalcDistance(t.MyAddress, trainee.MyAddress)
+            //         select t).OrderByDescending(t=>CalcDistance(t.MyAddress, trainee.MyAddress));
+            if(intersection.DefaultIfEmpty() == intersection)
             {
                 throw new Exception("There are no testers that can test at that time with that kind of test.");
             }
-            Tester tester = (from t in k
-                             where CalcDistance(t.MyAddress, trainee.MyAddress) == CalcDistance(k.Last().MyAddress, trainee.MyAddress)
+            Tester tester = (from t in intersection
+                             where CalcDistance(t.MyAddress, trainee.MyAddress) == CalcDistance(intersection.First().MyAddress, trainee.MyAddress)
                              select t).OrderByDescending(t => t.YearsOfExperience).First(); 
-            AddTest(new Test(tester.IDNumber, trainee.TraineeVehicle, trainee.IDNumber, trainee.MyAddress, dateTime));
+            AddTest(new Test(tester.IDNumber, trainee.TraineeVehicle, trainee.IDNumber, BestTestAddress(tester, trainee), dateTime));
         }
-
+        public int TestDistance(Tester _tester, Trainee _trainee)
+        {
+            return CalcDistance(_trainee.MyAddress, BestTestAddress(_tester, _trainee));
+        }
+        public Address BestTestAddress(Tester _tester, Trainee _trainee)
+        {
+            if(CalcDistance(_tester.MyAddress, _trainee.MyAddress) <= _tester.MaxDistanceFromTest)
+            {
+                return _trainee.MyAddress;
+            }
+            //when real maps will be implemented this will return an address that is the closest to trainee that also is smaller then the maximum distance
+            return _tester.MyAddress;
+        }
         public List<Tester> ReturnTesters()
         {
             try
@@ -650,19 +662,22 @@ namespace BL
             return k as List<Tester>;
         }
 
-        public List<DateTime> GetAvailableDatesForTest(Trainee trainee)
+        public List<TesterAndDate> GetAvailableDatesForTest(Trainee trainee)
         {
             if (trainee == null)
                 return null;
             var k = TestersBySpecialty(trainee.TraineeVehicle).Intersect((from t in ReturnTesters()
                                                                           orderby CalcDistance(t.MyAddress, trainee.MyAddress)
                                                                           select t));
-            List<DateTime> dates = new List<DateTime>();
+            List<TesterAndDate> returnList = new List<TesterAndDate>();
             foreach (var Tester in k)
             {
-                dates.Union(GetAvailableDates(Tester));
+                foreach (var date in GetAvailableDates(Tester))
+                {
+                    returnList.Add(new TesterAndDate(Tester,date));
+                }
             }
-            return dates;
+            return returnList;
         }
 
         public List<DateTime> GetAvailableDates(Tester tester)
