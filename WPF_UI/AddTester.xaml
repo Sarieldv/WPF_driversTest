@@ -5,8 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:WPF_UI"
              mc:Ignorable="d" >
-   
-    
+
+
     <StackPanel Background="White">
         <StackPanel.Resources>
             <LinearGradientBrush x:Key="MyBackground" EndPoint="0.504,1.5" StartPoint="0.504,0.03">
@@ -17,9 +17,24 @@
                 <Setter Property="Background" Value="{StaticResource MyBackground}"/>
                 <Setter Property="BorderBrush" Value="Black"/>
                 <Setter Property="BorderThickness" Value="1"/>
+                <Setter Property="FontSize" Value="30"/>
             </Style>
             <Style TargetType="Grid">
                 <Setter Property="Margin" Value="10"/>
+            </Style>
+            <Style TargetType="TextBox">
+                <Setter Property="FontSize" Value="30"/>
+            </Style>
+            <Style TargetType="ComboBox">
+                <Setter Property="FontSize" Value="30"/>
+            </Style>
+            <Style TargetType="Viewbox">
+                <Setter Property="Height" Value="auto"/>
+                <Setter Property="Width" Value="1000"/>
+            </Style>
+            <Style TargetType="Button">
+                <Setter Property="Margin" Value="10"/>
+                <Setter Property="FontSize" Value="30"/>
             </Style>
         </StackPanel.Resources>
         <Label Content="Add a new tester:"/>
@@ -47,7 +62,10 @@
                 <Label Content="Street Name: "/>
                 <TextBox Name="StreetName"/>
                 <Label Content="Birth Date:"/>
-                <DatePicker Name="BirthDate"/>
+                <Viewbox Height="auto" Width="300">
+                    <DatePicker Name="BirthDate"/>
+                </Viewbox>
+
             </StackPanel>
             <StackPanel Grid.Column="1">
                 <Label Content="Phone Number:"/>
@@ -64,30 +82,36 @@
                 <Label Content="Maximum amount of distance from the test(Km):"/>
                 <local:NumberUpDown x:Name="MaxDistance" HorizontalAlignment="Center"/>
                 <Label Content="Vehicles this tester specializes in:"/>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <StackPanel Grid.Column="0">
-                        <CheckBox Name="AutomaticPrivateVehicle" Content="Automatic Private Vehicle"/>
-                        <CheckBox Name="AutomaticTwoWheelVehicle" Content="Automatic Two Wheel Vehicle"/>
-                        <CheckBox Name="AutomaticMediumTruck" Content="Automatic Medium Truck"/>
-                        <CheckBox Name="AutomaticHeavyTruck" Content="Automatic Heavy Truck"/>
-                    </StackPanel>
-                    <StackPanel Grid.Column="1">
+                <Viewbox>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
 
-                        <CheckBox Name="ManualPrivateVehicle" Content="Manual Private Vehicle"/>
-                        <CheckBox Name="ManualTwoWheelVehicle" Content="Manual Two Wheel Vehicle"/>
-                        <CheckBox Name="ManualMediumTruck" Content="Manual Medium Truck"/>
-                        <CheckBox Name="ManualHeavyTruck" Content="Manual Heavy Truck"/>
-                    </StackPanel>
-                </Grid>
+                        <StackPanel Grid.Column="0">
+                            <CheckBox Name="AutomaticPrivateVehicle" Content="Automatic Private Vehicle"/>
+                            <CheckBox Name="AutomaticTwoWheelVehicle" Content="Automatic Two Wheel Vehicle"/>
+                            <CheckBox Name="AutomaticMediumTruck" Content="Automatic Medium Truck"/>
+                            <CheckBox Name="AutomaticHeavyTruck" Content="Automatic Heavy Truck"/>
+                        </StackPanel>
+
+
+
+                        <StackPanel Grid.Column="1">
+
+                            <CheckBox Name="ManualPrivateVehicle" Content="Manual Private Vehicle"/>
+                            <CheckBox Name="ManualTwoWheelVehicle" Content="Manual Two Wheel Vehicle"/>
+                            <CheckBox Name="ManualMediumTruck" Content="Manual Medium Truck"/>
+                            <CheckBox Name="ManualHeavyTruck" Content="Manual Heavy Truck"/>
+                        </StackPanel>
+                    </Grid>
+                </Viewbox>
             </StackPanel>
         </Grid>
-       
-     
-        <Button x:Name="addButton" Content="Add" Margin="10" Click="addButton_Click">
+
+
+        <Button x:Name="addButton" Content="Add" FontSize="30" Margin="10" Click="addButton_Click">
             <Button.Style>
                 <Style>
                     <Style.Triggers>
@@ -121,11 +145,11 @@
                         <DataTrigger Binding="{Binding ElementName=HomeorMobile, Path = SelectedIndex}" Value="-1">
                             <Setter Property="Button.IsEnabled" Value="False"/>
                         </DataTrigger>
-                        
+
                     </Style.Triggers>
                 </Style>
             </Button.Style>
         </Button>
-        <Button x:Name="BackButton" Content="Back" Margin="10" Click="BackButton_Click"/>
+        <Button x:Name="BackButton" Content="Back"  Click="BackButton_Click"/>
     </StackPanel>
 </UserControl>

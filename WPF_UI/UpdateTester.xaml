@@ -15,9 +15,24 @@
                 <Setter Property="Background" Value="{StaticResource MyBackground}"/>
                 <Setter Property="BorderBrush" Value="Black"/>
                 <Setter Property="BorderThickness" Value="1"/>
+                <Setter Property="FontSize" Value="30"/>
             </Style>
             <Style TargetType="Grid">
                 <Setter Property="Margin" Value="10"/>
+            </Style>
+            <Style TargetType="TextBox">
+                <Setter Property="FontSize" Value="30"/>
+            </Style>
+            <Style TargetType="ComboBox">
+                <Setter Property="FontSize" Value="30"/>
+            </Style>
+            <Style TargetType="Viewbox">
+                <Setter Property="Height" Value="auto"/>
+                <Setter Property="Width" Value="1000"/>
+            </Style>
+            <Style TargetType="Button">
+                <Setter Property="Margin" Value="10"/>
+                <Setter Property="FontSize" Value="30"/>
             </Style>
         </StackPanel.Resources>
         <Label Content="Update Tester (all fields are optional)"/>
@@ -57,6 +72,7 @@
             <Label Content="Update Maximum amount of distance from the test(Km):"/>
             <local:NumberUpDown x:Name="MaxDistance" HorizontalAlignment="Center"/>
             <Label Content="Vehicles this tester specializes in:"/>
+            <Viewbox>
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
@@ -76,8 +92,9 @@
                     <CheckBox Name="ManualHeavyTruck" Content="Manual Heavy Truck"/>
                 </StackPanel>
             </Grid>
+            </Viewbox>
         </StackPanel>
-        <Button x:Name="UpdateButton" Content="Update Tester" Margin="10" Click="UpdateButton_Click">
+        <Button x:Name="UpdateButton" Content="Update Tester" FontSize="30" Margin="10" Click="UpdateButton_Click">
             <Button.Style>
                 <Style>
                     <Style.Triggers>

@@ -54,6 +54,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="AddTest.xaml.cs">
+      <DependentUpon>AddTest.xaml</DependentUpon>
+    </Compile>
     <Compile Include="EraseTester.xaml.cs">
       <DependentUpon>EraseTester.xaml</DependentUpon>
     </Compile>
@@ -61,6 +64,10 @@
       <DependentUpon>UpdateTester.xaml</DependentUpon>
     </Compile>
     <Compile Include="Utilities.cs" />
+    <Page Include="AddTest.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="AddTester.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
