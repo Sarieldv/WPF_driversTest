@@ -20,8 +20,40 @@
             <Style TargetType="Grid">
                 <Setter Property="Margin" Value="10"/>
             </Style>
+            <Style TargetType="TextBox">
+                <Setter Property="FontSize" Value="30"/>
+            </Style>
+            <Style TargetType="ComboBox">
+                <Setter Property="FontSize" Value="30"/>
+            </Style>
+            <Style TargetType="Viewbox">
+                <Setter Property="Height" Value="auto"/>
+                <Setter Property="Width" Value="1000"/>
+            </Style>
+            <Style TargetType="Button">
+                <Setter Property="Margin" Value="10"/>
+                <Setter Property="FontSize" Value="30"/>
+            </Style>
         </StackPanel.Resources>
-
         <Label Content="Get A Test:"/>
+        <Label Content="This test is for trainee:"/>
+        <ComboBox x:Name="traineeOptions" SelectionChanged="traineeOptions_SelectionChanged"/>
+        <Label Content="Choose a Date:"/>
+        <ComboBox x:Name="dateAndDistanceOptions"/>
+        <Button Name="addButton" Content="Add test" Margin="10" FontSize="30" Click="addButton_Click">
+            <Button.Style>
+                <Style>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding ElementName=traineeOptions, Path=SelectedItem}" Value="null">
+                            <Setter Property="Button.IsEnabled" Value="False"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding ElementName=dateAndDistanceOptions, Path=SelectedItem}" Value="null">
+                            <Setter Property="Button.IsEnabled" Value="False"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
+        <Button Name="backButton" Content="Back" Click="backButton_Click"/>
     </StackPanel>
 </UserControl>

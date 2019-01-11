@@ -79,9 +79,20 @@ namespace WPF_UI
             catch (Exception ex)
             {
                 ErrorBox(ex.Message);
+                return null;
             }
-            return null;
         }
-
+        public static List<Trainee> ReturnTrainees()
+        {
+            try
+            {
+                return FactoryBL.Instance.ReturnTrainees();
+            }
+            catch (Exception ex)
+            {
+                ErrorBox(ex.Message);
+                return null;
+            }
+        }
     }
 }

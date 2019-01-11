@@ -654,10 +654,9 @@ namespace BL
         {
             if (trainee == null)
                 return null;
-            var a = (from t in ReturnTesters()
-                     where t.MaxDistanceFromTest >= CalcDistance(trainee.MyAddress, t.MyAddress)
-                     select t);
-            var k = TestersBySpecialty(trainee.TraineeVehicle).Intersect(a);
+            var k = TestersBySpecialty(trainee.TraineeVehicle).Intersect((from t in ReturnTesters()
+                                                                          orderby CalcDistance(t.MyAddress, trainee.MyAddress)
+                                                                          select t));
             List<DateTime> dates = new List<DateTime>();
             foreach (var Tester in k)
             {

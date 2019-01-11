@@ -29,7 +29,7 @@ namespace WPF_UI
             {
                 //go back
             }
-                foreach (var t in Utilities.ReturnTesters())
+                foreach (var t in testers)
                 {
                     ListBoxItem boxItem = new ListBoxItem();
                     boxItem.Content = t.ToString();
