@@ -133,7 +133,7 @@ namespace WPF_UI
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
-            Visibility = Visibility.Collapsed;
+            //go back
         }
 
         private void TesterOptions_SelectionChanged(object sender, SelectionChangedEventArgs e)

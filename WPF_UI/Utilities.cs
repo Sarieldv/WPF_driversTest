@@ -94,5 +94,17 @@ namespace WPF_UI
                 return null;
             }
         }
+        public static List<Test> ReturnTests()
+        {
+            try
+            {
+                return FactoryBL.Instance.ReturnTests();
+            }
+            catch(Exception ex)
+            {
+                ErrorBox(ex.Message);
+                return null;
+            }
+        }
     }
 }

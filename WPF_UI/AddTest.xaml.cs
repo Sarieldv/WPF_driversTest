@@ -52,7 +52,7 @@ namespace WPF_UI
         private void traineeOptions_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             thisTrainee = Utilities.ReturnTrainees().Find(t => t.ToString() == (sender as ComboBox).SelectedItem.ToString());
-            
+              
         }
     }
 }
