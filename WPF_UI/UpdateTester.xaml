@@ -42,7 +42,7 @@
             <StackPanel.Style>
                 <Style>
                     <Style.Triggers>
-                        <DataTrigger Binding="{Binding ElementName=TesterOptions,  Path=SelectedItem}" Value="null">
+                        <DataTrigger Binding="{Binding ElementName=TesterOptions,  Path=SelectedIndex}" Value="-1">
                             <Setter Property="StackPanel.IsEnabled" Value="False"/>
                         </DataTrigger>
                     </Style.Triggers>
@@ -98,7 +98,7 @@
             <Button.Style>
                 <Style>
                     <Style.Triggers>
-                        <DataTrigger Binding="{Binding ElementName=TesterOptions, Path=SelectedItem}" Value="null">
+                        <DataTrigger Binding="{Binding ElementName=TesterOptions, Path=SelectedIndex}" Value="-1">
                             <Setter Property="Button.IsEnabled" Value="False"/>
                         </DataTrigger>
                     </Style.Triggers>

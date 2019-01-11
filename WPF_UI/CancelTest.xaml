@@ -17,18 +17,11 @@
                 <Setter Property="BorderThickness" Value="1"/>
                 <Setter Property="FontSize" Value="30"/>
             </Style>
-            <Style TargetType="Grid">
-                <Setter Property="Margin" Value="10"/>
-            </Style>
             <Style TargetType="TextBox">
                 <Setter Property="FontSize" Value="30"/>
             </Style>
             <Style TargetType="ComboBox">
                 <Setter Property="FontSize" Value="30"/>
-            </Style>
-            <Style TargetType="Viewbox">
-                <Setter Property="Height" Value="auto"/>
-                <Setter Property="Width" Value="1000"/>
             </Style>
             <Style TargetType="Button">
                 <Setter Property="Margin" Value="10"/>
@@ -42,7 +35,7 @@
             <Button.Style>
                 <Style>
                     <Style.Triggers>
-                        <DataTrigger Binding="{Binding ElementName=testOptions, Path=SelectedItem}" Value="null">
+                        <DataTrigger Binding="{Binding ElementName=testOptions, Path=SelectedIndex}" Value="-1">
                             <Setter Property="Button.IsEnabled" Value="False"/>
                         </DataTrigger>
                     </Style.Triggers>
