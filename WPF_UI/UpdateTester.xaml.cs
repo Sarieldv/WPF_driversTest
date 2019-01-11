@@ -25,15 +25,17 @@ namespace WPF_UI
         {
             InitializeComponent();
             List<Tester> testers = Utilities.ReturnTesters();
-            if (testers != null)
+            if(testers==null)
             {
+                //go back
+            }
                 foreach (var t in Utilities.ReturnTesters())
                 {
                     ListBoxItem boxItem = new ListBoxItem();
                     boxItem.Content = t.ToString();
                     TesterOptions.Items.Add(boxItem);
                 }
-            }
+            
             thisTester = new Tester();
             copyTester = new Tester();
         }
@@ -131,7 +133,7 @@ namespace WPF_UI
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
-            
+            Visibility = Visibility.Collapsed;
         }
 
         private void TesterOptions_SelectionChanged(object sender, SelectionChangedEventArgs e)
