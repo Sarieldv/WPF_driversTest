@@ -46,6 +46,11 @@ namespace WPF_UI
                 Utilities.ErrorBox("You have not selected a date.");
                 return;
             }
+            if((datePicker.SelectedDate.Value - DateTime.Now).TotalDays < 0)
+            {
+                Utilities.ErrorBox("You cannot choose a date from the past.");
+                return;
+            }
             DateTime chosenDate = new DateTime(datePicker.SelectedDate.Value.Year, datePicker.SelectedDate.Value.Month, datePicker.SelectedDate.Value.Day, timeChoice.SelectedIndex + 9, 0, 0);
             try
             {
