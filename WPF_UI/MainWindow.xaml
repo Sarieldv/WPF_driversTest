@@ -38,7 +38,8 @@
             </Style>
             <Style TargetType="Button">
                 <Setter Property="Margin" Value="40"/>
-                <Setter Property="FontSize" Value="30"/>
+                <Setter Property="FontSize" Value="40"/>
+                <Setter Property="FontWeight" Value="Bold"/>
             </Style>
         </StackPanel.Resources>
         <Grid Height="520">
@@ -50,19 +51,26 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Button Name="TesterButton" Content="Tester Actions" Grid.Row="0" Grid.Column="0">
+            <Button Name="TesterButton" Content="Tester Actions" Grid.Row="0" Grid.Column="0" Click="TesterButton_Click">
                 <Button.Background>
-                    <ImageBrush ImageSource="C:\Users\sariel\source\repos\WPF_driversTest\WPF_UI\Properties\Tester Icon.jpg"/>
+                    <SolidColorBrush Color="Gray" Opacity="0.7"/>
                 </Button.Background>
             </Button>
-            <Button Name="TraineeButton" Content="Trainee Actions"  Grid.Row="0" Grid.Column="1"/>
-            <Button Name="TestButton" Content="Test Actions" Grid.Row="1" Grid.Column="0">
+            <Button Name="TraineeButton" Content="Trainee Actions"  Grid.Row="0" Grid.Column="1" Click="TraineeButton_Click">
                 <Button.Background>
-                    <SolidColorBrush Opacity="1"/>
-                    <!--<ImageBrush ImageSource="C:\Users\sariel\source\repos\WPF_driversTest\WPF_UI\Properties\Test Icon.jpg" Opacity="500"/>-->
+                    <SolidColorBrush Color="Gray" Opacity="0.7"/>
                 </Button.Background>
             </Button>
-            <Button Name="PresentButton" Content="View the Data" Grid.Row="1" Grid.Column="1" />
+            <Button Name="TestButton" Content="Test Actions" Grid.Row="1" Grid.Column="0" Click="TestButton_Click">
+                <Button.Background>
+                    <SolidColorBrush Opacity="0.7" Color="Gray"/>
+                </Button.Background>
+            </Button>
+            <Button Name="PresentButton" Content="View the Data" Grid.Row="1" Grid.Column="1" Click="PresentButton_Click">
+                <Button.Background>
+                    <SolidColorBrush Color="Gray" Opacity="0.7"/>
+                </Button.Background>
+            </Button>
         </Grid>
     </StackPanel>
 </Window>

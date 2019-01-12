@@ -126,12 +126,12 @@ namespace WPF_UI
                 return;
             }
             Utilities.InformationBox(FirstName.Text.ToString() + " " + LastName.Text.ToString() + " was just added to the system as a tester.");
-            this.Visibility = Visibility.Collapsed;
+            (this.Parent as StackPanel).Children.Remove(this);
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
-            this.Visibility = Visibility.Collapsed;
+            (this.Parent as StackPanel).Children.Remove(this);
         }
     }
 }

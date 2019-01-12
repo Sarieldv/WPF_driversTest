@@ -46,12 +46,12 @@ namespace WPF_UI
                 return;
             var k = Utilities.ReturnTesters().Find(t => t.ToString() == TesterOptions.ToString());
             FactoryBL.Instance.EraseTester(k);
-            this.Visibility = Visibility.Collapsed;
+            (this.Parent as StackPanel).Children.Remove(this);
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
-            this.Visibility = Visibility.Collapsed;
+            (this.Parent as StackPanel).Children.Remove(this);
         }
     }
 }

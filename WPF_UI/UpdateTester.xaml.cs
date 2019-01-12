@@ -27,7 +27,7 @@ namespace WPF_UI
             List<Tester> testers = Utilities.ReturnTesters();
             if(testers==null)
             {
-                this.Visibility = Visibility.Collapsed;
+                (this.Parent as StackPanel).Children.Remove(this);
             }
                 foreach (var t in testers)
                 {
@@ -133,7 +133,7 @@ namespace WPF_UI
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
-            this.Visibility = Visibility.Collapsed;
+            (this.Parent as StackPanel).Children.Remove(this);
         }
 
         private void TesterOptions_SelectionChanged(object sender, SelectionChangedEventArgs e)

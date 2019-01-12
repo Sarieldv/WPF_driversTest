@@ -28,7 +28,7 @@ namespace WPF_UI
             List<Trainee> trainees = Utilities.ReturnTrainees();
             if (trainees == null)
             {
-                this.Visibility = Visibility.Collapsed;
+                (this.Parent as StackPanel).Children.Remove(this);
             }
             foreach (var t in trainees)
             {
@@ -64,7 +64,7 @@ namespace WPF_UI
 
         private void backButton_Click(object sender, RoutedEventArgs e)
         {
-            this.Visibility = Visibility.Collapsed;
+            (this.Parent as StackPanel).Children.Remove(this);
         }
 
         private void traineeOptions_SelectionChanged(object sender, SelectionChangedEventArgs e)

@@ -28,7 +28,7 @@ namespace WPF_UI
             List<Test> tests = Utilities.ReturnTests();
             if(tests==null)
             {
-                this.Visibility = Visibility.Collapsed;
+                (this.Parent as StackPanel).Children.Remove(this);
             }
             foreach (var t in tests)
             {
@@ -43,7 +43,7 @@ namespace WPF_UI
         {
             if(!Utilities.AreYouSureBox("cancel this test"))
             {
-                this.Visibility = Visibility.Collapsed;
+                (this.Parent as StackPanel).Children.Remove(this);
             }
             else
             {
@@ -60,7 +60,7 @@ namespace WPF_UI
 
         private void backButton_Click(object sender, RoutedEventArgs e)
         {
-            this.Visibility = Visibility.Collapsed;
+            (this.Parent as StackPanel).Children.Remove(this);
         }
 
         private void testOptions_SelectionChanged(object sender, SelectionChangedEventArgs e)

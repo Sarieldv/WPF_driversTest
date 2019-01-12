@@ -63,6 +63,9 @@
     <Compile Include="EraseTester.xaml.cs">
       <DependentUpon>EraseTester.xaml</DependentUpon>
     </Compile>
+    <Compile Include="TestOptions.xaml.cs">
+      <DependentUpon>TestOptions.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UpdateTest.xaml.cs">
       <DependentUpon>UpdateTest.xaml</DependentUpon>
     </Compile>
@@ -102,6 +105,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="NumberUpDown.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TestOptions.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -155,12 +162,10 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Properties\Main window background.jpg" />
+    <Resource Include="Properties\Test Background.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Properties\Test Icon.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Properties\Tester Icon.jpg" />
+    <Resource Include="Properties\Open Road.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
