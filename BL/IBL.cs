@@ -38,6 +38,9 @@ namespace BL
         List<Tester> TestersByCity(Address address);
         List<Tester> TestersBySpecialty(VehicleParams vehicle);
         List<Test>TestsByCondition (Func<Test, bool> _condition);
+        Address BestTestAddress(Tester _tester, Trainee _trainee);
+        int TestDistance(Tester _tester, Trainee _trainee);
+        bool IsDateAvailable(Tester tester, DateTime dateTime);
 
         int TestsDone(Trainee _trainee);
         bool CanDrive(Trainee _trainee, VehicleParams vehicle);

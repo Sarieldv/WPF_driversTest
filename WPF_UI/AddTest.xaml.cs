@@ -41,7 +41,20 @@ namespace WPF_UI
         Trainee thisTrainee;
         private void addButton_Click(object sender, RoutedEventArgs e)
         {
-
+            if((datePicker.SelectedDate == null))
+            {
+                Utilities.ErrorBox("You have not selected a date.");
+                return;
+            }
+            DateTime chosenDate = new DateTime(datePicker.SelectedDate.Value.Year, datePicker.SelectedDate.Value.Month, datePicker.SelectedDate.Value.Day, timeChoice.SelectedIndex + 9, 0, 0);
+            try
+            {
+                FactoryBL.Instance.GetTest(thisTrainee, chosenDate);
+            }
+            catch(Exception ex)
+            {
+                Utilities.ErrorBox(ex.Message);
+            }
         }
 
         private void backButton_Click(object sender, RoutedEventArgs e)

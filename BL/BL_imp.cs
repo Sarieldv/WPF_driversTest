@@ -222,18 +222,42 @@ namespace BL
             {
                 throw new Exception("Trainee already has a test.");
             }
-            List<Tester> intersection = (List<Tester>)TestersBySpecialty(trainee.TraineeVehicle).Intersect(TestersFreeByTime(dateTime)).OrderBy(t => CalcDistance(t.MyAddress, trainee.MyAddress));
-            //var k = (from t in intersection
-            //         where t.MaxDistanceFromTest >= CalcDistance(t.MyAddress, trainee.MyAddress)
-            //         select t).OrderByDescending(t=>CalcDistance(t.MyAddress, trainee.MyAddress));
-            if(intersection.DefaultIfEmpty() == intersection)
+            List<Tester> options = (List<Tester>)TestersBySpecialty(trainee.TraineeVehicle).OrderBy(t => CalcDistance(t.MyAddress, trainee.MyAddress)).OrderByDescending(t=>t.YearsOfExperience);
+            if(options.DefaultIfEmpty() == options)
             {
-                throw new Exception("There are no testers that can test at that time with that kind of test.");
+                throw new Exception("There are no testers that can test with the needed vehicle.");
             }
-            Tester tester = (from t in intersection
-                             where CalcDistance(t.MyAddress, trainee.MyAddress) == CalcDistance(intersection.First().MyAddress, trainee.MyAddress)
-                             select t).OrderByDescending(t => t.YearsOfExperience).First(); 
-            AddTest(new Test(tester.IDNumber, trainee.TraineeVehicle, trainee.IDNumber, BestTestAddress(tester, trainee), dateTime));
+            foreach (var tester in options)
+            {
+                if(IsDateAvailable(tester, dateTime))
+                {
+                    AddTest(new Test(tester.IDNumber, trainee.TraineeVehicle, trainee.IDNumber, BestTestAddress(tester, trainee), dateTime));
+                    return;
+                }
+            }
+            throw new Exception("All testers are busy during the selected time.");            
+        }
+        public bool IsDateAvailable(Tester tester, DateTime dateTime)
+        {
+            TimeSpan span = dateTime - DateTime.Now;
+            int weeks = (span.Days / 7) + 1;
+            if((span.Days % 7) - (6- DateTime.Now.DayOfWeek) > 0)
+            {
+                weeks++;
+            }
+            if((weeks - tester.MyWorkHours.Length) > 0)
+            {
+                if(tester.MyWorkHours[weeks - 1][dateTime])
+                {
+                    return false;
+                }
+                return true;
+            }
+            for (int i = 0; i < (weeks - tester.MyWorkHours.Length); i++)
+            {
+                AddAnotherWeek(tester);
+            }
+            return true;
         }
         public int TestDistance(Tester _tester, Trainee _trainee)
         {
