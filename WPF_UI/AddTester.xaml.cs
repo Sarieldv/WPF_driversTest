@@ -28,6 +28,11 @@ namespace WPF_UI
 
         private void addButton_Click(object sender, RoutedEventArgs e)
         {
+            if ((BirthDate.SelectedDate == null))
+            {
+                Utilities.ErrorBox("You have not selected a date.");
+                return;
+            }
             if (!(bool)ManualHeavyTruck.IsChecked && !(bool)ManualMediumTruck.IsChecked && !(bool)ManualPrivateVehicle.IsChecked && !(bool)ManualTwoWheelVehicle.IsChecked && !(bool)AutomaticHeavyTruck.IsChecked && !(bool)AutomaticMediumTruck.IsChecked && !(bool)AutomaticPrivateVehicle.IsChecked && !(bool)AutomaticTwoWheelVehicle.IsChecked)
             {
                 Utilities.ErrorBox("At least one vehicle must be selected!");

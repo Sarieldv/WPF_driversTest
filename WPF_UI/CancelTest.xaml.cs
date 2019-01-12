@@ -28,7 +28,7 @@ namespace WPF_UI
             List<Test> tests = Utilities.ReturnTests();
             if(tests==null)
             {
-                //go back
+                this.Visibility = Visibility.Collapsed;
             }
             foreach (var t in tests)
             {
@@ -43,7 +43,7 @@ namespace WPF_UI
         {
             if(!Utilities.AreYouSureBox("cancel this test"))
             {
-                //go back
+                this.Visibility = Visibility.Collapsed;
             }
             else
             {
@@ -60,7 +60,7 @@ namespace WPF_UI
 
         private void backButton_Click(object sender, RoutedEventArgs e)
         {
-            //go back
+            this.Visibility = Visibility.Collapsed;
         }
 
         private void testOptions_SelectionChanged(object sender, SelectionChangedEventArgs e)

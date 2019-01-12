@@ -5,8 +5,64 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPF_UI"
         mc:Ignorable="d"
-        Title="MainWindow">
-    <StackPanel>
-        
+        Title="MainWindow"
+        WindowState="Maximized"
+        WindowStyle="None">
+    <StackPanel x:Name="MainWindowStack">
+        <StackPanel.Background>
+            <ImageBrush ImageSource="C:\Users\sariel\source\repos\WPF_driversTest\WPF_UI\Properties\Main window background.jpg" Stretch="UniformToFill"/>
+        </StackPanel.Background>
+        <StackPanel.Resources>
+            <LinearGradientBrush x:Key="MyBackground" EndPoint="0.504,1.5" StartPoint="0.504,0.03">
+                <GradientStop Color="MediumPurple" Offset="0"/>
+                <GradientStop Color="#FFFFFFFF" Offset="0.567"/>
+            </LinearGradientBrush>
+            <Style TargetType="Label">
+                <Setter Property="Background" Value="{StaticResource MyBackground}"/>
+                <Setter Property="BorderBrush" Value="Black"/>
+                <Setter Property="BorderThickness" Value="1"/>
+                <Setter Property="FontSize" Value="30"/>
+            </Style>
+            <Style TargetType="Grid">
+                <Setter Property="Margin" Value="10"/>
+            </Style>
+            <Style TargetType="TextBox">
+                <Setter Property="FontSize" Value="30"/>
+            </Style>
+            <Style TargetType="ComboBox">
+                <Setter Property="FontSize" Value="30"/>
+            </Style>
+            <Style TargetType="Viewbox">
+                <Setter Property="Height" Value="auto"/>
+                <Setter Property="Width" Value="1000"/>
+            </Style>
+            <Style TargetType="Button">
+                <Setter Property="Margin" Value="40"/>
+                <Setter Property="FontSize" Value="30"/>
+            </Style>
+        </StackPanel.Resources>
+        <Grid Height="520">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Button Name="TesterButton" Content="Tester Actions" Grid.Row="0" Grid.Column="0">
+                <Button.Background>
+                    <ImageBrush ImageSource="C:\Users\sariel\source\repos\WPF_driversTest\WPF_UI\Properties\Tester Icon.jpg"/>
+                </Button.Background>
+            </Button>
+            <Button Name="TraineeButton" Content="Trainee Actions"  Grid.Row="0" Grid.Column="1"/>
+            <Button Name="TestButton" Content="Test Actions" Grid.Row="1" Grid.Column="0">
+                <Button.Background>
+                    <SolidColorBrush Opacity="1"/>
+                    <!--<ImageBrush ImageSource="C:\Users\sariel\source\repos\WPF_driversTest\WPF_UI\Properties\Test Icon.jpg" Opacity="500"/>-->
+                </Button.Background>
+            </Button>
+            <Button Name="PresentButton" Content="View the Data" Grid.Row="1" Grid.Column="1" />
+        </Grid>
     </StackPanel>
 </Window>

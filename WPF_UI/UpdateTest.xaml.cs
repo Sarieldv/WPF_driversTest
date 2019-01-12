@@ -12,17 +12,17 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using BE;
 using BL;
+using BE;
 
 namespace WPF_UI
 {
     /// <summary>
-    /// Interaction logic for AddTest.xaml
+    /// Interaction logic for UpdateTest.xaml
     /// </summary>
-    public partial class AddTest : UserControl
+    public partial class UpdateTest : UserControl
     {
-        public AddTest()
+        public UpdateTest()
         {
             InitializeComponent();
             List<Trainee> trainees = Utilities.ReturnTrainees();
@@ -30,35 +30,53 @@ namespace WPF_UI
             {
                 this.Visibility = Visibility.Collapsed;
             }
-            foreach (var t in trainees)
+            foreach (var t in (from t in trainees where t.HaveTest select t))
             {
                 ListBoxItem boxItem = new ListBoxItem();
                 boxItem.Content = t.ToString();
                 traineeOptions.Items.Add(boxItem);
             }
             thisTrainee = new Trainee();
+            thisTest = new Test();
         }
         Trainee thisTrainee;
-        private void addButton_Click(object sender, RoutedEventArgs e)
+        Test thisTest;
+
+        private void updateButton_Click(object sender, RoutedEventArgs e)
         {
-            if((datePicker.SelectedDate == null))
+            if(dateSelector.SelectedDate == null)
             {
-                Utilities.ErrorBox("You have not selected a date.");
+                Utilities.ErrorBox("You must select a date.");
                 return;
             }
-            if((datePicker.SelectedDate.Value - DateTime.Now).TotalDays < 0)
+            DateTime originalDate = thisTest.DateAndTime;
+            if(!Utilities.AreYouSureBox("change the date of this test"))
             {
-                Utilities.ErrorBox("You cannot choose a date from the past.");
                 return;
             }
-            DateTime chosenDate = new DateTime(datePicker.SelectedDate.Value.Year, datePicker.SelectedDate.Value.Month, datePicker.SelectedDate.Value.Day, timeChoice.SelectedIndex + 9, 0, 0);
             try
             {
-                FactoryBL.Instance.GetTest(thisTrainee, chosenDate);
+                FactoryBL.Instance.CancelTest(thisTest);
             }
             catch(Exception ex)
             {
                 Utilities.ErrorBox(ex.Message);
+            }
+            try
+            {
+                FactoryBL.Instance.GetTest(thisTrainee, dateSelector.SelectedDate.Value);
+            }
+            catch(Exception ex)
+            {
+                Utilities.ErrorBox(ex.Message);
+                try
+                {
+                    FactoryBL.Instance.GetTest(thisTrainee, originalDate);
+                }
+                catch(Exception exc)
+                {
+                    Utilities.ErrorBox(exc.Message);
+                }
             }
         }
 
@@ -70,7 +88,7 @@ namespace WPF_UI
         private void traineeOptions_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             thisTrainee = Utilities.ReturnTrainees().Find(t => t.ToString() == (sender as ComboBox).SelectedItem.ToString());
-              
+            thisTest = Utilities.ReturnTests().Find(t => t.TraineeId == thisTrainee.IDNumber);
         }
     }
 }

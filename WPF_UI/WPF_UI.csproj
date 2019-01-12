@@ -63,6 +63,9 @@
     <Compile Include="EraseTester.xaml.cs">
       <DependentUpon>EraseTester.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UpdateTest.xaml.cs">
+      <DependentUpon>UpdateTest.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UpdateTester.xaml.cs">
       <DependentUpon>UpdateTester.xaml</DependentUpon>
     </Compile>
@@ -99,6 +102,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="NumberUpDown.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UpdateTest.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -145,6 +152,15 @@
       <Project>{31182f09-f978-4dd8-824e-80d96838fe99}</Project>
       <Name>BL</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Properties\Main window background.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Properties\Test Icon.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Properties\Tester Icon.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

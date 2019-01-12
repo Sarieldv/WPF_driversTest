@@ -136,9 +136,6 @@
                         <DataTrigger Binding="{Binding ElementName=StreetName, Path = Text}" Value="">
                             <Setter Property="Button.IsEnabled" Value="False"/>
                         </DataTrigger>
-                        <DataTrigger Binding="{Binding ElementName=BirthDate, Path = SelectedDate}" Value="null">
-                            <Setter Property="Button.IsEnabled" Value="False"/>
-                        </DataTrigger>
                         <DataTrigger Binding="{Binding ElementName=PhoneNumber, Path=Text}" Value="">
                             <Setter Property="Button.IsEnabled" Value="False"/>
                         </DataTrigger>
