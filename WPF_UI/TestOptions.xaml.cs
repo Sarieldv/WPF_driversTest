@@ -24,5 +24,21 @@ namespace WPF_UI
         {
             InitializeComponent();
         }
+
+        private void addTestButton_Click(object sender, RoutedEventArgs e)
+        {
+            AddTest addTest = new AddTest(); 
+            this.mainGrid.Children.Add(addTest)
+        }
+
+        private void updateTestButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void cancelTestButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

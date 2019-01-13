@@ -10,7 +10,7 @@
         WindowStyle="None">
     <StackPanel x:Name="MainWindowStack">
         <StackPanel.Background>
-            <ImageBrush ImageSource="C:\Users\sariel\source\repos\WPF_driversTest\WPF_UI\Properties\Main window background.jpg" Stretch="UniformToFill"/>
+            <ImageBrush ImageSource="C:\Users\sasegal\Source\Repos\WPF_driversTest\WPF_UI\Properties\Main window background.jpg" Stretch="UniformToFill"/>
         </StackPanel.Background>
         <StackPanel.Resources>
             <LinearGradientBrush x:Key="MyBackground" EndPoint="0.504,1.5" StartPoint="0.504,0.03">
