@@ -7,9 +7,9 @@
              mc:Ignorable="d">
     <StackPanel>
         <StackPanel.Background>
-            <ImageBrush ImageSource="C:\Users\sasegal\Source\Repos\WPF_driversTest\WPF_UI\Properties\Summer-Road-Trip.jpg"/>
+            <ImageBrush ImageSource="C:\Users\sariel\source\repos\WPF_driversTest\WPF_UI\Properties\Summer-Road-Trip.jpg"/>
         </StackPanel.Background>
-        <Grid Name="mainGrid">
+        <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
@@ -33,6 +33,10 @@
                 <Button Name="addTestButton" Content="Add A Test" Click="addTestButton_Click"/>
                 <Button Name="updateTestButton" Content="Update A Test" Click="updateTestButton_Click"/>
                 <Button Name="cancelTestButton" Content="Cancel A Test" Click="cancelTestButton_Click"/>
+                <Button Name="backButton" Content="Back" Click="backButton_Click"/>
+            </StackPanel>
+            <StackPanel Name="mainPanel" Grid.Column="0">
+                
             </StackPanel>
         </Grid>
     </StackPanel>

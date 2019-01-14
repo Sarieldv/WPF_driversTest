@@ -27,18 +27,26 @@ namespace WPF_UI
 
         private void addTestButton_Click(object sender, RoutedEventArgs e)
         {
-            AddTest addTest = new AddTest(); 
-            this.mainGrid.Children.Add(addTest)
+            mainPanel.Children.Clear();
+            this.mainPanel.Children.Add(new AddTest());
         }
 
         private void updateTestButton_Click(object sender, RoutedEventArgs e)
         {
-
+            mainPanel.Children.Clear();
+            this.mainPanel.Children.Add(new UpdateTest());
         }
 
         private void cancelTestButton_Click(object sender, RoutedEventArgs e)
         {
+            mainPanel.Children.Clear();
+            this.mainPanel.Children.Add(new CancelTest());
+        }
 
+        private void backButton_Click(object sender, RoutedEventArgs e)
+        {
+            (this.Parent as StackPanel).Children.Remove(this);
+            (this.Parent as StackPanel).Visibility = Visibility.Visible;
         }
     }
 }

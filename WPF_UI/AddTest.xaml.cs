@@ -51,6 +51,11 @@ namespace WPF_UI
                 Utilities.ErrorBox("You cannot choose a date from the past.");
                 return;
             }
+            if (datePicker.SelectedDate.Value.DayOfWeek == DayOfWeek.Friday || datePicker.SelectedDate.Value.DayOfWeek == DayOfWeek.Saturday)
+            {
+                Utilities.ErrorBox("Fridays and Saturdays are unavailable for tests.");
+                return;
+            }
             DateTime chosenDate = new DateTime(datePicker.SelectedDate.Value.Year, datePicker.SelectedDate.Value.Month, datePicker.SelectedDate.Value.Day, timeChoice.SelectedIndex + 9, 0, 0);
             try
             {

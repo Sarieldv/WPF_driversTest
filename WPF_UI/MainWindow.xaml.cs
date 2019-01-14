@@ -23,26 +23,9 @@ namespace WPF_UI
         public MainWindow()
         {
             InitializeComponent();
+            MainWindowStack.Children.Add(new openingWindow());
         }
 
-        private void TesterButton_Click(object sender, RoutedEventArgs e)
-        {
-            (this.Parent as StackPanel).Children.Remove(this);
-        }
-
-        private void TraineeButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void TestButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void PresentButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
+       
     }
 }
