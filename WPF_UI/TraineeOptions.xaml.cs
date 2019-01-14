@@ -24,5 +24,29 @@ namespace WPF_UI
         {
             InitializeComponent();
         }
+
+        private void addTraineeButton_Click(object sender, RoutedEventArgs e)
+        {
+            mainPanel.Children.Clear();
+            this.mainPanel.Children.Add(new AddTrainee());
+        }
+
+        private void updateTraineeButton_Click(object sender, RoutedEventArgs e)
+        {
+            mainPanel.Children.Clear();
+            this.mainPanel.Children.Add(new UpdateTrainee());
+        }
+
+        private void eraseTraineeButton_Click(object sender, RoutedEventArgs e)
+        {
+            mainPanel.Children.Clear();
+            this.mainPanel.Children.Add(new EraseTrainee());
+        }
+
+        private void backButton_Click(object sender, RoutedEventArgs e)
+        {
+            (this.Parent as StackPanel).Children.Add(new openingWindow());
+            (this.Parent as StackPanel).Children.Remove(this);
+        }
     }
 }
