@@ -11,31 +11,45 @@ namespace BL
     public interface IBL
     {
         void AddTester(Tester NewTester);
+    
         void EraseTester(Tester _tester);
+        
         void UpdateTester(Tester updatedTester);
+       
         void AddAnotherWeek(Tester tester);
+        
         void RemoveFirstWeek(Tester tester);
 
+        
         void AddTrainee(Trainee NewTrainee);
+        
         void EraseTrainee(Trainee _trainee);
+       
         void UpdateTrainee(Trainee updatedTrainee);
+        
         void GetTest(Trainee trainee, DateTime dateTime);
-
-
+        
         void AddTest(Test NewTest);
+        
         void CancelTest(Test _test);
+        
         void UpdateTest(Test updatedTest);
 
         List<Tester> ReturnTesters();
+        
         List<Trainee> ReturnTrainees();
+       
         List<Test> ReturnTests();
 
+       
         List<Tester> TestersByDistance(int _distance, Address address);
+        
         List<Tester> TestersBusyByTime(DateTime _dateTime);
-        List<TesterAndDate> GetAvailableDatesForTest(Trainee trainee);
-        List<DateTime> GetAvailableDates(Tester tester);
+        
         List<Tester> TestersFreeByTime(DateTime dateTime);
+        
         List<Tester> TestersByCity(Address address);
+        
         List<Tester> TestersBySpecialty(VehicleParams vehicle);
         List<Test>TestsByCondition (Func<Test, bool> _condition);
         Address BestTestAddress(Tester _tester, Trainee _trainee);

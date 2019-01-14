@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="MainWindow"
         WindowState="Maximized"
-        WindowStyle="None">
+        WindowStyle="ThreeDBorderWindow">
     <StackPanel x:Name="MainWindowStack">
         
     </StackPanel>

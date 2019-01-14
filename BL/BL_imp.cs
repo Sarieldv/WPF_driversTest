@@ -10,6 +10,10 @@ namespace BL
 {
     internal class BL_imp : IBL
     {
+        /// <summary>
+        /// Funtion to add a test to the system
+        /// </summary>
+        /// <param name="NewTest">Test to add</param>
         public void AddTest(Test NewTest)
         {
             Tester tester = (from t in ReturnTesters()
@@ -78,7 +82,10 @@ namespace BL
             trainee.HaveTest = true;
             UpdateTrainee(trainee);
         }
-
+        /// <summary>
+        /// Function that adds a given tester to the system
+        /// </summary>
+        /// <param name="NewTester">Tester to add to the system</param>
         public void AddTester(Tester NewTester)
         {
             if (NewTester.Age() > Configuration.MaximumTesterAge)
@@ -111,7 +118,10 @@ namespace BL
             }
 
         }
-
+        /// <summary>
+        /// Function to add a trainee to the system
+        /// </summary>
+        /// <param name="NewTrainee">Trainee to add</param>
         public void AddTrainee(Trainee NewTrainee)
         {
             if (NewTrainee.Age() < Configuration.MinimumTraineeAge)
@@ -139,13 +149,21 @@ namespace BL
                 throw ex;
             }
         }
-
+        /// <summary>
+        /// Function to calculate the distance between two addresses
+        /// </summary>
+        /// <param name="address1"></param>
+        /// <param name="address2"></param>
+        /// <returns></returns>
         public int CalcDistance(Address address1, Address address2)
         {
             Random r = new Random();
             return r.Next(0, 21);
         }
-
+        /// <summary>
+        /// Function to cancel a test
+        /// </summary>
+        /// <param name="_test">Test to cancel</param>
         public void CancelTest(Test _test)
         {
 
@@ -169,12 +187,20 @@ namespace BL
             trainee.HaveTest = false;
             UpdateTrainee(trainee);
         }
-
+        /// <summary>
+        /// Function the returns true if a given trainee can drive a given type of vehicle
+        /// </summary>
+        /// <param name="_trainee"></param>
+        /// <param name="vehicle"></param>
+        /// <returns></returns>
         public bool CanDrive(Trainee _trainee, VehicleParams vehicle)
         {
             return _trainee.PassedByVehicleParams[vehicle.Index()];
         }
-
+        /// <summary>
+        /// Function that erases a given tester from the system
+        /// </summary>
+        /// <param name="_tester">Tester to erase from the system</param>
         public void EraseTester(Tester _tester)
         {
             try
@@ -196,7 +222,10 @@ namespace BL
                 }
             }
         }
-
+        /// <summary>
+        /// Function to erase a trainee from the system
+        /// </summary>
+        /// <param name="_trainee">Trainee to erase</param>
         public void EraseTrainee(Trainee _trainee)
         {
             try
@@ -215,14 +244,18 @@ namespace BL
                 CancelTest(k as Test);
             }
         }
-
+        /// <summary>
+        /// Function to get a test
+        /// </summary>
+        /// <param name="trainee">Trainee the test is gotten for</param>
+        /// <param name="dateTime">Date of the requested test</param>
         public void GetTest(Trainee trainee, DateTime dateTime)
         {
             if (trainee.HaveTest)
             {
                 throw new Exception("Trainee already has a test.");
             }
-            List<Tester> options = (List<Tester>)TestersBySpecialty(trainee.TraineeVehicle).OrderBy(t => CalcDistance(t.MyAddress, trainee.MyAddress)).OrderByDescending(t=>t.YearsOfExperience);
+            List<Tester> options = (List<Tester>)TestersBySpecialty(trainee.TraineeVehicle).OrderByDescending(t => t.YearsOfExperience).OrderBy(t => CalcDistance(t.MyAddress, trainee.MyAddress));
             if(options.DefaultIfEmpty() == options)
             {
                 throw new Exception("There are no testers that can test with the needed vehicle.");
@@ -237,6 +270,12 @@ namespace BL
             }
             throw new Exception("All testers are busy during the selected time.");            
         }
+        /// <summary>
+        /// Function that returns true if a given date is available for a test
+        /// </summary>
+        /// <param name="tester"></param>
+        /// <param name="dateTime"></param>
+        /// <returns></returns>
         public bool IsDateAvailable(Tester tester, DateTime dateTime)
         {
             TimeSpan span = dateTime - DateTime.Now;
@@ -259,10 +298,22 @@ namespace BL
             }
             return true;
         }
+        /// <summary>
+        /// Function to determine the distance from the optimal address for the test
+        /// </summary>
+        /// <param name="_tester"></param>
+        /// <param name="_trainee"></param>
+        /// <returns></returns>
         public int TestDistance(Tester _tester, Trainee _trainee)
         {
             return CalcDistance(_trainee.MyAddress, BestTestAddress(_tester, _trainee));
         }
+        /// <summary>
+        /// Function to determine the optimal address for a test
+        /// </summary>
+        /// <param name="_tester"></param>
+        /// <param name="_trainee"></param>
+        /// <returns></returns>
         public Address BestTestAddress(Tester _tester, Trainee _trainee)
         {
             if(CalcDistance(_tester.MyAddress, _trainee.MyAddress) <= _tester.MaxDistanceFromTest)
@@ -272,6 +323,11 @@ namespace BL
             //when real maps will be implemented this will return an address that is the closest to trainee that also is smaller then the maximum distance
             return _tester.MyAddress;
         }
+
+        /// <summary>
+        /// Function to return the list of testers
+        /// </summary>
+        /// <returns></returns>
         public List<Tester> ReturnTesters()
         {
             try
@@ -283,7 +339,10 @@ namespace BL
                 throw ex;
             }
         }
-
+        /// <summary>
+        /// Function to return the list of tests
+        /// </summary>
+        /// <returns></returns>
         public List<Test> ReturnTests()
         {
             try
@@ -295,7 +354,10 @@ namespace BL
                 throw ex;
             }
         }
-
+        /// <summary>
+        /// Function to return the ist of trainees
+        /// </summary>
+        /// <returns></returns>
         public List<Trainee> ReturnTrainees()
         {
             try
@@ -307,7 +369,12 @@ namespace BL
                 throw ex;
             }
         }
-
+        /// <summary>
+        /// Function that returns all the testers who are a certain distance from an address
+        /// </summary>
+        /// <param name="_distance"></param>
+        /// <param name="address"></param>
+        /// <returns></returns>
         public List<Tester> TestersByDistance(int _distance, Address address)
         {
             var k = (from t in ReturnTesters()
@@ -315,7 +382,11 @@ namespace BL
                      select t);
             return k as List<Tester>;
         }
-
+        /// <summary>
+        /// Function that returns all the testers that are busy at a given time
+        /// </summary>
+        /// <param name="_dateTime"></param>
+        /// <returns></returns>
         public List<Tester> TestersBusyByTime(DateTime _dateTime)
         {
             var k = (from t in ReturnTesters()
@@ -323,7 +394,11 @@ namespace BL
                      select t);
             return k as List<Tester>;
         }
-
+        /// <summary>
+        /// Function the returns all the testers who are in the same city as the givan address
+        /// </summary>
+        /// <param name="address"></param>
+        /// <returns></returns>
         public List<Tester> TestersByCity(Address address)
         {
             var k = (from t in ReturnTesters()
@@ -331,7 +406,11 @@ namespace BL
                      select t);
             return k as List<Tester>;
         }
-
+        /// <summary>
+        /// Function the returns all the testers who specialize in a given vehicle
+        /// </summary>
+        /// <param name="vehicle"></param>
+        /// <returns></returns>
         public List<Tester> TestersBySpecialty(VehicleParams vehicle)
         {
             var k = (from t in ReturnTesters()
@@ -339,7 +418,11 @@ namespace BL
                      select t);
             return k as List<Tester>;
         }
-
+        /// <summary>
+        /// Function to group the testers by their specialty (by vehicle then gearbox)
+        /// </summary>
+        /// <param name="_extraSorted"></param>
+        /// <returns></returns>
         public List<List<List<Tester>>> TestersGroupedBySpecialty(bool _extraSorted)
         {
             var k = (from t in ReturnTesters()
@@ -355,7 +438,11 @@ namespace BL
             }
             return g as List<List<List<Tester>>>;
         }
-
+        /// <summary>
+        /// Function that returns all tests that apply for a given condition
+        /// </summary>
+        /// <param name="_condition"></param>
+        /// <returns></returns>
         public List<Test> TestsByCondition(Func<Test, bool> _condition)
         {
             var k = (from t in ReturnTests()
@@ -363,7 +450,11 @@ namespace BL
                      select t);
             return k as List<Test>;
         }
-
+        /// <summary>
+        /// Function that returns all the tests that are happenning on a given day
+        /// </summary>
+        /// <param name="_dateTime"></param>
+        /// <returns></returns>
         public List<Test> TestsByDay(DateTime _dateTime)
         {
             var k = (from t in TestsByMonth(_dateTime)
@@ -371,6 +462,11 @@ namespace BL
                      select t);
             return k as List<Test>;
         }
+        /// <summary>
+        /// Function that returns all the tests happening during a given month
+        /// </summary>
+        /// <param name="_dateTime"></param>
+        /// <returns></returns>
         public List<Test> TestsByMonth(DateTime _dateTime)
         {
             var k = (from t in ReturnTests()
@@ -378,11 +474,20 @@ namespace BL
                      select t);
             return k as List<Test>;
         }
+        /// <summary>
+        /// Function that returns the numer of tests a trainee has done
+        /// </summary>
+        /// <param name="_trainee"></param>
+        /// <returns></returns>
         public int TestsDone(Trainee _trainee)
         {
             return _trainee.AmountOfTests;
         }
-
+        /// <summary>
+        /// Returns all the trainees grouped by the school they learnt in
+        /// </summary>
+        /// <param name="_extraSorted"></param>
+        /// <returns></returns>
         public List<List<Trainee>> TraineesGroupedBySchool(bool _extraSorted)
         {
             var k = (from t in ReturnTrainees()
@@ -397,7 +502,11 @@ namespace BL
             return k as List<List<Trainee>>;
 
         }
-
+        /// <summary>
+        /// Returns all the trainees grouped by teacher
+        /// </summary>
+        /// <param name="_extraSorted"></param>
+        /// <returns></returns>
         public List<List<Trainee>> TraineesGroupedByTeacher(bool _extraSorted)
         {
             var k = (from t in ReturnTrainees()
@@ -411,7 +520,11 @@ namespace BL
             }
             return k as List<List<Trainee>>;
         }
-
+        /// <summary>
+        /// Returns all the trainees grouped by test amount
+        /// </summary>
+        /// <param name="_extraSorted"></param>
+        /// <returns></returns>
         public List<List<Trainee>> TraineesGroupedByTestAmount(bool _extraSorted)
         {
             var k = (from t in ReturnTrainees()
@@ -425,7 +538,10 @@ namespace BL
             }
             return k as List<List<Trainee>>;
         }
-
+        /// <summary>
+        /// Function to update a test
+        /// </summary>
+        /// <param name="updatedTest">Test to update</param>
         public void UpdateTest(Test updatedTest)
         {
             if (!ReturnTests().Any(t => t.Number == updatedTest.Number))
@@ -551,7 +667,10 @@ namespace BL
                 throw ex;
             }
         }
-
+        /// <summary>
+        /// Function to update a Tester in the system
+        /// </summary>
+        /// <param name="updatedTester">Tester to be updated</param>
         public void UpdateTester(Tester updatedTester)
         {
             Tester tester = (from t in ReturnTesters()
@@ -597,7 +716,10 @@ namespace BL
                 throw ex;
             }
         }
-
+        /// <summary>
+        /// Function to update a trainee in the system
+        /// </summary>
+        /// <param name="updatedTrainee">Trainee to update</param>
         public void UpdateTrainee(Trainee updatedTrainee)
         {
             Trainee trainee = (from t in ReturnTrainees()
@@ -651,7 +773,10 @@ namespace BL
                 throw ex;
             }
         }
-
+        /// <summary>
+        /// Function to add a week to a given testers work hours
+        /// </summary>
+        /// <param name="tester">Tester to add a week for</param>
         public void AddAnotherWeek(Tester tester)
         {
             try
@@ -664,7 +789,10 @@ namespace BL
             }
 
         }
-
+        /// <summary>
+        /// Function that removes the first week of a given testers work hours
+        /// </summary>
+        /// <param name="tester">Tester the week is removed for</param>
         public void RemoveFirstWeek(Tester tester)
         {
             try
@@ -677,7 +805,11 @@ namespace BL
             }
 
         }
-
+        /// <summary>
+        /// Function that returns all the testers that are free at a given time
+        /// </summary>
+        /// <param name="dateTime"></param>
+        /// <returns></returns>
         public List<Tester> TestersFreeByTime(DateTime dateTime)
         {
             var k = (from t in ReturnTesters()
@@ -686,44 +818,8 @@ namespace BL
             return k as List<Tester>;
         }
 
-        public List<TesterAndDate> GetAvailableDatesForTest(Trainee trainee)
-        {
-            if (trainee == null)
-                return null;
-            var k = TestersBySpecialty(trainee.TraineeVehicle).Intersect((from t in ReturnTesters()
-                                                                          orderby CalcDistance(t.MyAddress, trainee.MyAddress)
-                                                                          select t));
-            List<TesterAndDate> returnList = new List<TesterAndDate>();
-            foreach (var Tester in k)
-            {
-                foreach (var date in GetAvailableDates(Tester))
-                {
-                    returnList.Add(new TesterAndDate(Tester,date));
-                }
-            }
-            return returnList;
-        }
 
-        public List<DateTime> GetAvailableDates(Tester tester)
-        {
-            List<DateTime> returnList = new List<DateTime>();
-            DateTime date;
-            for (int i = 0; i < tester.MyWorkHours.Length; i++)
-            {
-                for (int j = 0; j < 5; j++)
-                {
-                    for (int h = 0; h < 6; h++)
-                    {
-                        date = new DateTime(DateTime.Now.AddDays((double)(7 * i  + j)).Year, DateTime.Now.AddDays((double)(7 * i + j)).Month, DateTime.Now.AddDays((double) (7 * i +j)).DayOfYear, h+9 , 0 , 0);
-                        if(tester.MyWorkHours[i][date] == false)
-                        {
-                            returnList.Add(date);
-                        }
-                    }
-                }
-            }
-            return returnList;        
-        }
+
         //public void SendAMessage(string mySubject, string myBody, Person person)
         //{
         //    MailMessage mail = new MailMessage("you@yourcompany.com", "user@hotmail.com");

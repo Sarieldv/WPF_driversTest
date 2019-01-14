@@ -16,31 +16,31 @@ using System.Windows.Shapes;
 namespace WPF_UI
 {
     /// <summary>
-    /// Interaction logic for TestOptions.xaml
+    /// Interaction logic for TesterOptions.xaml
     /// </summary>
-    public partial class TestOptions : UserControl
+    public partial class TesterOptions : UserControl
     {
-        public TestOptions()
+        public TesterOptions()
         {
             InitializeComponent();
         }
 
-        private void addTestButton_Click(object sender, RoutedEventArgs e)
+        private void addTesterButton_Click(object sender, RoutedEventArgs e)
         {
-            mainPanel.Children.Clear();
-            this.mainPanel.Children.Add(new AddTest());
+            (this.Parent as StackPanel).Children.Add(new AddTester());
+            (this.Parent as StackPanel).Children.Remove(this);
         }
 
-        private void updateTestButton_Click(object sender, RoutedEventArgs e)
+        private void updateTesterButton_Click(object sender, RoutedEventArgs e)
         {
-            mainPanel.Children.Clear();
-            this.mainPanel.Children.Add(new UpdateTest());
+            (this.Parent as StackPanel).Children.Add(new UpdateTester());
+            (this.Parent as StackPanel).Children.Remove(this);
         }
 
-        private void cancelTestButton_Click(object sender, RoutedEventArgs e)
+        private void cancelTesterButton_Click(object sender, RoutedEventArgs e)
         {
-            mainPanel.Children.Clear();
-            this.mainPanel.Children.Add(new CancelTest());
+            (this.Parent as StackPanel).Children.Add(new EraseTester());
+            (this.Parent as StackPanel).Children.Remove(this);
         }
 
         private void backButton_Click(object sender, RoutedEventArgs e)

@@ -15,12 +15,7 @@
                 <Setter Property="Background" Value="{StaticResource MyBackground}"/>
                 <Setter Property="BorderBrush" Value="Black"/>
                 <Setter Property="BorderThickness" Value="1"/>
-                <Setter Property="FontSize" Value="30"/>
-            </Style>
-
-
-            <Style TargetType="ComboBox">
-                <Setter Property="FontSize" Value="30"/>
+                <Setter Property="FontWeight" Value="Bold"/>
             </Style>
             <Style TargetType="Button">
                 <Setter Property="Margin" Value="10"/>

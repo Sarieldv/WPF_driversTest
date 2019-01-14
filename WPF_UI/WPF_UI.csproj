@@ -66,6 +66,9 @@
     <Compile Include="openingWindow.xaml.cs">
       <DependentUpon>openingWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="TesterOptions.xaml.cs">
+      <DependentUpon>TesterOptions.xaml</DependentUpon>
+    </Compile>
     <Compile Include="TestOptions.xaml.cs">
       <DependentUpon>TestOptions.xaml</DependentUpon>
     </Compile>
@@ -112,6 +115,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="openingWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TesterOptions.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -169,13 +176,15 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Properties\Main window background.jpg" />
-    <Resource Include="Properties\Test Background.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Properties\Open Road.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Properties\Summer-Road-Trip.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Properties\Tester Background.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

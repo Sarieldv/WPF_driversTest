@@ -29,15 +29,18 @@ namespace WPF_UI
         {
             InitializeComponent();
             List<Tester> testers = Utilities.ReturnTesters();
-            if (testers != null)
+            if(testers == null)
             {
+                (this.Parent as StackPanel).Children.Add(new TesterOptions());
+                (this.Parent as StackPanel).Children.Remove(this);
+            }
                 foreach (var t in Utilities.ReturnTesters())
                 {
                     ListBoxItem boxItem = new ListBoxItem();
                     boxItem.Content = t.ToString();
                     TesterOptions.Items.Add(boxItem);
                 }
-            }
+            
         }
 
         private void EraseButton_Click(object sender, RoutedEventArgs e)
@@ -51,6 +54,7 @@ namespace WPF_UI
 
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
+            (this.Parent as StackPanel).Children.Add(new TesterOptions());
             (this.Parent as StackPanel).Children.Remove(this);
         }
     }

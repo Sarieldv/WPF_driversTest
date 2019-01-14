@@ -26,7 +26,8 @@ namespace WPF_UI
         }
         private void TesterButton_Click(object sender, RoutedEventArgs e)
         {
-
+            (this.Parent as StackPanel).Children.Add(new TesterOptions());
+            (this.Parent as StackPanel).Children.Remove(this);
         }
 
         private void TraineeButton_Click(object sender, RoutedEventArgs e)
@@ -37,7 +38,6 @@ namespace WPF_UI
         private void TestButton_Click(object sender, RoutedEventArgs e)
         {
             (this.Parent as StackPanel).Children.Add(new TestOptions());
-
             (this.Parent as StackPanel).Children.Remove(this);
         }
 
