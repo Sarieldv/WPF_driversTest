@@ -45,5 +45,10 @@ namespace WPF_UI
         {
 
         }
+
+        private void closeButton_Click(object sender, RoutedEventArgs e)
+        {
+            ((this.Parent as StackPanel).Parent as MainWindow).Close();
+        }
     }
 }

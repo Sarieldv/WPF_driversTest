@@ -38,5 +38,6 @@
             <Button Name="TestButton" Content="Test Actions" Grid.Row="1" Grid.Column="0" Click="TestButton_Click"/>
             <Button Name="PresentButton" Content="View the Data" Grid.Row="1" Grid.Column="1" Click="PresentButton_Click"/>
         </Grid>
+        <Button Name="closeButton" Content="Close" BorderThickness="3" BorderBrush="Black" Click="closeButton_Click"/>
     </StackPanel>
 </UserControl>
