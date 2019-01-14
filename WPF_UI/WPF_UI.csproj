@@ -75,11 +75,17 @@
     <Compile Include="TestOptions.xaml.cs">
       <DependentUpon>TestOptions.xaml</DependentUpon>
     </Compile>
+    <Compile Include="TraineeOptions.xaml.cs">
+      <DependentUpon>TraineeOptions.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UpdateTest.xaml.cs">
       <DependentUpon>UpdateTest.xaml</DependentUpon>
     </Compile>
     <Compile Include="UpdateTester.xaml.cs">
       <DependentUpon>UpdateTester.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UpdateTrainee.xaml.cs">
+      <DependentUpon>UpdateTrainee.xaml</DependentUpon>
     </Compile>
     <Compile Include="Utilities.cs" />
     <Page Include="AddTest.xaml">
@@ -133,11 +139,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="TraineeOptions.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UpdateTest.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UpdateTester.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UpdateTrainee.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
