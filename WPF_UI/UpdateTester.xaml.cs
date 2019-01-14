@@ -130,6 +130,8 @@ namespace WPF_UI
             {
                 Utilities.ErrorBox(ex.Message);
             }
+            Utilities.InformationBox(thisTester.ToString() + " has been successfully updated.");
+            (this.Parent as StackPanel).Children.Remove(this);
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)

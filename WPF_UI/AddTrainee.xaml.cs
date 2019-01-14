@@ -136,8 +136,6 @@ namespace WPF_UI
             try
             {
                 FactoryBL.Instance.AddTrainee(new Trainee(IDNumber.Text.ToString(), new FullName(FirstName.Text.ToString(), LastName.Text.ToString()), (DateTime)BirthDate.SelectedDate, (Gender)Gender.SelectedIndex, new PhoneNumber(PhoneNumber.Text.ToString(), (KindOfPhoneNumber)HomeorMobile.SelectedIndex), new Address(StreetName.Text.ToString(), int.Parse(AddressNumber.Text), CityName.Text), myVehicle, schoolName.Text.ToString(), new FullName(teacherFirstName.Text.ToString(), teacherLastName.Text.ToString()), classesArr ));
-                //for checking purposes
-                //FactoryBL.Instance.AddTester(new Tester("212413165", new FullName("Sariel", "Segal"), (DateTime)BirthDate.SelectedDate, BE.Gender.Female, new PhoneNumber("0584719940", KindOfPhoneNumber.Mobile), new Address("Hanasi", 1, "Jerusalem"), 1, 1, MyVehicles, 1));
             }
             catch (Exception ex)
             {
@@ -157,38 +155,6 @@ namespace WPF_UI
         {
             if (vehicleComboBox.SelectedIndex == -1)
                 return;
-            //if ((sender as ComboBox).SelectedItem.ToString() == "Automatic Private Vehicle")
-            //{
-            //    classesArr[0] = (int)classes.Value;
-            //}
-            //if ((sender as ComboBox).SelectedItem.ToString() == "Automatic Two Wheel Vehicle")
-            //{
-
-            //}
-            //if ((sender as ComboBox).SelectedItem.ToString() == "Automatic Medium Truck")
-            //{
-
-            //}
-            //if ((sender as ComboBox).SelectedItem.ToString() == "Automatic Heavy Truck")
-            //{
-
-            //}
-            //if ((sender as ComboBox).SelectedItem.ToString() == "Manual Private Vehicle")
-            //{
-
-            //}
-            //if ((sender as ComboBox).SelectedItem.ToString() == "Manual Two Wheel Vehicle")
-            //{
-
-            //}
-            //if ((sender as ComboBox).SelectedItem.ToString() == "Manual Medium Truck")
-            //{
-
-            //}
-            //if ((sender as ComboBox).SelectedItem.ToString() == "Manual Medium Truck")
-            //{
-
-            //}
             classesArr[vehicleComboBox.SelectedIndex] = (int)classes.Value;
         }
     }

@@ -56,6 +56,8 @@ namespace WPF_UI
                     Utilities.ErrorBox(ex.Message);
                 }
             }
+            Utilities.InformationBox("You have successfelly canceled a test.");
+            (this.Parent as StackPanel).Children.Remove(this);
         }
 
         private void backButton_Click(object sender, RoutedEventArgs e)

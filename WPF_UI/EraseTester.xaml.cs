@@ -34,7 +34,7 @@ namespace WPF_UI
                 (this.Parent as StackPanel).Children.Add(new TesterOptions());
                 (this.Parent as StackPanel).Children.Remove(this);
             }
-                foreach (var t in Utilities.ReturnTesters())
+                foreach (var t in testers)
                 {
                     ListBoxItem boxItem = new ListBoxItem();
                     boxItem.Content = t.ToString();
@@ -47,8 +47,16 @@ namespace WPF_UI
         {
             if (!Utilities.AreYouSureBox("erase this tester"))
                 return;
-            var k = Utilities.ReturnTesters().Find(t => t.ToString() == TesterOptions.ToString());
-            FactoryBL.Instance.EraseTester(k);
+            var k = Utilities.ReturnTesters().Find(t => t.ToString() == TesterOptions.SelectedItem.ToString());
+            try
+            {
+                FactoryBL.Instance.EraseTester(k);
+            }
+            catch(Exception ex)
+            {
+                Utilities.ErrorBox(ex.Message);
+            }
+            Utilities.InformationBox("You have successfully erased a tester");
             (this.Parent as StackPanel).Children.Remove(this);
         }
 

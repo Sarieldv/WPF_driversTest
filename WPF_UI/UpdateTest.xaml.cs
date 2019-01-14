@@ -78,6 +78,8 @@ namespace WPF_UI
                     Utilities.ErrorBox(exc.Message);
                 }
             }
+            Utilities.InformationBox("You have successfully updated this test");
+            (this.Parent as StackPanel).Children.Remove(this);
         }
 
         private void backButton_Click(object sender, RoutedEventArgs e)

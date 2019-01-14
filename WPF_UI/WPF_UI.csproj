@@ -66,6 +66,9 @@
     <Compile Include="EraseTester.xaml.cs">
       <DependentUpon>EraseTester.xaml</DependentUpon>
     </Compile>
+    <Compile Include="EraseTrainee.xaml.cs">
+      <DependentUpon>EraseTrainee.xaml</DependentUpon>
+    </Compile>
     <Compile Include="openingWindow.xaml.cs">
       <DependentUpon>openingWindow.xaml</DependentUpon>
     </Compile>
@@ -105,6 +108,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="EraseTester.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="EraseTrainee.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
