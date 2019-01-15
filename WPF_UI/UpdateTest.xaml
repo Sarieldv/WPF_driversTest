@@ -8,24 +8,14 @@
     <StackPanel Background="White">
         <StackPanel.Resources>
             <LinearGradientBrush x:Key="MyBackground" EndPoint="0.504,1.5" StartPoint="0.504,0.03">
-                <GradientStop Color="MediumPurple" Offset="0"/>
+                <GradientStop Color="MediumVioletRed" Offset="0"/>
                 <GradientStop Color="#FFFFFFFF" Offset="0.567"/>
             </LinearGradientBrush>
             <Style TargetType="Label">
                 <Setter Property="Background" Value="{StaticResource MyBackground}"/>
                 <Setter Property="BorderBrush" Value="Black"/>
                 <Setter Property="BorderThickness" Value="1"/>
-                <Setter Property="FontSize" Value="30"/>
-            </Style>
-            <Style TargetType="TextBox">
-                <Setter Property="FontSize" Value="30"/>
-            </Style>
-            <Style TargetType="ComboBox">
-                <Setter Property="FontSize" Value="30"/>
-            </Style>
-            <Style TargetType="Viewbox">
-                <Setter Property="Height" Value="auto"/>
-                <Setter Property="Width" Value="450"/>
+                <Setter Property="FontWeight" Value="Bold"/>
             </Style>
             <Style TargetType="Button">
                 <Setter Property="Margin" Value="10"/>

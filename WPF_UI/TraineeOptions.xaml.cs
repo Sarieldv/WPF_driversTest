@@ -27,20 +27,20 @@ namespace WPF_UI
 
         private void addTraineeButton_Click(object sender, RoutedEventArgs e)
         {
-            mainPanel.Children.Clear();
-            this.mainPanel.Children.Add(new AddTrainee());
+            (this.Parent as StackPanel).Children.Add(new AddTrainee());
+            (this.Parent as StackPanel).Children.Remove(this); ;
         }
 
         private void updateTraineeButton_Click(object sender, RoutedEventArgs e)
         {
-            mainPanel.Children.Clear();
-            this.mainPanel.Children.Add(new UpdateTrainee());
+            (this.Parent as StackPanel).Children.Add(new UpdateTrainee());
+            (this.Parent as StackPanel).Children.Remove(this);
         }
 
         private void eraseTraineeButton_Click(object sender, RoutedEventArgs e)
         {
-            mainPanel.Children.Clear();
-            this.mainPanel.Children.Add(new EraseTrainee());
+            (this.Parent as StackPanel).Children.Add(new EraseTrainee());
+            (this.Parent as StackPanel).Children.Remove(this); ;
         }
 
         private void backButton_Click(object sender, RoutedEventArgs e)

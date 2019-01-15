@@ -63,6 +63,12 @@
     <Compile Include="CancelTest.xaml.cs">
       <DependentUpon>CancelTest.xaml</DependentUpon>
     </Compile>
+    <Compile Include="DataPresentWindow.xaml.cs">
+      <DependentUpon>DataPresentWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="DataWindow.xaml.cs">
+      <DependentUpon>DataWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="EraseTester.xaml.cs">
       <DependentUpon>EraseTester.xaml</DependentUpon>
     </Compile>
@@ -104,6 +110,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="CancelTest.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DataPresentWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="DataWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

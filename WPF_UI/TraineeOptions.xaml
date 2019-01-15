@@ -6,8 +6,7 @@
              xmlns:local="clr-namespace:WPF_UI"
              mc:Ignorable="d">
     <StackPanel>
-        <StackPanel>
-            <StackPanel.Resources>
+        <StackPanel.Resources>
                 <LinearGradientBrush x:Key="buttonBackground" EndPoint="0.504,1.5" StartPoint="0.504,0.03">
                     <GradientStop  Offset="0"/>
                     <GradientStop Color="#FFFFFFFF" Offset="0.567"/>
@@ -26,9 +25,7 @@
             <Button Name="updateTraineeButton" Content="Update A Trainee" Click="updateTraineeButton_Click"/>
             <Button Name="eraseTraineeButton" Content="Erase A Trainee" Click="eraseTraineeButton_Click"/>
             <Button Name="backButton" Content="Back" Click="backButton_Click"/>
-        </StackPanel>
-        <StackPanel Name="mainPanel" Grid.Column="0">
-
-        </StackPanel>
-    </StackPanel>
+        
+        
+   </StackPanel>
 </UserControl>

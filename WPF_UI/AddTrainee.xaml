@@ -7,6 +7,7 @@
              mc:Ignorable="d" 
              >
     <StackPanel Background="White">
+        
         <StackPanel.Resources>
             <LinearGradientBrush x:Key="MyBackground" EndPoint="0.504,1.5" StartPoint="0.504,0.03">
                 <GradientStop Color="MediumSeaGreen" Offset="0"/>
@@ -21,19 +22,18 @@
             <Style TargetType="Grid">
                 <Setter Property="Margin" Value="10"/>
             </Style>
-            <Style TargetType="ComboBox">
-                <Setter Property="FontSize" Value="30"/>
-            </Style>
             <Style TargetType="Button">
                 <Setter Property="Margin" Value="10"/>
                 <Setter Property="FontSize" Value="30"/>
             </Style>
         </StackPanel.Resources>
         <Label Content="Add a new trainee:"/>
+        
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
             <StackPanel Grid.Column="0">
                 <Label Content="First Name:"/>
@@ -42,7 +42,6 @@
                 <TextBox Name="LastName"/>
                 <Label Content="ID Number:" />
                 <TextBox Name="IDNumber"/>
-                
                 <Label Content="City Name:"/>
                 <TextBox Name="CityName"/>
                 <Label Content="Address Number: " />
@@ -50,7 +49,7 @@
                 <Label Content="Street Name: "/>
                 <TextBox Name="StreetName"/>
                 <Label Content="Birth Date:"/>
-                <Viewbox Height="auto" Width="300">
+                <Viewbox>
                     <DatePicker Name="BirthDate"/>
                 </Viewbox>
                 <Label Content="Phone Number:"/>
@@ -60,8 +59,6 @@
                     <ComboBoxItem>Mobile Phone</ComboBoxItem>
                     <ComboBoxItem>Home Phone</ComboBoxItem>
                 </ComboBox>
-            </StackPanel>
-            <StackPanel Grid.Column="1">
                 <Label Content="Gender:"/>
                 <ComboBox Name="Gender">
                     <ComboBoxItem>Male</ComboBoxItem>
@@ -71,6 +68,9 @@
                 <TextBox Name="teacherFirstName"/>
                 <Label Content="Teacher's last name:"/>
                 <TextBox Name="teacherLastName"/>
+            </StackPanel>
+            <StackPanel Grid.Column="1">
+                
                 <Label Content="School Name:"/>
                 <TextBox Name="schoolName"/>
                 <Label Content="Vehicle the trainee is currently learning on:"/>
@@ -101,6 +101,8 @@
                 <local:NumberUpDown x:Name="classes" HorizontalAlignment="Center"/>
                 <Button Name="updateValue" Content="Update classes" Click="updateValue_Click"/>
             </StackPanel>
+
+            <ScrollBar HorizontalAlignment="Left" VerticalAlignment="Center" Grid.Column="2"/>
         </Grid>
 
 

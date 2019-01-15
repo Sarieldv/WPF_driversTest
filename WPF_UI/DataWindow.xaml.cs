@@ -16,31 +16,28 @@ using System.Windows.Shapes;
 namespace WPF_UI
 {
     /// <summary>
-    /// Interaction logic for TestOptions.xaml
+    /// Interaction logic for DataWindow.xaml
     /// </summary>
-    public partial class TestOptions : UserControl
+    public partial class DataWindow : UserControl
     {
-        public TestOptions()
+        public DataWindow()
         {
             InitializeComponent();
         }
 
-        private void addTestButton_Click(object sender, RoutedEventArgs e)
+        private void addTraineeButton_Click(object sender, RoutedEventArgs e)
         {
-            (this.Parent as StackPanel).Children.Add(new AddTest());
-            (this.Parent as StackPanel).Children.Remove(this);
+
         }
 
-        private void updateTestButton_Click(object sender, RoutedEventArgs e)
+        private void updateTraineeButton_Click(object sender, RoutedEventArgs e)
         {
-            (this.Parent as StackPanel).Children.Add(new UpdateTest());
-            (this.Parent as StackPanel).Children.Remove(this);
+
         }
 
-        private void cancelTestButton_Click(object sender, RoutedEventArgs e)
+        private void eraseTraineeButton_Click(object sender, RoutedEventArgs e)
         {
-            (this.Parent as StackPanel).Children.Add(new CancelTest());
-            (this.Parent as StackPanel).Children.Remove(this);
+
         }
 
         private void backButton_Click(object sender, RoutedEventArgs e)

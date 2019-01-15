@@ -14,30 +14,22 @@
                 <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>-->
-            <StackPanel>
-                <StackPanel.Resources>
-                    <LinearGradientBrush x:Key="buttonBackground" EndPoint="0.504,1.5" StartPoint="0.504,0.03">
-                        <GradientStop  Offset="0"/>
-                        <GradientStop Color="#FFFFFFFF" Offset="0.567"/>
-                    </LinearGradientBrush>
-
-                    <Style TargetType="Grid">
-                        <Setter Property="Margin" Value="10"/>
-                    </Style>
-                    <Style TargetType="Button">
-                        <Setter Property="Margin" Value="10"/>
-                        <Setter Property="FontSize" Value="30"/>
-                        <Setter Property="Background" Value="{StaticResource buttonBackground}"/>
-                    </Style>
-                </StackPanel.Resources>
-                <Button Name="addTestButton" Content="Add A Test" Click="addTestButton_Click"/>
-                <Button Name="updateTestButton" Content="Update A Test" Click="updateTestButton_Click"/>
-                <Button Name="cancelTestButton" Content="Cancel A Test" Click="cancelTestButton_Click"/>
-                <Button Name="backButton" Content="Back" Click="backButton_Click"/>
-            </StackPanel>
-            <StackPanel Name="mainPanel" Grid.Column="0">
-                
-            </StackPanel>
-        <!--</Grid>-->
+        <StackPanel>
+            <StackPanel.Resources>
+                <LinearGradientBrush x:Key="buttonBackground" EndPoint="0.504,1.5" StartPoint="0.504,0.03">
+                    <GradientStop  Offset="0"/>
+                    <GradientStop Color="#FFFFFFFF" Offset="0.567"/>
+                </LinearGradientBrush>
+                <Style TargetType="Button">
+                    <Setter Property="Margin" Value="10"/>
+                    <Setter Property="FontSize" Value="30"/>
+                    <Setter Property="Background" Value="{StaticResource buttonBackground}"/>
+                </Style>
+            </StackPanel.Resources>
+            <Button Name="addTestButton" Content="Add A Test" Click="addTestButton_Click"/>
+            <Button Name="updateTestButton" Content="Update A Test" Click="updateTestButton_Click"/>
+            <Button Name="cancelTestButton" Content="Cancel A Test" Click="cancelTestButton_Click"/>
+            <Button Name="backButton" Content="Back" Click="backButton_Click"/>
+        </StackPanel>
     </StackPanel>
 </UserControl>

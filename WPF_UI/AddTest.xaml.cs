@@ -28,8 +28,10 @@ namespace WPF_UI
             List<Trainee> trainees = Utilities.ReturnTrainees();
             if (trainees == null)
             {
+                (this.Parent as StackPanel).Children.Add(new TestOptions());
                 (this.Parent as StackPanel).Children.Remove(this);
             }
+        
             foreach (var t in trainees)
             {
                 ListBoxItem boxItem = new ListBoxItem();
@@ -72,6 +74,7 @@ namespace WPF_UI
 
         private void backButton_Click(object sender, RoutedEventArgs e)
         {
+            (this.Parent as StackPanel).Children.Add(new TestOptions());
             (this.Parent as StackPanel).Children.Remove(this);
         }
 

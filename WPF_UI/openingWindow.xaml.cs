@@ -44,7 +44,8 @@ namespace WPF_UI
 
         private void PresentButton_Click(object sender, RoutedEventArgs e)
         {
-
+            (this.Parent as StackPanel).Children.Add(new DataWindow());
+            (this.Parent as StackPanel).Children.Remove(this);
         }
 
         private void closeButton_Click(object sender, RoutedEventArgs e)
