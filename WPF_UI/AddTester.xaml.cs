@@ -126,6 +126,7 @@ namespace WPF_UI
                 return;
             }
             Utilities.InformationBox(FirstName.Text.ToString() + " " + LastName.Text.ToString() + " was just added to the system as a tester.");
+            (this.Parent as StackPanel).Children.Add(new TesterOptions());
             (this.Parent as StackPanel).Children.Remove(this);
         }
 

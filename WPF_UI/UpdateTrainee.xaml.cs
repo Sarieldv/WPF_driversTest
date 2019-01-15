@@ -94,6 +94,7 @@ namespace WPF_UI
                 Utilities.ErrorBox(ex.Message);
             }
             Utilities.InformationBox(thisTrainee.ToString() + " has been successfully updated.");
+            (this.Parent as StackPanel).Children.Add(new TraineeOptions());
             (this.Parent as StackPanel).Children.Remove(this);
         }
         #region stuffIsChanged

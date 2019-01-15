@@ -54,6 +54,7 @@ namespace WPF_UI
                 Utilities.ErrorBox(ex.Message);
             }
             Utilities.InformationBox("You have successfully erased a trainee.");
+            (this.Parent as StackPanel).Children.Add(new TraineeOptions());
             (this.Parent as StackPanel).Children.Remove(this);
         }
 

@@ -143,6 +143,7 @@ namespace WPF_UI
                 return;
             }
             Utilities.InformationBox(FirstName.Text.ToString() + " " + LastName.Text.ToString() + " was just added to the system as a trainee.");
+            (this.Parent as StackPanel).Children.Add(new TraineeOptions());
             (this.Parent as StackPanel).Children.Remove(this);
         }
 

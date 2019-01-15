@@ -79,8 +79,10 @@ namespace WPF_UI
                 }
             }
             Utilities.InformationBox("You have successfully updated this test");
+            (this.Parent as StackPanel).Children.Add(new TestOptions());
             (this.Parent as StackPanel).Children.Remove(this);
-        }
+        
+    }
 
         private void backButton_Click(object sender, RoutedEventArgs e)
         {

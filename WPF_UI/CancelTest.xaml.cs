@@ -57,6 +57,7 @@ namespace WPF_UI
                 }
             }
             Utilities.InformationBox("You have successfelly canceled a test.");
+            (this.Parent as StackPanel).Children.Add(new TestOptions());
             (this.Parent as StackPanel).Children.Remove(this);
         }
 

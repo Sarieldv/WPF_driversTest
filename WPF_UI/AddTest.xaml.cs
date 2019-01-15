@@ -66,6 +66,7 @@ namespace WPF_UI
                 Utilities.ErrorBox(ex.Message);
             }
             Utilities.InformationBox("You have successfully added a test");
+            (this.Parent as StackPanel).Children.Add(new TestOptions());
             (this.Parent as StackPanel).Children.Remove(this);
         }
 

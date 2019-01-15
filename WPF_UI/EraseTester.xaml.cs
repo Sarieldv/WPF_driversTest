@@ -57,6 +57,7 @@ namespace WPF_UI
                 Utilities.ErrorBox(ex.Message);
             }
             Utilities.InformationBox("You have successfully erased a tester");
+            (this.Parent as StackPanel).Children.Add(new TesterOptions());
             (this.Parent as StackPanel).Children.Remove(this);
         }
 
