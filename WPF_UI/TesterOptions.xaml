@@ -8,30 +8,38 @@
              >
     <Grid>
         <StackPanel>
-            <!--<StackPanel.Background>
-                <ImageBrush ImageSource="C:\Users\sariel\source\repos\WPF_driversTest\WPF_UI\Properties\Tester Background.jpg"/>
-            </StackPanel.Background>-->
-                <StackPanel>
-                    <StackPanel.Resources>
-                        <LinearGradientBrush x:Key="buttonBackground" EndPoint="0.504,1.5" StartPoint="0.504,0.03">
-                            <GradientStop  Offset="0"/>
-                            <GradientStop Color="#FFFFFFFF" Offset="0.567"/>
-                        </LinearGradientBrush>
+            <StackPanel>
+                <StackPanel.Resources>
+                    <LinearGradientBrush x:Key="buttonBackground" EndPoint="0.504,1.5" StartPoint="0.504,0.03">
+                        <GradientStop  Offset="0"/>
+                        <GradientStop Color="#FFFFFFFF" Offset="0.567"/>
+                    </LinearGradientBrush>
 
-                        <Style TargetType="Grid">
-                            <Setter Property="Margin" Value="10"/>
-                        </Style>
-                        <Style TargetType="Button">
-                            <Setter Property="Margin" Value="10"/>
-                            <Setter Property="FontSize" Value="30"/>
-                            <Setter Property="Background" Value="{StaticResource buttonBackground}"/>
-                        </Style>
-                    </StackPanel.Resources>
-                    <Button Name="addTesterButton" Content="Add A Tester" Click="addTesterButton_Click"/>
-                    <Button Name="updateTesterButton" Content="Update A Tester" Click="updateTesterButton_Click"/>
-                    <Button Name="cancelTesterButton" Content="Erase A Tester" Click="cancelTesterButton_Click"/>
-                    <Button Name="backButton" Content="Back" Click="backButton_Click"/>
-                </StackPanel>
+                    <Style TargetType="Grid">
+                        <Setter Property="Margin" Value="50"/>
+                    </Style>
+                    <Style TargetType="Button">
+                        <Setter Property="Margin" Value="10"/>
+                        <Setter Property="FontSize" Value="40"/>
+                        <Setter Property="Background" Value="{StaticResource buttonBackground}"/>
+                        <Setter Property="FontWeight" Value="Bold"/>
+                    </Style>
+                </StackPanel.Resources>
+                <Grid Height="700">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Button Name="addTesterButton" Content="Add A Tester" Click="addTesterButton_Click" Grid.Row="0" Grid.Column="0"/>
+                    <Button Name="updateTesterButton" Content="Update A Tester" Click="updateTesterButton_Click" Grid.Row="0" Grid.Column="1"/>
+                    <Button Name="cancelTesterButton" Content="Erase A Tester" Click="cancelTesterButton_Click" Grid.Row="1" Grid.Column="0"/>
+                    <Button Name="backButton" Content="Back" Click="backButton_Click" Grid.Row="1" Grid.Column="1" BorderThickness="3" BorderBrush="Black"/>
+                </Grid>
+            </StackPanel>
         </StackPanel>
     </Grid>
 </UserControl>

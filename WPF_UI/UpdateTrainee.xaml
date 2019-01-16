@@ -112,6 +112,7 @@
                     </ComboBox>
                     <local:NumberUpDown x:Name="classes" HorizontalAlignment="Center"/>
                     <Button Name="updateValue" Content="Update classes" Click="updateValue_Click"/>
+                    <TextBlock Text="The amount of classes will only enter the system if you press update!" Foreground="Red"/>
                 </StackPanel>
             </Grid>
         </StackPanel>

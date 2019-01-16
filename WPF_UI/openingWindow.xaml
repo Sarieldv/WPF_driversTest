@@ -12,7 +12,7 @@
                 <GradientStop Color="#FFFFFFFF" Offset="0.567"/>
             </LinearGradientBrush>
             <Style TargetType="Grid">
-                <Setter Property="Margin" Value="0"/>
+                <Setter Property="Margin" Value="50"/>
             </Style>
             <Style TargetType="Button">
                 <Setter Property="Margin" Value="40"/>
@@ -21,7 +21,7 @@
                 <Setter Property="Background" Value="{StaticResource MyBackground}"/>
             </Style>
         </StackPanel.Resources>
-        <Grid Height="520">
+        <Grid Height="700">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>

@@ -13,19 +13,29 @@
                 </LinearGradientBrush>
 
                 <Style TargetType="Grid">
-                    <Setter Property="Margin" Value="10"/>
+                    <Setter Property="Margin" Value="50"/>
                 </Style>
                 <Style TargetType="Button">
                     <Setter Property="Margin" Value="10"/>
-                    <Setter Property="FontSize" Value="30"/>
+                    <Setter Property="FontSize" Value="40"/>
                     <Setter Property="Background" Value="{StaticResource buttonBackground}"/>
-                </Style>
+                <Setter Property="FontWeight" Value="Bold"/>
+            </Style>
             </StackPanel.Resources>
-            <Button Name="addTraineeButton" Content="Add A Trainee" Click="addTraineeButton_Click"/>
-            <Button Name="updateTraineeButton" Content="Update A Trainee" Click="updateTraineeButton_Click"/>
-            <Button Name="eraseTraineeButton" Content="Erase A Trainee" Click="eraseTraineeButton_Click"/>
-            <Button Name="backButton" Content="Back" Click="backButton_Click"/>
+        <Grid Height="700">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Button Name="addTraineeButton" Content="Add A Trainee" Click="addTraineeButton_Click" Grid.Column="0" Grid.Row="0"/>
+            <Button Name="updateTraineeButton" Content="Update A Trainee" Click="updateTraineeButton_Click" Grid.Column="0" Grid.Row="1"/>
+            <Button Name="eraseTraineeButton" Content="Erase A Trainee" Click="eraseTraineeButton_Click" Grid.Column="1" Grid.Row="0"/>
+            <Button Name="backButton" Content="Back" Click="backButton_Click" Grid.Column="1" Grid.Row="1" BorderThickness="3" BorderBrush="Black"/>
         
-        
+        </Grid>
    </StackPanel>
 </UserControl>

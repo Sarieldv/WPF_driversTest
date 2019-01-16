@@ -67,7 +67,7 @@ namespace DAL
         {
             if (DataSource.TestersList.Any(t => t.IDNumber == NewTester.IDNumber) || DataSource.TraineesList.Any(t => t.IDNumber == NewTester.IDNumber))
             {
-                throw new Exception("New Tester already exists.");
+                throw new Exception("A person with this ID number already exists in the system.");
             }
             DataSource.TestersList.Add(NewTester);
 
@@ -77,7 +77,7 @@ namespace DAL
         {
             if (DataSource.TraineesList.Any(t => t.IDNumber == NewTrainee.IDNumber) || DataSource.TraineesList.Any(t => t.IDNumber == NewTrainee.IDNumber))
             {
-                throw new Exception("New Tester already exists.");
+                throw new Exception("A person with this ID number already exists in the system.");
             }
             DataSource.TraineesList.Add(NewTrainee);
         }

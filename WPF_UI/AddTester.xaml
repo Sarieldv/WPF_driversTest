@@ -22,9 +22,7 @@
             <Style TargetType="Grid">
                 <Setter Property="Margin" Value="10"/>
             </Style>
-            <Style TargetType="ComboBox">
-                <Setter Property="FontSize" Value="30"/>
-            </Style>
+
             
             <Style TargetType="Button">
                 <Setter Property="Margin" Value="10"/>
