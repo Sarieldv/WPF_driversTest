@@ -31,8 +31,7 @@ namespace WPF_UI
             List<Tester> testers = Utilities.ReturnTesters();
             if(testers == null)
             {
-                (this.Parent as StackPanel).Children.Add(new TesterOptions());
-                (this.Parent as StackPanel).Children.Remove(this);
+                return;
             }
                 foreach (var t in testers)
                 {

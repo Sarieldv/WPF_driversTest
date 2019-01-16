@@ -28,7 +28,7 @@ namespace WPF_UI
             List<Test> tests = Utilities.ReturnTests();
             if(tests==null)
             {
-                (this.Parent as StackPanel).Children.Remove(this);
+                return;
             }
             foreach (var t in tests)
             {
@@ -63,6 +63,7 @@ namespace WPF_UI
 
         private void backButton_Click(object sender, RoutedEventArgs e)
         {
+            (this.Parent as StackPanel).Children.Add(new TestOptions());
             (this.Parent as StackPanel).Children.Remove(this);
         }
 

@@ -28,9 +28,7 @@ namespace WPF_UI
             List<Trainee> trainees = Utilities.ReturnTrainees();
             if (trainees == null)
             {
-                trainees = new List<Trainee>();
-                //(Parent as StackPanel).Children.Add(new TraineeOptions());
-                //(Parent as StackPanel).Children.Remove(this);
+                return;
             }
             foreach (var t in trainees)
             {

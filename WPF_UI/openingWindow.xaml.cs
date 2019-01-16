@@ -23,6 +23,7 @@ namespace WPF_UI
         public openingWindow()
         {
             InitializeComponent();
+
         }
         private void TesterButton_Click(object sender, RoutedEventArgs e)
         {
