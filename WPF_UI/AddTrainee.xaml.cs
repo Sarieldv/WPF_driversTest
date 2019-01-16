@@ -27,10 +27,10 @@ namespace WPF_UI
             InitializeComponent();
         }
         int[] classesArr = new int[8];
-        int num;
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
-
+            (this.Parent as StackPanel).Children.Add(new TraineeOptions());
+            (this.Parent as StackPanel).Children.Remove(this);
         }
 
         private void addButton_Click(object sender, RoutedEventArgs e)

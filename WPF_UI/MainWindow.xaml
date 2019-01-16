@@ -10,7 +10,7 @@
         WindowStyle="ThreeDBorderWindow">
     <StackPanel x:Name="MainWindowStack">
         <StackPanel.Background>
-            <ImageBrush ImageSource="C:\Users\sariel\source\repos\WPF_driversTest\WPF_UI\Properties\Main window background.jpg"/>
+            <ImageBrush ImageSource=".\Properties\Main window background.jpg"/>
         </StackPanel.Background>
     </StackPanel>
 </Window>

@@ -10,7 +10,7 @@
         
         <StackPanel.Resources>
             <LinearGradientBrush x:Key="MyBackground" EndPoint="0.504,1.5" StartPoint="0.504,0.03">
-                <GradientStop Color="MediumSeaGreen" Offset="0"/>
+                <GradientStop Color="LightBlue" Offset="0"/>
                 <GradientStop Color="#FFFFFFFF" Offset="0.567"/>
             </LinearGradientBrush>
             <Style TargetType="Label">
@@ -49,9 +49,8 @@
                 <Label Content="Street Name: "/>
                 <TextBox Name="StreetName"/>
                 <Label Content="Birth Date:"/>
-                <Viewbox>
-                    <DatePicker Name="BirthDate"/>
-                </Viewbox>
+                <DatePicker Name="BirthDate"/>
+                
                 <Label Content="Phone Number:"/>
                 <TextBox Name="PhoneNumber"/>
                 <Label Content="Home Or Mobile:"/>
@@ -74,18 +73,17 @@
                 <Label Content="School Name:"/>
                 <TextBox Name="schoolName"/>
                 <Label Content="Vehicle the trainee is currently learning on:"/>
-                <Viewbox>
-                    <StackPanel>
-                        <RadioButton GroupName="vehicles" Name="AutomaticPrivateVehicle" Content="Automatic Private Vehicle"/>
-                        <RadioButton GroupName="vehicles" Name="AutomaticTwoWheelVehicle" Content="Automatic Two Wheel Vehicle"/>
-                        <RadioButton GroupName="vehicles" Name="AutomaticMediumTruck" Content="Automatic Medium Truck"/>
-                        <RadioButton GroupName="vehicles" Name="AutomaticHeavyTruck" Content="Automatic Heavy Truck"/>
-                        <RadioButton GroupName="vehicles" Name="ManualPrivateVehicle" Content="Manual Private Vehicle"/>
-                        <RadioButton GroupName="vehicles" Name="ManualTwoWheelVehicle" Content="Manual Two Wheel Vehicle"/>
-                        <RadioButton GroupName="vehicles" Name="ManualMediumTruck" Content="Manual Medium Truck"/>
-                        <RadioButton GroupName="vehicles" Name="ManualHeavyTruck" Content="Manual Heavy Truck"/>
-                    </StackPanel>
-                </Viewbox>
+
+                <StackPanel>
+                    <RadioButton GroupName="vehicles" Name="AutomaticPrivateVehicle" Content="Automatic Private Vehicle"/>
+                    <RadioButton GroupName="vehicles" Name="AutomaticTwoWheelVehicle" Content="Automatic Two Wheel Vehicle"/>
+                    <RadioButton GroupName="vehicles" Name="AutomaticMediumTruck" Content="Automatic Medium Truck"/>
+                    <RadioButton GroupName="vehicles" Name="AutomaticHeavyTruck" Content="Automatic Heavy Truck"/>
+                    <RadioButton GroupName="vehicles" Name="ManualPrivateVehicle" Content="Manual Private Vehicle"/>
+                    <RadioButton GroupName="vehicles" Name="ManualTwoWheelVehicle" Content="Manual Two Wheel Vehicle"/>
+                    <RadioButton GroupName="vehicles" Name="ManualMediumTruck" Content="Manual Medium Truck"/>
+                    <RadioButton GroupName="vehicles" Name="ManualHeavyTruck" Content="Manual Heavy Truck"/>
+                </StackPanel>
                 <Label Content="How many classes have you had on every vehicle?"/>
 
                 <ComboBox Name="vehicleComboBox" SelectionChanged="vehicleComboBox_SelectionChanged">

@@ -47,7 +47,7 @@ namespace WPF_UI
         {
             if (!Utilities.AreYouSureBox("erase this tester"))
                 return;
-            Tester k = Utilities.ReturnTesters().Find(t => t.ToString() == TesterOptions.);
+            Tester k = Utilities.ReturnTesters().Find(t => t.ToString() == TesterOptions.ToString());
             try
             {
                 FactoryBL.Instance.EraseTester(k);

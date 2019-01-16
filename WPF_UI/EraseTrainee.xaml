@@ -9,7 +9,7 @@
     <StackPanel Background="White">
         <StackPanel.Resources>
             <LinearGradientBrush x:Key="MyBackground" EndPoint="0.504,1.5" StartPoint="0.504,0.03">
-                <GradientStop Color="MediumSeaGreen" Offset="0"/>
+                <GradientStop Color="LightBlue" Offset="0"/>
                 <GradientStop Color="#FFFFFFFF" Offset="0.567"/>
             </LinearGradientBrush>
             <Style TargetType="Label">
