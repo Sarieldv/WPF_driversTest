@@ -25,10 +25,7 @@
             <Style TargetType="ComboBox">
                 <Setter Property="FontSize" Value="30"/>
             </Style>
-            <!--<Style TargetType="Viewbox">
-                <Setter Property="Height" Value="auto"/>
-                <Setter Property="Width" Value="1000"/>
-            </Style>-->
+            
             <Style TargetType="Button">
                 <Setter Property="Margin" Value="10"/>
                 <Setter Property="FontSize" Value="30"/>
@@ -59,10 +56,7 @@
                 <Label Content="Street Name: "/>
                 <TextBox Name="StreetName"/>
                 <Label Content="Birth Date:"/>
-                <Viewbox Height="auto" Width="300">
-                    <DatePicker Name="BirthDate"/>
-                </Viewbox>
-
+                <DatePicker Name="BirthDate"/>
             </StackPanel>
             <StackPanel Grid.Column="1">
                 <Label Content="Phone Number:"/>
@@ -79,7 +73,7 @@
                 <Label Content="Maximum amount of distance from the test(Km):"/>
                 <local:NumberUpDown x:Name="MaxDistance" HorizontalAlignment="Center"/>
                 <Label Content="Vehicles this tester specializes in:"/>
-                <Viewbox>
+                
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*"/>
@@ -103,7 +97,7 @@
                             <CheckBox Name="ManualHeavyTruck" Content="Manual Heavy Truck"/>
                         </StackPanel>
                     </Grid>
-                </Viewbox>
+                
             </StackPanel>
         </Grid>
 

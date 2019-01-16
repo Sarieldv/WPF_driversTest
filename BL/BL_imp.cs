@@ -132,7 +132,7 @@ namespace BL
             int Temp = int.Parse(NewTrainee.IDNumber) / 10;
             for (int i = 0; i < 8; i++)
             {
-                Sum += ((Temp % 10) * (2 ^ (i % 2))) / 10 + ((Temp % 10) * (2 ^ (i % 2))) % 10;
+                Sum += (Temp % 10) * (Utilities.FuncForID(i)) / 10 + ((Temp % 10) * Utilities.FuncForID(i)) % 10;
                 Temp /= 10;
             }
             Temp = (((Sum / 10) * 10 + 10) - Sum) % 10;
