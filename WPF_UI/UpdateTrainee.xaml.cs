@@ -28,12 +28,13 @@ namespace WPF_UI
             List<Trainee> trainees = Utilities.ReturnTrainees();
             if (trainees == null)
             {
-                (Parent as StackPanel).Children.Add(new TraineeOptions());
-                (Parent as StackPanel).Children.Remove(this);
+                trainees = new List<Trainee>();
+                //(Parent as StackPanel).Children.Add(new TraineeOptions());
+                //(Parent as StackPanel).Children.Remove(this);
             }
             foreach (var t in trainees)
             {
-                ListBoxItem boxItem = new ListBoxItem();
+                ComboBoxItem boxItem = new ComboBoxItem();
                 boxItem.Content = t.ToString();
                 TraineeOptions.Items.Add(boxItem);
             }
@@ -185,7 +186,8 @@ namespace WPF_UI
         #endregion
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
-            (this.Parent as StackPanel).Children.Remove(this);
+            (Parent as StackPanel).Children.Add(new TraineeOptions());
+            (Parent as StackPanel).Children.Remove(this);
         }
         
     }
