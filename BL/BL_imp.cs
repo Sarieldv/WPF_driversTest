@@ -211,6 +211,14 @@ namespace BL
             {
                 throw ex;
             }
+            try
+            {
+                ReturnTests();
+            }
+            catch
+            {
+                return;
+            }
             var k = (from t in ReturnTests()
                      where t.TesterId == _tester.IDNumber
                      select t);
@@ -235,6 +243,14 @@ namespace BL
             catch (Exception ex)
             {
                 throw ex;
+            }
+            try
+            {
+               ReturnTests();
+            }
+            catch
+            {
+                return;
             }
             var k = (from t in ReturnTests()
                      where t.TraineeId == _trainee.IDNumber

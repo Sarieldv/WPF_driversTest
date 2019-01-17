@@ -35,7 +35,7 @@ namespace WPF_UI
             }
                 foreach (var t in testers)
                 {
-                    ListBoxItem boxItem = new ListBoxItem();
+                    ComboBoxItem boxItem = new ComboBoxItem();
                     boxItem.Content = t.ToString();
                     TesterOptions.Items.Add(boxItem);
                 }
@@ -44,9 +44,20 @@ namespace WPF_UI
 
         private void EraseButton_Click(object sender, RoutedEventArgs e)
         {
-            if (!Utilities.AreYouSureBox("erase this tester"))
+            if (!Utilities.AreYouSureBox("erase this tester, even though any tests they are signed up to will be erased"))
                 return;
-            Tester k = Utilities.ReturnTesters().Find(t => t.ToString() == TesterOptions.ToString());
+            ComboBoxItem TempBoxItem = new ComboBoxItem();
+            //Tester k = Utilities.ReturnTesters().Find(t => t.ToString() == TesterOptions.ToString());
+            Tester k = new Tester();
+            foreach (var t in Utilities.ReturnTesters())
+            {
+                TempBoxItem.Content = t.ToString();
+                if(TesterOptions.SelectedItem.ToString() == TempBoxItem.ToString())
+                {
+                    k = t;           
+                    break;
+                }
+            }
             try
             {
                 FactoryBL.Instance.EraseTester(k);

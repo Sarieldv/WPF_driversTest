@@ -25,7 +25,7 @@
         </StackPanel.Resources>
 
         <Label Content="Choose which tester to erase:"/>
-        <ListBox x:Name="TesterOptions" BorderThickness="3"/>
+        <ComboBox x:Name="TesterOptions" BorderThickness="3"/>
         <Button x:Name="EraseButton" Content="Erase" FontSize="30" Margin="10" Click="EraseButton_Click">
             <Button.Style>
                 <Style>
