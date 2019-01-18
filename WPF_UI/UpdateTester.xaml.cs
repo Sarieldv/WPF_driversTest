@@ -25,17 +25,17 @@ namespace WPF_UI
         {
             InitializeComponent();
             List<Tester> testers = Utilities.ReturnTesters();
-            if(testers==null)
+            if (testers == null)
             {
                 return;
             }
-                foreach (var t in testers)
-                {
-                    ListBoxItem boxItem = new ListBoxItem();
-                    boxItem.Content = t.ToString();
-                    TesterOptions.Items.Add(boxItem);
-                }
-            
+            foreach (var t in testers)
+            {
+                ComboBoxItem boxItem = new ComboBoxItem();
+                boxItem.Content = t.ToString();
+                TesterOptions.Items.Add(boxItem);
+            }
+
             thisTester = new Tester();
             copyTester = new Tester();
         }
@@ -63,7 +63,7 @@ namespace WPF_UI
                 Utilities.ErrorBox("The phone number contains characters that are not numbers.");
                 return;
             }
-            if (HomeorMobile.SelectedItem.ToString() == "Home Phone")
+            if (HomeorMobile.SelectedIndex == 1)
             {
                 if (PhoneNumber.Text.ToString().Length != 9)
                 {
@@ -73,7 +73,7 @@ namespace WPF_UI
             }
             else
             {
-                if (PhoneNumber.Text.ToString().Length != 10)
+                if (PhoneNumber.Text.ToString().Length != 10 && HomeorMobile.SelectedIndex != -1)
                 {
                     Utilities.ErrorBox("The phone number is an incorrect length.");
                     return;
@@ -142,93 +142,102 @@ namespace WPF_UI
 
         private void TesterOptions_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            thisTester = Utilities.ReturnTesters().Find(t => t.ToString() == TesterOptions.ToString());
-            copyTester = thisTester;
-            AutomaticPrivateVehicle.IsChecked = thisTester.hasVehicle(new VehicleParams(Vehicle.PrivateVehicle, GearBox.Automatic));
-            AutomaticTwoWheelVehicle.IsChecked = thisTester.hasVehicle(new VehicleParams(Vehicle.TwoWheelVehicle, GearBox.Automatic));
-            AutomaticMediumTruck.IsChecked = thisTester.hasVehicle(new VehicleParams(Vehicle.MediumTruck, GearBox.Automatic));
-            AutomaticHeavyTruck.IsChecked = thisTester.hasVehicle(new VehicleParams(Vehicle.HeavyTruck, GearBox.Automatic));
-            ManualPrivateVehicle.IsChecked = thisTester.hasVehicle(new VehicleParams(Vehicle.PrivateVehicle, GearBox.Manual));
-            ManualTwoWheelVehicle.IsChecked = thisTester.hasVehicle(new VehicleParams(Vehicle.TwoWheelVehicle, GearBox.Manual));
-            ManualMediumTruck.IsChecked = thisTester.hasVehicle(new VehicleParams(Vehicle.MediumTruck, GearBox.Manual));
-            ManualHeavyTruck.IsChecked = thisTester.hasVehicle(new VehicleParams(Vehicle.HeavyTruck, GearBox.Manual));
-            MaxTests.Value = thisTester.MaximumWeeklyTests;
-            YearsOfExperience.Value = thisTester.YearsOfExperience;
-            MaxDistance.Value = thisTester.MaxDistanceFromTest;
-        }
-        #region StuffIsChanged
-        private void FirstName_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            if((sender as TextBox).Text.ToString()!="" && Utilities.IsWords((sender as TextBox).Text.ToString()))
+            ComboBoxItem TempBoxItem = new ComboBoxItem();
+            foreach (var t in Utilities.ReturnTesters())
             {
-                thisTester.Name = new FullName(Utilities.ToProper((sender as TextBox).Text.ToString()), thisTester.Name.LastName);
+                TempBoxItem.Content = t.ToString();
+                if (TesterOptions.SelectedItem.ToString() == TempBoxItem.ToString())
+                {
+                    thisTester = t;
+                    break;
+                }
             }
-            else
+                copyTester = thisTester;
+                AutomaticPrivateVehicle.IsChecked = thisTester.hasVehicle(new VehicleParams(Vehicle.PrivateVehicle, GearBox.Automatic));
+                AutomaticTwoWheelVehicle.IsChecked = thisTester.hasVehicle(new VehicleParams(Vehicle.TwoWheelVehicle, GearBox.Automatic));
+                AutomaticMediumTruck.IsChecked = thisTester.hasVehicle(new VehicleParams(Vehicle.MediumTruck, GearBox.Automatic));
+                AutomaticHeavyTruck.IsChecked = thisTester.hasVehicle(new VehicleParams(Vehicle.HeavyTruck, GearBox.Automatic));
+                ManualPrivateVehicle.IsChecked = thisTester.hasVehicle(new VehicleParams(Vehicle.PrivateVehicle, GearBox.Manual));
+                ManualTwoWheelVehicle.IsChecked = thisTester.hasVehicle(new VehicleParams(Vehicle.TwoWheelVehicle, GearBox.Manual));
+                ManualMediumTruck.IsChecked = thisTester.hasVehicle(new VehicleParams(Vehicle.MediumTruck, GearBox.Manual));
+                ManualHeavyTruck.IsChecked = thisTester.hasVehicle(new VehicleParams(Vehicle.HeavyTruck, GearBox.Manual));
+                MaxTests.Value = thisTester.MaximumWeeklyTests;
+                YearsOfExperience.Value = thisTester.YearsOfExperience;
+                MaxDistance.Value = thisTester.MaxDistanceFromTest;
+            }
+            #region StuffIsChanged
+            private void FirstName_TextChanged(object sender, TextChangedEventArgs e)
             {
-                thisTester.Name = new FullName(copyTester.Name.FirstName, thisTester.Name.LastName);
+                if ((sender as TextBox).Text.ToString() != "" && Utilities.IsWords((sender as TextBox).Text.ToString()))
+                {
+                    thisTester.Name = new FullName(Utilities.ToProper((sender as TextBox).Text.ToString()), thisTester.Name.LastName);
+                }
+                else
+                {
+                    thisTester.Name = new FullName(copyTester.Name.FirstName, thisTester.Name.LastName);
+                }
             }
-        }
-        private void LastName_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            if ((sender as TextBox).Text.ToString() != "" && Utilities.IsWords((sender as TextBox).Text.ToString()))
+            private void LastName_TextChanged(object sender, TextChangedEventArgs e)
             {
-                thisTester.Name = new FullName(thisTester.Name.FirstName, Utilities.ToProper((sender as TextBox).Text.ToString()));
+                if ((sender as TextBox).Text.ToString() != "" && Utilities.IsWords((sender as TextBox).Text.ToString()))
+                {
+                    thisTester.Name = new FullName(thisTester.Name.FirstName, Utilities.ToProper((sender as TextBox).Text.ToString()));
+                }
+                else
+                {
+                    thisTester.Name = new FullName(thisTester.Name.FirstName, copyTester.Name.LastName);
+                }
             }
-            else
+            private void CityName_TextChanged(object sender, TextChangedEventArgs e)
             {
-                thisTester.Name = new FullName(thisTester.Name.FirstName, copyTester.Name.LastName);
+                if ((sender as TextBox).Text.ToString() != "")
+                {
+                    thisTester.MyAddress = new Address(thisTester.MyAddress.StreetName, thisTester.MyAddress.AddressNumber, (sender as TextBox).Text.ToString());
+                }
+                else
+                {
+                    thisTester.MyAddress = new Address(thisTester.MyAddress.StreetName, thisTester.MyAddress.AddressNumber, copyTester.MyAddress.CityName);
+                }
             }
-        }
-        private void CityName_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            if ((sender as TextBox).Text.ToString() != "")
+            private void AddressNumber_TextChanged(object sender, TextChangedEventArgs e)
             {
-                thisTester.MyAddress = new Address(thisTester.MyAddress.StreetName, thisTester.MyAddress.AddressNumber, (sender as TextBox).Text.ToString());
+                if (Utilities.IsStringNumbers((sender as TextBox).Text.ToString()) && (sender as TextBox).Text.ToString() != "")
+                {
+                    thisTester.MyAddress = new Address(thisTester.MyAddress.StreetName, int.Parse((sender as TextBox).Text.ToString()), thisTester.MyAddress.CityName);
+                }
+                else
+                {
+                    thisTester.MyAddress = new Address(thisTester.MyAddress.StreetName, copyTester.MyAddress.AddressNumber, thisTester.MyAddress.CityName);
+                }
             }
-            else
+            private void StreetName_TextChanged(object sender, TextChangedEventArgs e)
             {
-                thisTester.MyAddress = new Address(thisTester.MyAddress.StreetName, thisTester.MyAddress.AddressNumber, copyTester.MyAddress.CityName);
+                if ((sender as TextBox).Text.ToString() != "")
+                {
+                    thisTester.MyAddress = new Address((sender as TextBox).Text.ToString(), thisTester.MyAddress.AddressNumber, thisTester.MyAddress.CityName);
+                }
+                else
+                {
+                    thisTester.MyAddress = new Address(copyTester.MyAddress.StreetName, thisTester.MyAddress.AddressNumber, thisTester.MyAddress.CityName);
+                }
             }
-        }
-        private void AddressNumber_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            if (Utilities.IsStringNumbers((sender as TextBox).Text.ToString()) && (sender as TextBox).Text.ToString() !="")
+            private void PhoneNumber_TextChanged(object sender, TextChangedEventArgs e)
             {
-                thisTester.MyAddress = new Address(thisTester.MyAddress.StreetName, int.Parse((sender as TextBox).Text.ToString()), thisTester.MyAddress.CityName);
+                if ((sender as TextBox).Text.ToString() != "")
+                {
+                    thisTester.MyPhoneNumber = new PhoneNumber((sender as TextBox).Text.ToString(), thisTester.MyPhoneNumber.kind);
+                }
+                else
+                {
+                    thisTester.MyPhoneNumber = new PhoneNumber(copyTester.MyPhoneNumber.number, thisTester.MyPhoneNumber.kind);
+                }
             }
-            else
+            private void HomeorMobile_SelectionChanged(object sender, SelectionChangedEventArgs e)
             {
-                thisTester.MyAddress = new Address(thisTester.MyAddress.StreetName, copyTester.MyAddress.AddressNumber, thisTester.MyAddress.CityName);
+                thisTester.MyPhoneNumber = new PhoneNumber(thisTester.MyPhoneNumber.number, (KindOfPhoneNumber)HomeorMobile.SelectedIndex);
             }
-        }
-        private void StreetName_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            if ((sender as TextBox).Text.ToString() != "")
-            {
-                thisTester.MyAddress = new Address((sender as TextBox).Text.ToString(), thisTester.MyAddress.AddressNumber, thisTester.MyAddress.CityName);
-            }
-            else
-            {
-                thisTester.MyAddress = new Address(copyTester.MyAddress.StreetName, thisTester.MyAddress.AddressNumber, thisTester.MyAddress.CityName);
-            }
-        }
-        private void PhoneNumber_TextChanged(object sender, TextChangedEventArgs e)
-        {
-            if ((sender as TextBox).Text.ToString() != "")
-            {
-                thisTester.MyPhoneNumber = new PhoneNumber((sender as TextBox).Text.ToString(), thisTester.MyPhoneNumber.kind);
-            }
-            else
-            {
-                thisTester.MyPhoneNumber = new PhoneNumber(copyTester.MyPhoneNumber.number, thisTester.MyPhoneNumber.kind);
-            }
-        }
-        private void HomeorMobile_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            thisTester.MyPhoneNumber = new PhoneNumber(thisTester.MyPhoneNumber.number, (KindOfPhoneNumber)HomeorMobile.SelectedIndex);
-        }
-        #endregion
+            #endregion
 
 
+        }
     }
-}

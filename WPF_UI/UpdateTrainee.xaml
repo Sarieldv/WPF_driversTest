@@ -112,11 +112,11 @@
                     </ComboBox>
                     <local:NumberUpDown x:Name="classes" HorizontalAlignment="Center"/>
                     <Button Name="updateValue" Content="Update classes" Click="updateValue_Click"/>
-                    <TextBlock Text="The amount of classes will only enter the system if you press update!" Foreground="Red"/>
+                    <TextBlock Text="The amount of classes will only enter the system if you press update, after updating the amount of classes for every vehicle!" Foreground="Red" HorizontalAlignment="Center" FontWeight="Bold"/>
                 </StackPanel>
             </Grid>
         </StackPanel>
-        <Button x:Name="UpdateButton" Content="Update Tester" FontSize="30" Margin="10" Click="UpdateButton_Click">
+        <Button x:Name="UpdateButton" Content="Update" FontSize="30" Margin="10" Click="UpdateButton_Click">
             <Button.Style>
                 <Style>
                     <Style.Triggers>

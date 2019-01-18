@@ -32,7 +32,7 @@ namespace WPF_UI
             }
             foreach (var t in trainees)
             {
-                ListBoxItem boxItem = new ListBoxItem();
+                ComboBoxItem boxItem = new ComboBoxItem();
                 boxItem.Content = t.ToString();
                 traineeOptions.Items.Add(boxItem);
             }
@@ -43,7 +43,17 @@ namespace WPF_UI
         {
             if (!Utilities.AreYouSureBox("erase this trainee"))
                 return;
-            var k = Utilities.ReturnTrainees().Find(t => t.ToString() == traineeOptions.SelectedItem.ToString());
+            ComboBoxItem TempBoxItem = new ComboBoxItem();
+            Trainee k = new Trainee();
+            foreach (var t in Utilities.ReturnTrainees())
+            {
+                TempBoxItem.Content = t.ToString();
+                if (traineeOptions.SelectedItem.ToString() == TempBoxItem.ToString())
+                {
+                    k = t;
+                    break;
+                }
+            }
             try
             {
                 FactoryBL.Instance.EraseTrainee(k);

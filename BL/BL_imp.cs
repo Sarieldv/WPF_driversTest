@@ -692,7 +692,16 @@ namespace BL
             Tester tester = (from t in ReturnTesters()
                              where t.IDNumber == updatedTester.IDNumber
                              select t).FirstOrDefault();
-            var k = (from t in ReturnTests()
+            List<Test> testList = new List<Test>();
+            try
+            {
+                testList = ReturnTests();
+            }
+            catch 
+            {
+                testList = new List<Test>();
+            }
+            var k = (from t in testList
                      where t.TesterId == updatedTester.IDNumber
                      select t);
             if (tester == null)
@@ -769,7 +778,16 @@ namespace BL
             {
                 throw new Exception("Trainee has a test in the system on a specific vehicle. In order to change the vehicle, please update the test.");
             }
-            Test test = (from t in ReturnTests()
+            List<Test> testList = new List<Test>();
+            try
+            {
+                testList = ReturnTests();
+            }
+            catch
+            {
+                testList = new List<Test>();
+            }
+            Test test = (from t in testList
                          where t.TraineeId == trainee.IDNumber
                          select t).FirstOrDefault();
             if (test != null && updatedTrainee.PassedByVehicleParams[test.TestVehicle.Index()])

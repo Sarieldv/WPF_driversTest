@@ -52,35 +52,35 @@ namespace WPF_UI
 
         private void UpdateButton_Click(object sender, RoutedEventArgs e)
         {
-            if ((sender as ComboBox).SelectedItem.ToString() == "Automatic Private Vehicle")
+            if (AutomaticPrivateVehicle.IsChecked.Value)
             {
                 thisTrainee.TraineeVehicle = new VehicleParams(Vehicle.PrivateVehicle, GearBox.Automatic);
             }
-            else if ((sender as ComboBox).SelectedItem.ToString() == "Automatic Two Wheel Vehicle")
+            else if (AutomaticTwoWheelVehicle.IsChecked.Value)
             {
                 thisTrainee.TraineeVehicle = new VehicleParams(Vehicle.TwoWheelVehicle, GearBox.Automatic);
             }
-            else if ((sender as ComboBox).SelectedItem.ToString() == "Automatic Medium Truck")
+            else if (AutomaticMediumTruck.IsChecked.Value)
             {
                 thisTrainee.TraineeVehicle = new VehicleParams(Vehicle.MediumTruck, GearBox.Automatic);
             }
-            else if ((sender as ComboBox).SelectedItem.ToString() == "Automatic Heavy Truck")
+            else if (AutomaticHeavyTruck.IsChecked.Value)
             {
                 thisTrainee.TraineeVehicle = new VehicleParams(Vehicle.HeavyTruck, GearBox.Automatic);
             }
-            else if ((sender as ComboBox).SelectedItem.ToString() == "Manual Private Vehicle")
+            else if (ManualPrivateVehicle.IsChecked.Value)
             {
                 thisTrainee.TraineeVehicle = new VehicleParams(Vehicle.PrivateVehicle, GearBox.Manual);
             }
-            else if ((sender as ComboBox).SelectedItem.ToString() == "Manual Two Wheel Vehicle")
+            else if (ManualTwoWheelVehicle.IsChecked.Value)
             {
                 thisTrainee.TraineeVehicle = new VehicleParams(Vehicle.TwoWheelVehicle, GearBox.Manual);
             }
-            else if ((sender as ComboBox).SelectedItem.ToString() == "Manual Medium Truck")
+            else if (ManualMediumTruck.IsChecked.Value)
             {
                 thisTrainee.TraineeVehicle = new VehicleParams(Vehicle.MediumTruck, GearBox.Manual);
             }
-            else if ((sender as ComboBox).SelectedItem.ToString() == "Manual Heavy Truck")
+            else if (ManualHeavyTruck.IsChecked.Value)
             {
                 thisTrainee.TraineeVehicle = new VehicleParams(Vehicle.HeavyTruck, GearBox.Manual);
             }
@@ -99,7 +99,16 @@ namespace WPF_UI
         #region stuffIsChanged
         private void TraineeOptions_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            thisTrainee = Utilities.ReturnTrainees().Find(t => t.ToString() == TraineeOptions.ToString());
+            ComboBoxItem TempBoxItem = new ComboBoxItem();
+            foreach (var t in Utilities.ReturnTrainees())
+            {
+                TempBoxItem.Content = t.ToString();
+                if (TraineeOptions.SelectedItem.ToString() == TempBoxItem.ToString())
+                {
+                    thisTrainee = t;
+                    break;
+                }
+            }
             copyTrainee = thisTrainee;
         }
         private void FirstName_TextChanged(object sender, TextChangedEventArgs e)
@@ -179,7 +188,7 @@ namespace WPF_UI
         {
             if (vehicleComboBox.SelectedIndex == -1)
                 return;
-            thisTrainee.AmountOfClasses[vehicleComboBox.SelectedIndex] = (int)classes.Value;
+            classes.Value = thisTrainee.AmountOfClasses[vehicleComboBox.SelectedIndex];
         }
         #endregion
         private void BackButton_Click(object sender, RoutedEventArgs e)

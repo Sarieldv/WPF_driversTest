@@ -64,8 +64,15 @@ namespace BE
         }
         public bool hasVehicle(VehicleParams vehicle)
         {
-            if (MyVehicles.Any(t => t == vehicle))
-                return true;
+            foreach (var v in MyVehicles)
+            {
+                if(v.GearBoxType == vehicle.GearBoxType && v.VehicleType == vehicle.VehicleType)
+                {
+                    return true;
+                }
+            }
+            //if (MyVehicles.Any(t => t == vehicle))
+            //    return true;
             return false;
         }
         public bool hasTestByDate(DateTime dateTime)

@@ -32,7 +32,7 @@ namespace WPF_UI
             }
             foreach (var t in (from t in trainees where t.HaveTest select t))
             {
-                ListBoxItem boxItem = new ListBoxItem();
+                ComboBoxItem boxItem = new ComboBoxItem();
                 boxItem.Content = t.ToString();
                 traineeOptions.Items.Add(boxItem);
             }

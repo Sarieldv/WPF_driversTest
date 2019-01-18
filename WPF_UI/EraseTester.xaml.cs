@@ -47,7 +47,6 @@ namespace WPF_UI
             if (!Utilities.AreYouSureBox("erase this tester, even though any tests they are signed up to will be erased"))
                 return;
             ComboBoxItem TempBoxItem = new ComboBoxItem();
-            //Tester k = Utilities.ReturnTesters().Find(t => t.ToString() == TesterOptions.ToString());
             Tester k = new Tester();
             foreach (var t in Utilities.ReturnTesters())
             {
