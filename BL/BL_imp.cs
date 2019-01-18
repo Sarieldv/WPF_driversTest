@@ -271,7 +271,8 @@ namespace BL
             {
                 throw new Exception("Trainee already has a test.");
             }
-            List<Tester> options = (List<Tester>)TestersBySpecialty(trainee.TraineeVehicle).OrderByDescending(t => t.YearsOfExperience).OrderBy(t => CalcDistance(t.MyAddress, trainee.MyAddress));
+            List<Tester> options = new List<Tester>();
+            options=(List<Tester>)TestersBySpecialty(trainee.TraineeVehicle)/*.OrderByDescending(t => t.YearsOfExperience).OrderBy(t => CalcDistance(t.MyAddress, trainee.MyAddress))*/;
             if(options.DefaultIfEmpty() == options)
             {
                 throw new Exception("There are no testers that can test with the needed vehicle.");
@@ -429,10 +430,15 @@ namespace BL
         /// <returns></returns>
         public List<Tester> TestersBySpecialty(VehicleParams vehicle)
         {
-            var k = (from t in ReturnTesters()
-                     where t.hasVehicle(vehicle)
-                     select t);
-            return k as List<Tester>;
+            List<Tester> k = new List<Tester>();
+            foreach (var t in ReturnTesters())
+            {
+                if(t.hasVehicle(vehicle))
+                {
+                    k.Add(t);
+                }
+            }
+            return k;
         }
         /// <summary>
         /// Function to group the testers by their specialty (by vehicle then gearbox)

@@ -33,7 +33,7 @@ namespace WPF_UI
         
             foreach (var t in trainees)
             {
-                ListBoxItem boxItem = new ListBoxItem();
+                ComboBoxItem boxItem = new ComboBoxItem();
                 boxItem.Content = t.ToString();
                 traineeOptions.Items.Add(boxItem);
             }
@@ -65,6 +65,7 @@ namespace WPF_UI
             catch(Exception ex)
             {
                 Utilities.ErrorBox(ex.Message);
+                return;
             }
             Utilities.InformationBox("You have successfully added a test");
             (this.Parent as StackPanel).Children.Add(new TestOptions());
@@ -79,8 +80,17 @@ namespace WPF_UI
 
         private void traineeOptions_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            thisTrainee = Utilities.ReturnTrainees().Find(t => t.ToString() == (sender as ComboBox).SelectedItem.ToString());
-              
+            ComboBoxItem TempBoxItem = new ComboBoxItem();
+            foreach (var t in Utilities.ReturnTrainees())
+            {
+                TempBoxItem.Content = t.ToString();
+                if (traineeOptions.SelectedItem.ToString() == TempBoxItem.ToString())
+                {
+                    thisTrainee = t;
+                    break;
+                }
+            }
+
         }
     }
 }

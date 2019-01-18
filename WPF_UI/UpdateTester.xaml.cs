@@ -152,7 +152,7 @@ namespace WPF_UI
                     break;
                 }
             }
-                copyTester = thisTester;
+            copyTester = thisTester;
                 AutomaticPrivateVehicle.IsChecked = thisTester.hasVehicle(new VehicleParams(Vehicle.PrivateVehicle, GearBox.Automatic));
                 AutomaticTwoWheelVehicle.IsChecked = thisTester.hasVehicle(new VehicleParams(Vehicle.TwoWheelVehicle, GearBox.Automatic));
                 AutomaticMediumTruck.IsChecked = thisTester.hasVehicle(new VehicleParams(Vehicle.MediumTruck, GearBox.Automatic));
