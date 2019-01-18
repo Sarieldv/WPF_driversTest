@@ -710,27 +710,27 @@ namespace BL
             }
             if (tester.TestsSignedUpFor > updatedTester.MaximumWeeklyTests)
             {
-                throw new Exception("Tester is already signed up to more tests then will be possible. Please manually cancel those tests before changing the amount of tests possible.\n At least "+ (tester.TestsSignedUpFor - updatedTester.MaximumWeeklyTests).ToString() +" will need to be canceled to allow this action.");
+                throw new Exception( tester.Name.ToString()+" is already signed up to more tests then will be possible. Please manually cancel those tests before changing the amount of tests possible.\n At least "+ (tester.TestsSignedUpFor - updatedTester.MaximumWeeklyTests).ToString() +" will need to be canceled to allow this action.");
             }
             if (tester.MyVehicles != updatedTester.MyVehicles && k.Any(t => updatedTester.hasVehicle(t.TestVehicle) == false))
             {
-                throw new Exception("Tester is signed up to tests he will not be able to do because he will no longer specialize in the needed vehicle.\n Please manually cancel those tests before updating the tester.");
+                throw new Exception(tester.Name.ToString()+" is signed up to tests he will not be able to do because he will no longer specialize in the needed vehicle.\n Please manually cancel those tests before updating the tester.");
             }
             if ((tester.MaxDistanceFromTest > updatedTester.MaxDistanceFromTest || tester.MyAddress != updatedTester.MyAddress) && k.Any(t => CalcDistance(updatedTester.MyAddress, t.AddressOfDeparture) > updatedTester.MaxDistanceFromTest))
             {
-                throw new Exception("Tester is signed up to tests he will not be able to do because his address will be too far from the test.\n Please manually cancel those tests before updating the tester.");
+                throw new Exception(tester.Name.ToString()+" is signed up to tests he will not be able to do because his address will be too far from the test.\n Please manually cancel those tests before updating the tester.");
             }
             if (updatedTester.Age() > Configuration.MaximumTesterAge)
             {
-                throw new Exception("Tester is too old.");
+                throw new Exception(tester.Name.ToString() + " is too old.");
             }
             if (updatedTester.Age() < Configuration.MinimumTesterAge)
             {
-                throw new Exception("Tester is too young.");
+                throw new Exception(tester.Name.ToString() + " is too young.");
             }
             if (updatedTester.MyWorkHours != tester.MyWorkHours && k.Any(t => !updatedTester.hasTestByDate(t.DateAndTime)))
             {
-                throw new Exception("Tester is signed up to Tests that need to be canceled in order to change his schedule.");
+                throw new Exception(tester.Name.ToString() + " is signed up to Tests that need to be canceled in order to change his schedule.");
             }
             try
             {
@@ -752,11 +752,11 @@ namespace BL
                                select t).FirstOrDefault();
             if (trainee == null)
             {
-                throw new Exception("Trainee does not exist.");
+                throw new Exception(trainee.Name.ToString()+" does not exist.");
             }
             if (updatedTrainee.Age() < Configuration.MinimumTraineeAge)
             {
-                throw new Exception("Trainee is too young.");
+                throw new Exception(trainee.Name.ToString()+" is too young.");
             }
             int Sum = 0;
             int Temp = int.Parse(updatedTrainee.IDNumber) / 10;
@@ -772,11 +772,11 @@ namespace BL
             }
             if (trainee.HaveTest != updatedTrainee.HaveTest)
             {
-                throw new Exception("Trainee has a test in the system.");
+                throw new Exception(trainee.Name.ToString() + " has a test in the system.");
             }
             if (trainee.TraineeVehicle != updatedTrainee.TraineeVehicle && trainee.HaveTest)
             {
-                throw new Exception("Trainee has a test in the system on a specific vehicle. In order to change the vehicle, please update the test.");
+                throw new Exception(trainee.Name.ToString() + " has a test in the system on a specific vehicle. In order to change the vehicle, please update the test.");
             }
             List<Test> testList = new List<Test>();
             try
@@ -792,11 +792,11 @@ namespace BL
                          select t).FirstOrDefault();
             if (test != null && updatedTrainee.PassedByVehicleParams[test.TestVehicle.Index()])
             {
-                throw new Exception("Trainee has a test in the system that will become irrelevant.");
+                throw new Exception(trainee.Name.ToString() +" has a test in the system that will become irrelevant.");
             }
             if (test != null && updatedTrainee.AmountOfClasses[test.TestVehicle.Index()] < Configuration.MinimumClasses)
             {
-                throw new Exception("With this change, trainee will not have enough classes to do the test he has in the system.");
+                throw new Exception("With this change, " +trainee.Name.ToString() +" will not have enough classes to do the test he has in the system.");
             }
             try
             {
