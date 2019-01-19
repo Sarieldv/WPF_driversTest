@@ -23,8 +23,19 @@
             </Style>
         </StackPanel.Resources>
         <Label Content="Cancel a test:"/>
-        <Label Content="Choose a test to cancel:"/>
-        <ComboBox Name="testOptions" SelectionChanged="testOptions_SelectionChanged"/>
+        <StackPanel>
+            <StackPanel.Style>
+                <Style>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding ElementName=testOptions, Path=Items.Count}" Value="0">
+                            <Setter Property="StackPanel.IsEnabled" Value="False"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </StackPanel.Style>
+            <Label Content="Choose a test to cancel:"/>
+            <ComboBox Name="testOptions" SelectionChanged="testOptions_SelectionChanged"/>
+        </StackPanel>
         <Button Name="deleteButton" Content="Delete Test" Margin="10" FontSize="30" Click="deleteButton_Click">
             <Button.Style>
                 <Style>

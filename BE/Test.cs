@@ -59,7 +59,7 @@ namespace BE
 
         public override string ToString()
         {
-            return "Number: " + Number + " TesterId: " + TesterId + " TraineeId: " + TraineeId + "Date: " + DateAndTime;
+            return "Number: " + Number + " TesterId: " + TesterId + " TraineeId: " + TraineeId + " Date: " + DateAndTime;
         }
     }
 }

@@ -32,7 +32,7 @@ namespace WPF_UI
             }
             foreach (var t in tests)
             {
-                ListBoxItem boxItem = new ListBoxItem();
+                ComboBoxItem boxItem = new ComboBoxItem();
                 boxItem.Content = t.ToString();
                 testOptions.Items.Add(boxItem);
             }
@@ -69,7 +69,16 @@ namespace WPF_UI
 
         private void testOptions_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            thisTest = Utilities.ReturnTests().Find(t => t.ToString() == (sender as ComboBox).SelectedItem.ToString());
+            ComboBoxItem TempBoxItem = new ComboBoxItem();
+            foreach (var t in Utilities.ReturnTests())
+            {
+                TempBoxItem.Content = t.ToString();
+                if (testOptions.SelectedItem.ToString() == TempBoxItem.ToString())
+                {
+                    thisTest = t;
+                    break;
+                }
+            }
         }
     }
 }

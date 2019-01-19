@@ -23,17 +23,38 @@
             </Style>
         </StackPanel.Resources>
         <Label Content="Update test:"/>
-        <Label Content="Choose a trainee to update for:"/>
-        <ComboBox Name="traineeOptions" SelectionChanged="traineeOptions_SelectionChanged"/>
-        <Label Content="Select the date you would like to change to:"/>
-        <Viewbox>
+        <StackPanel>
+            <StackPanel.Style>
+                <Style>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding ElementName=traineeOptions, Path=Items.Count}" Value="0">
+                            <Setter Property="StackPanel.IsEnabled" Value="False"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </StackPanel.Style>
+            <Label Content="Choose a trainee to update for:"/>
+            <ComboBox Name="traineeOptions" SelectionChanged="traineeOptions_SelectionChanged"/>
+            <Label Content="Select the date you would like to change to:"/>
             <DatePicker Name="dateSelector"/>
-        </Viewbox>
+            <Label Content="Choose a time:"/>
+            <ComboBox x:Name="timeChoice">
+                <ComboBoxItem>09:00</ComboBoxItem>
+                <ComboBoxItem>10:00</ComboBoxItem>
+                <ComboBoxItem>11:00</ComboBoxItem>
+                <ComboBoxItem>12:00</ComboBoxItem>
+                <ComboBoxItem>13:00</ComboBoxItem>
+                <ComboBoxItem>14:00</ComboBoxItem>
+            </ComboBox>
+        </StackPanel>
         <Button Name="updateButton" Content="Update" FontSize="30" Margin="10" Click="updateButton_Click">
             <Button.Style>
                 <Style>
                     <Style.Triggers>
                         <DataTrigger Binding="{Binding ElementName=traineeOptions, Path=SelectedIndex}" Value="-1">
+                            <Setter Property="Button.IsEnabled" Value="False"/>
+                        </DataTrigger>
+                        <DataTrigger Binding="{Binding ElementName=timeChoice, Path=SelectedIndex}" Value="-1">
                             <Setter Property="Button.IsEnabled" Value="False"/>
                         </DataTrigger>
                     </Style.Triggers>

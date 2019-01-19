@@ -36,6 +36,10 @@ namespace WPF_UI
                 boxItem.Content = t.ToString();
                 traineeOptions.Items.Add(boxItem);
             }
+            if(traineeOptions.Items.Count == 0)
+            {
+                Utilities.ErrorBox("There are no tests in the system.");
+            }
             thisTrainee = new Trainee();
             thisTest = new Test();
         }
@@ -62,9 +66,11 @@ namespace WPF_UI
             {
                 Utilities.ErrorBox(ex.Message);
             }
+            DateTime chosenDate = new DateTime(dateSelector.SelectedDate.Value.Year, dateSelector.SelectedDate.Value.Month, dateSelector.SelectedDate.Value.Day, timeChoice.SelectedIndex + 9, 0, 0);
+
             try
             {
-                FactoryBL.Instance.GetTest(thisTrainee, dateSelector.SelectedDate.Value);
+                FactoryBL.Instance.GetTest(thisTrainee, chosenDate);
             }
             catch(Exception ex)
             {
@@ -77,6 +83,7 @@ namespace WPF_UI
                 {
                     Utilities.ErrorBox(exc.Message);
                 }
+                return;
             }
             Utilities.InformationBox("You have successfully updated this test");
             (this.Parent as StackPanel).Children.Add(new TestOptions());
@@ -92,7 +99,16 @@ namespace WPF_UI
 
         private void traineeOptions_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            thisTrainee = Utilities.ReturnTrainees().Find(t => t.ToString() == (sender as ComboBox).SelectedItem.ToString());
+            ComboBoxItem TempBoxItem = new ComboBoxItem();
+            foreach (var t in Utilities.ReturnTrainees())
+            {
+                TempBoxItem.Content = t.ToString();
+                if (traineeOptions.SelectedItem.ToString() == TempBoxItem.ToString())
+                {
+                    thisTrainee = t;
+                    break;
+                }
+            }
             thisTest = Utilities.ReturnTests().Find(t => t.TraineeId == thisTrainee.IDNumber);
         }
     }

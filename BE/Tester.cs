@@ -46,6 +46,7 @@ namespace BE
             MaximumWeeklyTests = _maximumWeeklyTests;
             MyVehicles = _myVehicles;
             MyWorkHours = _myWorkHours;
+            
             MaxDistanceFromTest = _maximumDistance;
         }
         public Tester(string _ID, FullName _name, DateTime _birthDate, Gender _gender, PhoneNumber _phoneNumber, Address _address, int _yearsOfExperience, int _maximumWeeklyTests, List<VehicleParams> _myVehicles, int _maximumDistance)
@@ -60,6 +61,7 @@ namespace BE
             MaximumWeeklyTests = _maximumWeeklyTests;
             MyVehicles = _myVehicles;
             MyWorkHours = new WeeklyWorkHours[1];
+            MyWorkHours[0] = new WeeklyWorkHours();
             MaxDistanceFromTest = _maximumDistance;
         }
         public bool hasVehicle(VehicleParams vehicle)
@@ -77,6 +79,10 @@ namespace BE
         }
         public bool hasTestByDate(DateTime dateTime)
         {
+            if(MyWorkHours.Length <= ((dateTime.DayOfYear - DateTime.Now.DayOfYear) / 7 + 1))
+            {
+                return false;
+            }
             if(MyWorkHours[(int)((dateTime.DayOfYear - DateTime.Now.DayOfYear) / 7)][dateTime])
             {
                 return true;

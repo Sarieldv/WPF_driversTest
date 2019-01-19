@@ -21,7 +21,7 @@ namespace DAL
             {
                 tester.MyWorkHours[i] = temp[i];
             }
-            tester.MyWorkHours[temp.Length + 1] = new WeeklyWorkHours();
+            tester.MyWorkHours[temp.Length] = new WeeklyWorkHours();
             UpdateTester(tester);
         }
         public void RemoveFirstWeek(Tester tester)

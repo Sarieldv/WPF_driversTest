@@ -42,21 +42,40 @@ namespace BL
             {
                 throw new Exception("Not enough classes.");
             }
-            var k = (from t in ReturnTests()
-                     where t.TraineeId == trainee.IDNumber
-                     select t);
-            Test mostRecentTest = k.OrderByDescending(e => e.DateAndTime).FirstOrDefault();
-            if (Configuration.TimeBetweenTests > (NewTest.DateAndTime - mostRecentTest.DateAndTime) && (mostRecentTest != null))
+            Test mostRecentTest;
+
+            try
             {
-                throw new Exception("Trainee had a test too recently.");
+                var k = (from t in ReturnTests()
+                         where t.TraineeId == trainee.IDNumber
+                         select t);
+                mostRecentTest = k.OrderByDescending(e => e.DateAndTime).FirstOrDefault();
             }
-            if ((from bool t in tester.MyWorkHours
-                 where t
-                 select t).Count() == tester.MaximumWeeklyTests)
+            catch
             {
-                throw new Exception("Tester can not test any more this week.");
+                mostRecentTest = null;
             }
-            if (!(tester.MyVehicles.Any(t => t == trainee.TraineeVehicle)))
+            if (mostRecentTest != null)
+            {
+                if (Configuration.TimeBetweenTests > (NewTest.DateAndTime - mostRecentTest.DateAndTime))
+                {
+                    throw new Exception("Trainee had a test too recently.");
+                }
+            }
+            int count = 0;
+            foreach (bool d in tester.MyWorkHours[(NewTest.DateAndTime.DayOfYear - DateTime.Now.DayOfYear) / 7])
+            {
+                if (d)
+                {
+                    count++;
+                }
+
+            }
+            if (count == tester.MaximumWeeklyTests)
+            {
+                throw new Exception("Tester cannot test any more this week.");
+            }
+            if (!(tester.MyVehicles.Any(t => t.GearBoxType == trainee.TraineeVehicle.GearBoxType && t.VehicleType == trainee.TraineeVehicle.VehicleType)))
             {
                 throw new Exception("Mismatch between trainee and tester");
             }
@@ -246,7 +265,7 @@ namespace BL
             }
             try
             {
-               ReturnTests();
+                ReturnTests();
             }
             catch
             {
@@ -272,20 +291,20 @@ namespace BL
                 throw new Exception("Trainee already has a test.");
             }
             List<Tester> options = new List<Tester>();
-            options=(List<Tester>)TestersBySpecialty(trainee.TraineeVehicle)/*.OrderByDescending(t => t.YearsOfExperience).OrderBy(t => CalcDistance(t.MyAddress, trainee.MyAddress))*/;
-            if(options.DefaultIfEmpty() == options)
+            options = (List<Tester>)TestersBySpecialty(trainee.TraineeVehicle)/*.OrderByDescending(t => t.YearsOfExperience).OrderBy(t => CalcDistance(t.MyAddress, trainee.MyAddress))*/;
+            if (options.DefaultIfEmpty() == options)
             {
                 throw new Exception("There are no testers that can test with the needed vehicle.");
             }
             foreach (var tester in options)
             {
-                if(IsDateAvailable(tester, dateTime))
+                if (IsDateAvailable(tester, dateTime))
                 {
                     AddTest(new Test(tester.IDNumber, trainee.TraineeVehicle, trainee.IDNumber, BestTestAddress(tester, trainee), dateTime));
                     return;
                 }
             }
-            throw new Exception("All testers are busy during the selected time.");            
+            throw new Exception("All testers are busy during the selected time.");
         }
         /// <summary>
         /// Function that returns true if a given date is available for a test
@@ -295,15 +314,15 @@ namespace BL
         /// <returns></returns>
         public bool IsDateAvailable(Tester tester, DateTime dateTime)
         {
-            TimeSpan span = dateTime - DateTime.Now;
-            int weeks = (span.Days / 7) + 1;
-            if((span.Days % 7) - (6- DateTime.Now.DayOfWeek) > 0)
+            TimeSpan span = dateTime - DateTime.Now; //opperation does not count today
+            int weeks = ((span.Days+1) / 7) + 1;
+            if (dateTime.DayOfWeek-DateTime.Now.DayOfWeek < 0)
             {
                 weeks++;
             }
-            if((weeks - tester.MyWorkHours.Length) > 0)
+            if ((weeks - tester.MyWorkHours.Length) < 0)
             {
-                if(tester.MyWorkHours[weeks - 1][dateTime])
+                if (tester.MyWorkHours[weeks - 1][dateTime])
                 {
                     return false;
                 }
@@ -333,7 +352,7 @@ namespace BL
         /// <returns></returns>
         public Address BestTestAddress(Tester _tester, Trainee _trainee)
         {
-            if(CalcDistance(_tester.MyAddress, _trainee.MyAddress) <= _tester.MaxDistanceFromTest)
+            if (CalcDistance(_tester.MyAddress, _trainee.MyAddress) <= _tester.MaxDistanceFromTest)
             {
                 return _trainee.MyAddress;
             }
@@ -433,7 +452,7 @@ namespace BL
             List<Tester> k = new List<Tester>();
             foreach (var t in ReturnTesters())
             {
-                if(t.hasVehicle(vehicle))
+                if (t.hasVehicle(vehicle))
                 {
                     k.Add(t);
                 }
@@ -659,7 +678,7 @@ namespace BL
                 trainee.AmountOfTests = 1;
                 trainee.PassedByVehicleParams[trainee.TraineeVehicle.Index()] = (bool)updatedTest.Grade;
                 trainee.HaveTest = false;
-               (tester.MyWorkHours[(int)((originalTest.DateAndTime.DayOfYear - DateTime.Now.DayOfYear) / 7)])[originalTest.DateAndTime] = false;
+                (tester.MyWorkHours[(int)((originalTest.DateAndTime.DayOfYear - DateTime.Now.DayOfYear) / 7)])[originalTest.DateAndTime] = false;
 
                 try
                 {
@@ -673,7 +692,7 @@ namespace BL
                 {
                     UpdateTester(tester);
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     throw ex;
                 }
@@ -703,7 +722,7 @@ namespace BL
             {
                 testList = ReturnTests();
             }
-            catch 
+            catch
             {
                 testList = new List<Test>();
             }
@@ -716,15 +735,15 @@ namespace BL
             }
             if (tester.TestsSignedUpFor > updatedTester.MaximumWeeklyTests)
             {
-                throw new Exception( tester.Name.ToString()+" is already signed up to more tests then will be possible. Please manually cancel those tests before changing the amount of tests possible.\n At least "+ (tester.TestsSignedUpFor - updatedTester.MaximumWeeklyTests).ToString() +" will need to be canceled to allow this action.");
+                throw new Exception(tester.Name.ToString() + " is already signed up to more tests then will be possible. Please manually cancel those tests before changing the amount of tests possible.\n At least " + (tester.TestsSignedUpFor - updatedTester.MaximumWeeklyTests).ToString() + " will need to be canceled to allow this action.");
             }
             if (tester.MyVehicles != updatedTester.MyVehicles && k.Any(t => updatedTester.hasVehicle(t.TestVehicle) == false))
             {
-                throw new Exception(tester.Name.ToString()+" is signed up to tests he will not be able to do because he will no longer specialize in the needed vehicle.\n Please manually cancel those tests before updating the tester.");
+                throw new Exception(tester.Name.ToString() + " is signed up to tests he will not be able to do because he will no longer specialize in the needed vehicle.\n Please manually cancel those tests before updating the tester.");
             }
             if ((tester.MaxDistanceFromTest > updatedTester.MaxDistanceFromTest || tester.MyAddress != updatedTester.MyAddress) && k.Any(t => CalcDistance(updatedTester.MyAddress, t.AddressOfDeparture) > updatedTester.MaxDistanceFromTest))
             {
-                throw new Exception(tester.Name.ToString()+" is signed up to tests he will not be able to do because his address will be too far from the test.\n Please manually cancel those tests before updating the tester.");
+                throw new Exception(tester.Name.ToString() + " is signed up to tests he will not be able to do because his address will be too far from the test.\n Please manually cancel those tests before updating the tester.");
             }
             if (updatedTester.Age() > Configuration.MaximumTesterAge)
             {
@@ -758,11 +777,11 @@ namespace BL
                                select t).FirstOrDefault();
             if (trainee == null)
             {
-                throw new Exception(trainee.Name.ToString()+" does not exist.");
+                throw new Exception(trainee.Name.ToString() + " does not exist.");
             }
             if (updatedTrainee.Age() < Configuration.MinimumTraineeAge)
             {
-                throw new Exception(trainee.Name.ToString()+" is too young.");
+                throw new Exception(trainee.Name.ToString() + " is too young.");
             }
             int Sum = 0;
             int Temp = int.Parse(updatedTrainee.IDNumber) / 10;
@@ -798,11 +817,11 @@ namespace BL
                          select t).FirstOrDefault();
             if (test != null && updatedTrainee.PassedByVehicleParams[test.TestVehicle.Index()])
             {
-                throw new Exception(trainee.Name.ToString() +" has a test in the system that will become irrelevant.");
+                throw new Exception(trainee.Name.ToString() + " has a test in the system that will become irrelevant.");
             }
             if (test != null && updatedTrainee.AmountOfClasses[test.TestVehicle.Index()] < Configuration.MinimumClasses)
             {
-                throw new Exception("With this change, " +trainee.Name.ToString() +" will not have enough classes to do the test he has in the system.");
+                throw new Exception("With this change, " + trainee.Name.ToString() + " will not have enough classes to do the test he has in the system.");
             }
             try
             {
