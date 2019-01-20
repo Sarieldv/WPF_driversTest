@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using BL;
+using BE;
 
 namespace WPF_UI
 {
@@ -25,25 +27,29 @@ namespace WPF_UI
             InitializeComponent();
         }
 
-        private void addTraineeButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void updateTraineeButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void eraseTraineeButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
+       
 
         private void backButton_Click(object sender, RoutedEventArgs e)
         {
             (this.Parent as StackPanel).Children.Add(new openingWindow());
             (this.Parent as StackPanel).Children.Remove(this);
+        }
+
+        private void byTeacherButton_Click(object sender, RoutedEventArgs e)
+        {
+            DataPresentWindow window = new DataPresentWindow(FactoryBL.Instance.TraineesGroupedByTeacher(true), true);
+        }
+
+        private void bySchoolButton_Click(object sender, RoutedEventArgs e)
+        {
+
+            DataPresentWindow window = new DataPresentWindow(FactoryBL.Instance.TraineesGroupedBySchool(true), false);
+        }
+
+        private void byTestAmountButton_Click(object sender, RoutedEventArgs e)
+        {
+
+            DataPresentWindow window = new DataPresentWindow(FactoryBL.Instance.TraineesGroupedByTestAmount(true), null);
         }
     }
 }

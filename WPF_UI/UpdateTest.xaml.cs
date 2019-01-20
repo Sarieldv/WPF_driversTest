@@ -93,7 +93,7 @@ namespace WPF_UI
 
         private void backButton_Click(object sender, RoutedEventArgs e)
         {
-            (Parent as StackPanel).Children.Add(new bothUpdateOptions());
+            //(Parent as StackPanel).Children.Add(new bothUpdateOptions());
             (this.Parent as StackPanel).Children.Remove(this);
         }
 

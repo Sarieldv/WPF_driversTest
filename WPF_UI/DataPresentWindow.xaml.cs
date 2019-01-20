@@ -20,37 +20,58 @@ namespace WPF_UI
     /// </summary>
     public partial class DataPresentWindow : Window
     {
-        public DataPresentWindow(List<List<Trainee>> traineeList, bool? flag)
+        public DataPresentWindow(List<List<Trainee>> traineeListList, bool? flag)
         {
             InitializeComponent();
-            Label title = new Label();
-            DataGrid data = new DataGrid();
             if (flag == null)
             {
-                title.Content = "Trainees grouped by amount of tests done:";
+                TitleLabel.Content = "Trainees grouped by amount of tests done:";
             }
             else if (flag == true)
             {
-                title.Content = "Trainees grouped by teacher:";
+                TitleLabel.Content = "Trainees grouped by teacher:";
             }
             else if (flag == false)
             {
-                title.Content = "Trainees grouped by school name:";
+                TitleLabel.Content = "Trainees grouped by school name:";
             }
-            panel.Children.Add(title);
-            foreach (var trainee in traineeList)
+            foreach (var traineeList in traineeListList)
             {
                 if (flag == null)
                 {
-
+                    DataGridCell cell = new DataGridCell();
+                    cell.Content = traineeList.First().AmountOfTests.ToString() + " tests done:";
+                    data.Items.Add(cell);
+                    foreach (var trainee in traineeList)
+                    {
+                        cell = new DataGridCell();
+                        cell.Content = trainee.ToString();
+                        data.Items.Add(cell);
+                    }
                 }
                 else if (flag == true)
                 {
-                    
+                    DataGridCell cell = new DataGridCell();
+                    cell.Content = traineeList.First().Teacher.ToString() + " 's students:";
+                    data.Items.Add(cell);
+                    foreach (var trainee in traineeList)
+                    {
+                        cell = new DataGridCell();
+                        cell.Content = trainee.ToString();
+                        data.Items.Add(cell);
+                    }
                 }
                 else if (flag == false)
                 {
-                    
+                    DataGridCell cell = new DataGridCell();
+                    cell.Content = "Students that learnt at " + traineeList.First().SchoolName;
+                    data.Items.Add(cell);
+                    foreach (var trainee in traineeList)
+                    {
+                        cell = new DataGridCell();
+                        cell.Content = trainee.ToString();
+                        data.Items.Add(cell);
+                    }
                 }
             }
         }

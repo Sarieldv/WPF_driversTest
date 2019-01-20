@@ -16,7 +16,7 @@
                 <Setter  Property="Background" Value="{StaticResource MyBackground}"/>
             </Style>
         </StackPanel.Resources>
-        <Label></Label>
+        <Label Name="TitleLabel"/>
         <DataGrid Name="data"/>
         <Button Name="closeButton" Content="Close" Click="closeButton_Click" Margin="10" FontSize="30"/>
     </StackPanel>
