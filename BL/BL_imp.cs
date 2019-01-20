@@ -55,7 +55,7 @@ namespace BL
             {
                 mostRecentTest = null;
             }
-            if (mostRecentTest != null)
+            if (mostRecentTest != null && mostRecentTest.Grade != null)
             {
                 if (Configuration.TimeBetweenTests > (NewTest.DateAndTime - mostRecentTest.DateAndTime))
                 {
@@ -63,13 +63,16 @@ namespace BL
                 }
             }
             int count = 0;
-            foreach (bool d in tester.MyWorkHours[(NewTest.DateAndTime.DayOfYear - DateTime.Now.DayOfYear) / 7])
+            if (tester.MyWorkHours.Length > (NewTest.DateAndTime.DayOfYear - DateTime.Now.DayOfYear) / 7)
             {
-                if (d)
+                foreach (bool d in tester.MyWorkHours[(NewTest.DateAndTime.DayOfYear - DateTime.Now.DayOfYear) / 7])
                 {
-                    count++;
-                }
+                    if (d)
+                    {
+                        count++;
+                    }
 
+                }
             }
             if (count == tester.MaximumWeeklyTests)
             {
@@ -95,7 +98,14 @@ namespace BL
             {
                 throw ex;
             }
-            (tester.MyWorkHours[(int)((NewTest.DateAndTime.DayOfYear - DateTime.Now.DayOfYear) / 7)])[NewTest.DateAndTime] = true;
+            if ((NewTest.DateAndTime.DayOfWeek - DateTime.Now.DayOfWeek + 1) >= 0)
+            {
+                (tester.MyWorkHours[(NewTest.DateAndTime.DayOfYear - DateTime.Now.DayOfYear) / 7 - 1])[NewTest.DateAndTime] = true;
+            }
+            else
+            {
+                (tester.MyWorkHours[(NewTest.DateAndTime.DayOfYear - DateTime.Now.DayOfYear) / 7])[NewTest.DateAndTime] = true;
+            }
             tester.TestsSignedUpFor = 1;
             UpdateTester(tester);
             trainee.HaveTest = true;
@@ -291,7 +301,7 @@ namespace BL
                 throw new Exception("Trainee already has a test.");
             }
             List<Tester> options = new List<Tester>();
-            options = (List<Tester>)TestersBySpecialty(trainee.TraineeVehicle)/*.OrderByDescending(t => t.YearsOfExperience).OrderBy(t => CalcDistance(t.MyAddress, trainee.MyAddress))*/;
+            options = TestersBySpecialty(trainee.TraineeVehicle);
             if (options.DefaultIfEmpty() == options)
             {
                 throw new Exception("There are no testers that can test with the needed vehicle.");
@@ -642,20 +652,27 @@ namespace BL
                      where t.TraineeId == trainee.IDNumber
                      select t);
             Test mostRecentTest = k.OrderByDescending(e => e.DateAndTime).FirstOrDefault();//gives the most recent (verified)
-            if (mostRecentTest != null && mostRecentTest.Grade != null)
+            if (mostRecentTest != null && mostRecentTest.Number != updatedTest.Number)
             {
                 if (Configuration.TimeBetweenTests > (updatedTest.DateAndTime - mostRecentTest.DateAndTime))
                 {
                     throw new Exception("Trainee had a test too recently.");
                 }
             }
-            if ((from bool t in tester.MyWorkHours
-                 where t
-                 select t).Count() == tester.MaximumWeeklyTests)
+            int count = 0;
+            foreach (bool d in tester.MyWorkHours[(updatedTest.DateAndTime.DayOfYear - DateTime.Now.DayOfYear) / 7])
             {
-                throw new Exception("Tester can not test any more this week.");
+                if (d)
+                {
+                    count++;
+                }
+
             }
-            if (!(tester.MyVehicles.Any(t => t == trainee.TraineeVehicle)))
+            if (count == tester.MaximumWeeklyTests)
+            {
+                throw new Exception("Tester cannot test any more this week.");
+            }
+            if (!(tester.MyVehicles.Any(t => t.GearBoxType == trainee.TraineeVehicle.GearBoxType && t.VehicleType == trainee.TraineeVehicle.VehicleType)))
             {
                 throw new Exception("Mismatch between trainee and tester");
             }
@@ -668,17 +685,12 @@ namespace BL
                 throw new Exception("Test is too far for tester.");
             }
 
-            Test originalTest = (from d in(from t in ReturnTests()
-                                 where t.Number == updatedTest.Number
-                                 select t)
-                                 where d.Grade==null
-                                 select d).FirstOrDefault();
             if (updatedTest.Grade != null)
             {
                 trainee.AmountOfTests = 1;
                 trainee.PassedByVehicleParams[trainee.TraineeVehicle.Index()] = (bool)updatedTest.Grade;
                 trainee.HaveTest = false;
-                (tester.MyWorkHours[(int)((originalTest.DateAndTime.DayOfYear - DateTime.Now.DayOfYear) / 7)])[originalTest.DateAndTime] = false;
+                (tester.MyWorkHours[(int)((mostRecentTest.DateAndTime.DayOfYear - DateTime.Now.DayOfYear) / 7)])[mostRecentTest.DateAndTime] = false;
 
                 try
                 {
@@ -815,10 +827,6 @@ namespace BL
             Test test = (from t in testList
                          where t.TraineeId == trainee.IDNumber
                          select t).FirstOrDefault();
-            if (test != null && updatedTrainee.PassedByVehicleParams[test.TestVehicle.Index()])
-            {
-                throw new Exception(trainee.Name.ToString() + " has a test in the system that will become irrelevant.");
-            }
             if (test != null && updatedTrainee.AmountOfClasses[test.TestVehicle.Index()] < Configuration.MinimumClasses)
             {
                 throw new Exception("With this change, " + trainee.Name.ToString() + " will not have enough classes to do the test he has in the system.");

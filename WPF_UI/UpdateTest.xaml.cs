@@ -79,7 +79,7 @@ namespace WPF_UI
                 {
                     FactoryBL.Instance.GetTest(thisTrainee, originalDate);
                 }
-                catch(Exception exc)
+                catch (Exception exc)
                 {
                     Utilities.ErrorBox(exc.Message);
                 }
