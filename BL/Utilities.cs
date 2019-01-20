@@ -8,6 +8,12 @@ namespace BL
 {
     public static class Utilities
     {
+        /// <summary>
+        /// Function that returns 2 ^ ( num % 2 + 1 )
+        /// Is used while checking if id is valid
+        /// </summary>
+        /// <param name="num"></param>
+        /// <returns></returns>
         public static int FuncForID(int num)
         {
             if (num % 2 == 0)
