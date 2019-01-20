@@ -1,0 +1,78 @@
+﻿<UserControl x:Class="WPF_UI.UpdateTestAfterTest"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:WPF_UI"
+             mc:Ignorable="d">
+    <StackPanel Background="White">
+        <StackPanel.Resources>
+            <LinearGradientBrush x:Key="MyBackground" EndPoint="0.504,1.5" StartPoint="0.504,0.03">
+                <GradientStop Color="LightGray" Offset="0"/>
+                <GradientStop Color="#FFFFFFFF" Offset="0.567"/>
+            </LinearGradientBrush>
+            <Style TargetType="Label">
+                <Setter Property="Background" Value="{StaticResource MyBackground}"/>
+                <Setter Property="BorderBrush" Value="Black"/>
+                <Setter Property="BorderThickness" Value="1"/>
+                <Setter Property="FontWeight" Value="Bold"/>
+            </Style>
+            <Style TargetType="Button">
+                <Setter Property="Margin" Value="10"/>
+                <Setter Property="FontSize" Value="30"/>
+            </Style>
+        </StackPanel.Resources>
+        <Label Content="Grade:"/>
+        <Label Content="Select the test to grade:"/>
+        <ComboBox Name="testOptions" SelectionChanged="testOptions_SelectionChanged"/>
+        <StackPanel>
+            <StackPanel.Style>
+                <Style>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding ElementName=testOptions, Path=SelectedIndex}" Value="-1">
+                            <Setter Property="StackPanel.IsEnabled" Value="False"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </StackPanel.Style>
+            <Label Content="For every parameter, check the box if the trainee passed in that aspect of the test:"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <CheckBox Content="Keeping appropriate distance" Name="distanceKeep" Grid.Column="0" Grid.Row="0"/>
+                <CheckBox Content="Parking in reverse" Name="reverseParking" Grid.Column="1" Grid.Row="0"/>
+                <CheckBox Content="Regular parking" Name="parking" Grid.Column="2" Grid.Row="0"/>
+                <CheckBox Content="Looking at the mirrors" Name="lookingAtMirrors" Grid.Column="0" Grid.Row="1"/>
+                <CheckBox Content="Junction" Name="junction" Grid.Column="1" Grid.Row="1"/>
+                <CheckBox Content="Reversing" Name="reversing" Grid.Column="2" Grid.Row="1"/>
+                <CheckBox Content="Roundabout" Name="roundAbout" Grid.Column="0" Grid.Row="2"/>
+                <CheckBox Content="Overtaking" Name="overTaking" Grid.Column="1" Grid.Row="2"/>
+                <CheckBox Content="Turning" Name="turning" Grid.Column="2" Grid.Row="2"/>
+            </Grid>
+            <Label Content="Note:"/>
+            <TextBox Name="testersNote"/>
+            <CheckBox Name="passed" Content="Check if the trainee passed the test"/>
+        </StackPanel>
+        <Button Name="gradeButton" Content="Grade" Click="gradeButton_Click" Margin="10" FontSize="30">
+            <Button.Style>
+                <Style>
+                    <Style.Triggers>
+                        <DataTrigger Binding="{Binding ElementName=testOptions, Path=SelectedIndex}" Value="-1">
+                            <Setter Property="Button.IsEnabled" Value="False"/>
+                        </DataTrigger>
+                    </Style.Triggers>
+                </Style>
+            </Button.Style>
+        </Button>
+        <Button Name="backButton" Content="Back" Click="backButton_Click"/>
+    </StackPanel>
+</UserControl>

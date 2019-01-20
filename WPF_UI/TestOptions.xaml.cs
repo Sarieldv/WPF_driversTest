@@ -33,7 +33,11 @@ namespace WPF_UI
 
         private void updateTestButton_Click(object sender, RoutedEventArgs e)
         {
-            (this.Parent as StackPanel).Children.Add(new UpdateTest());
+            if(Utilities.ReturnTests() == null)
+            {
+                return;
+            }
+            (this.Parent as StackPanel).Children.Add(new bothUpdateOptions());
             (this.Parent as StackPanel).Children.Remove(this);
         }
 

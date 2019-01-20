@@ -12,21 +12,20 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using BE;
 using BL;
-
+using BE;
 namespace WPF_UI
 {
     /// <summary>
-    /// Interaction logic for CancelTest.xaml
+    /// Interaction logic for UpdateTestAfterTest.xaml
     /// </summary>
-    public partial class CancelTest : UserControl
+    public partial class UpdateTestAfterTest : UserControl
     {
-        public CancelTest()
+        public UpdateTestAfterTest()
         {
             InitializeComponent();
             List<Test> tests = Utilities.ReturnTests();
-            if(tests==null)
+            if (tests == null)
             {
                 return;
             }
@@ -41,32 +40,39 @@ namespace WPF_UI
             }
             thisTest = new Test();
         }
+        Trainee thisTrainee;
         Test thisTest;
-        private void deleteButton_Click(object sender, RoutedEventArgs e)
+
+        private void gradeButton_Click(object sender, RoutedEventArgs e)
         {
-            if(!Utilities.AreYouSureBox("cancel this test"))
+            thisTest.DistanceKeep = distanceKeep.IsChecked;
+            thisTest.ReverseParking = reverseParking.IsChecked;
+            thisTest.Parking = parking.IsChecked;
+            thisTest.LookingAtMirrors = lookingAtMirrors.IsChecked;
+            thisTest.Junction = junction.IsChecked;
+            thisTest.Reversing = reversing.IsChecked;
+            thisTest.Roundabout = roundAbout.IsChecked;
+            thisTest.Overtaking = overTaking.IsChecked;
+            thisTest.Turning = turning.IsChecked;
+            thisTest.TesterNote = testersNote.Text.ToString();
+            thisTest.Grade = passed.IsChecked;
+            try
             {
-                (this.Parent as StackPanel).Children.Remove(this);
+                FactoryBL.Instance.UpdateTest(thisTest);
             }
-            else
+            catch(Exception ex)
             {
-                try
-                {
-                    FactoryBL.Instance.CancelTest(thisTest);
-                }
-                catch (Exception ex)
-                {
-                    Utilities.ErrorBox(ex.Message);
-                }
+                Utilities.ErrorBox(ex.Message);
+                return;
             }
-            Utilities.InformationBox("You have successfelly canceled a test.");
+            Utilities.InformationBox("You have successfully graded this test!");
             (this.Parent as StackPanel).Children.Add(new TestOptions());
             (this.Parent as StackPanel).Children.Remove(this);
         }
 
         private void backButton_Click(object sender, RoutedEventArgs e)
         {
-            (this.Parent as StackPanel).Children.Add(new TestOptions());
+            (this.Parent as StackPanel).Children.Add(new bothUpdateOptions());
             (this.Parent as StackPanel).Children.Remove(this);
         }
 
@@ -82,6 +88,7 @@ namespace WPF_UI
                     break;
                 }
             }
+            thisTrainee = Utilities.ReturnTrainees().Find(t => t.IDNumber == thisTest.TraineeId);
         }
     }
 }

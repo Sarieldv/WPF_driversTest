@@ -70,10 +70,6 @@ namespace WPF_UI
                 return true;
             return false;
         }
-        //public static bool IsIdValid(string str)
-        //{
-        //    return true;
-        //}
         public static List<Tester> ReturnTesters()
         {
             try

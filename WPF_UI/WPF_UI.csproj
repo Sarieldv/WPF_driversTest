@@ -60,6 +60,9 @@
     <Compile Include="AddTrainee.xaml.cs">
       <DependentUpon>AddTrainee.xaml</DependentUpon>
     </Compile>
+    <Compile Include="bothUpdateOptions.xaml.cs">
+      <DependentUpon>bothUpdateOptions.xaml</DependentUpon>
+    </Compile>
     <Compile Include="CancelTest.xaml.cs">
       <DependentUpon>CancelTest.xaml</DependentUpon>
     </Compile>
@@ -90,6 +93,9 @@
     <Compile Include="UpdateTest.xaml.cs">
       <DependentUpon>UpdateTest.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UpdateTestAfterTest.xaml.cs">
+      <DependentUpon>UpdateTestAfterTest.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UpdateTester.xaml.cs">
       <DependentUpon>UpdateTester.xaml</DependentUpon>
     </Compile>
@@ -106,6 +112,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="AddTrainee.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="bothUpdateOptions.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -165,6 +175,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UpdateTest.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UpdateTestAfterTest.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

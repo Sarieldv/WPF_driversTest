@@ -635,10 +635,10 @@ namespace BL
                                where t.IDNumber == updatedTest.TraineeId
                                select t).FirstOrDefault();
 
-            if (trainee.HaveTest)
-            {
-                throw new Exception("Trainee already has a test in the system.");
-            }
+            //if (trainee.HaveTest)
+            //{
+            //    throw new Exception("Trainee already has a test in the system.");
+            //}
             if (trainee.AmountOfClasses[updatedTest.TestVehicle.Index()] < Configuration.MinimumClasses)
             {
                 throw new Exception("Not enough classes.");
@@ -646,10 +646,13 @@ namespace BL
             var k = (from t in ReturnTests()
                      where t.TraineeId == trainee.IDNumber
                      select t);
-            Test mostRecentTest = k.OrderByDescending(e => e.DateAndTime).FirstOrDefault();
-            if (Configuration.TimeBetweenTests > (updatedTest.DateAndTime - mostRecentTest.DateAndTime) && (mostRecentTest != null))
+            Test mostRecentTest = k.OrderByDescending(e => e.DateAndTime).FirstOrDefault();//gives the most recent (verified)
+            if (mostRecentTest != null && mostRecentTest.Grade != null)
             {
-                throw new Exception("Trainee had a test too recently.");
+                if (Configuration.TimeBetweenTests > (updatedTest.DateAndTime - mostRecentTest.DateAndTime))
+                {
+                    throw new Exception("Trainee had a test too recently.");
+                }
             }
             if ((from bool t in tester.MyWorkHours
                  where t
@@ -670,10 +673,12 @@ namespace BL
                 throw new Exception("Test is too far for tester.");
             }
 
-            Test originalTest = (from t in ReturnTests()
+            Test originalTest = (from d in(from t in ReturnTests()
                                  where t.Number == updatedTest.Number
-                                 select t).FirstOrDefault();
-            if (updatedTest.TesterNote != null)
+                                 select t)
+                                 where d.Grade==null
+                                 select d).FirstOrDefault();
+            if (updatedTest.Grade != null)
             {
                 trainee.AmountOfTests = 1;
                 trainee.PassedByVehicleParams[trainee.TraineeVehicle.Index()] = (bool)updatedTest.Grade;
