@@ -339,7 +339,8 @@ namespace BL
                 }
                 return true;
             }
-            for (int i = 0; i <= weeks - tester.MyWorkHours.Length + 1; i++)
+            int length = tester.MyWorkHours.Length;
+            for (int i = 0; i <= weeks - length + 1; i++)
             {
                 AddAnotherWeek(tester);
             }
