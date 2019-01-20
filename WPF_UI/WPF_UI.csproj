@@ -60,9 +60,6 @@
     <Compile Include="AddTrainee.xaml.cs">
       <DependentUpon>AddTrainee.xaml</DependentUpon>
     </Compile>
-    <Compile Include="bothUpdateOptions.xaml.cs">
-      <DependentUpon>bothUpdateOptions.xaml</DependentUpon>
-    </Compile>
     <Compile Include="CancelTest.xaml.cs">
       <DependentUpon>CancelTest.xaml</DependentUpon>
     </Compile>
@@ -112,10 +109,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="AddTrainee.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="bothUpdateOptions.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

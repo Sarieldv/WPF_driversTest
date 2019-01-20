@@ -549,7 +549,7 @@ namespace BL
             {
                 foreach (var item in k)
                 {
-                    item.OrderByDescending(t => t.Name);
+                    item.OrderBy(t => t.Name);
                 }
             }
             return k as List<List<Trainee>>;
@@ -568,7 +568,7 @@ namespace BL
             {
                 foreach (var item in k)
                 {
-                    item.OrderByDescending(t => t.Name);
+                    item.OrderBy(t => t.Name);
                 }
             }
             return k as List<List<Trainee>>;
@@ -586,7 +586,7 @@ namespace BL
             {
                 foreach (var item in k)
                 {
-                    item.OrderByDescending(t => t.Name);
+                    item.OrderBy(t => t.Name);
                 }
             }
             return k as List<List<Trainee>>;

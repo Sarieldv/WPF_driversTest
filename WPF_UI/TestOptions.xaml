@@ -32,7 +32,7 @@
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <Button Name="addTestButton" Content="Add A Test" Click="addTestButton_Click" Grid.Column="0" Grid.Row="0"/>
-                <Button Name="updateTestButton" Content="Update A Test" Click="updateTestButton_Click" Grid.Column="1" Grid.Row="0"/>
+                <Button Name="updateTestButton" Content="Grade A Test" Click="updateTestButton_Click" Grid.Column="1" Grid.Row="0"/>
                 <Button Name="cancelTestButton" Content="Cancel A Test" Click="cancelTestButton_Click" Grid.Column="0" Grid.Row="1"/>
                 <Button Name="backButton" Content="Back" Click="backButton_Click" Grid.Column="1" Grid.Row="1" BorderThickness="3" BorderBrush="Black"/>
             </Grid>

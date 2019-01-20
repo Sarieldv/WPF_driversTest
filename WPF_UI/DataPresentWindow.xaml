@@ -17,6 +17,7 @@
             </Style>
         </StackPanel.Resources>
         <Label></Label>
+        <DataGrid Name="data"/>
         <Button Name="closeButton" Content="Close" Click="closeButton_Click" Margin="10" FontSize="30"/>
     </StackPanel>
     
