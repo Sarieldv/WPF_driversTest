@@ -77,12 +77,9 @@ namespace BE
         }
         public int getWeek(DateTime dateTime)
         {
-            int weeks = (dateTime - DateTime.Now).Days / 7;
-            if(dateTime.DayOfWeek < DateTime.Now.DayOfWeek)
-            {
-                weeks++;
-            }
-            return weeks;
+            int weeks = (dateTime - DateTime.Now).Days - 6 + DateTime.Now.DayOfWeek -dateTime.DayOfWeek;
+            weeks /= 7;
+            return weeks + 1;
         }
         public bool hasTestByDate(DateTime dateTime)
         {
