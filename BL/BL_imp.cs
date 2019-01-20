@@ -63,9 +63,9 @@ namespace BL
                 }
             }
             int count = 0;
-            if (tester.MyWorkHours.Length > (NewTest.DateAndTime.DayOfYear - DateTime.Now.DayOfYear) / 7)
+            if (tester.MyWorkHours.Length > tester.getWeek(NewTest.DateAndTime))
             {
-                foreach (bool d in tester.MyWorkHours[(NewTest.DateAndTime.DayOfYear - DateTime.Now.DayOfYear) / 7])
+                foreach (bool d in tester.MyWorkHours[tester.getWeek(NewTest.DateAndTime)])
                 {
                     if (d)
                     {
@@ -98,14 +98,15 @@ namespace BL
             {
                 throw ex;
             }
-            if ((NewTest.DateAndTime.DayOfWeek - DateTime.Now.DayOfWeek + 1) >= 0)
-            {
-                (tester.MyWorkHours[(NewTest.DateAndTime.DayOfYear - DateTime.Now.DayOfYear) / 7 - 1])[NewTest.DateAndTime] = true;
-            }
-            else
-            {
-                (tester.MyWorkHours[(NewTest.DateAndTime.DayOfYear - DateTime.Now.DayOfYear) / 7])[NewTest.DateAndTime] = true;
-            }
+            //if ((NewTest.DateAndTime.DayOfWeek - DateTime.Now.DayOfWeek + 1) >= 0)
+            //if((NewTest.DateAndTime - DateTime.Now).Days % 7 > 0)
+            //{
+                (tester.MyWorkHours[tester.getWeek(NewTest.DateAndTime)])[NewTest.DateAndTime] = true;
+            //}
+            //else
+            //{
+            //    (tester.MyWorkHours[(NewTest.DateAndTime - DateTime.Now).Days / 7 - 1])[NewTest.DateAndTime] = true;
+            //}
             tester.TestsSignedUpFor = 1;
             UpdateTester(tester);
             trainee.HaveTest = true;
@@ -210,7 +211,7 @@ namespace BL
             Trainee trainee = (from t in ReturnTrainees()
                                where t.IDNumber == _test.TraineeId
                                select t).FirstOrDefault();
-            (tester.MyWorkHours[(int)((_test.DateAndTime.DayOfYear - DateTime.Now.DayOfYear) / 7)])[_test.DateAndTime] = false;
+            (tester.MyWorkHours[tester.getWeek(_test.DateAndTime)])[_test.DateAndTime] = false;
             tester.TestsSignedUpFor = -1;
             UpdateTester(tester);
             trainee.HaveTest = false;
@@ -324,21 +325,21 @@ namespace BL
         /// <returns></returns>
         public bool IsDateAvailable(Tester tester, DateTime dateTime)
         {
-            TimeSpan span = dateTime - DateTime.Now; //opperation does not count today
-            int weeks = ((span.Days+1) / 7) + 1;
-            if (dateTime.DayOfWeek-DateTime.Now.DayOfWeek < 0)
+            //TimeSpan span = dateTime - DateTime.Now; //opperation does not count today
+            int weeks = tester.getWeek(dateTime);
+            //if (dateTime.DayOfWeek-DateTime.Now.DayOfWeek < 0)
+            //{
+            //    weeks++;
+            //}
+            if (weeks < tester.MyWorkHours.Length)
             {
-                weeks++;
-            }
-            if ((weeks - tester.MyWorkHours.Length) < 0)
-            {
-                if (tester.MyWorkHours[weeks - 1][dateTime])
+                if (tester.MyWorkHours[weeks][dateTime])
                 {
                     return false;
                 }
                 return true;
             }
-            for (int i = 0; i < (weeks - tester.MyWorkHours.Length); i++)
+            for (int i = 0; i < (weeks - tester.MyWorkHours.Length + 1); i++)
             {
                 AddAnotherWeek(tester);
             }
@@ -660,7 +661,12 @@ namespace BL
                 }
             }
             int count = 0;
-            foreach (bool d in tester.MyWorkHours[(updatedTest.DateAndTime.DayOfYear - DateTime.Now.DayOfYear) / 7])
+            //int week = (updatedTest.DateAndTime - DateTime.Now).Days / 7;
+            //if(updatedTest.DateAndTime.DayOfWeek < DateTime.Now.DayOfWeek)
+            //{
+            //    week++;
+            //}
+            foreach (bool d in tester.MyWorkHours[tester.getWeek(updatedTest.DateAndTime)])
             {
                 if (d)
                 {
@@ -690,7 +696,7 @@ namespace BL
                 trainee.AmountOfTests = 1;
                 trainee.PassedByVehicleParams[trainee.TraineeVehicle.Index()] = (bool)updatedTest.Grade;
                 trainee.HaveTest = false;
-                (tester.MyWorkHours[(int)((mostRecentTest.DateAndTime.DayOfYear - DateTime.Now.DayOfYear) / 7)])[mostRecentTest.DateAndTime] = false;
+                (tester.MyWorkHours[tester.getWeek(mostRecentTest.DateAndTime)])[mostRecentTest.DateAndTime] = false;
 
                 try
                 {

@@ -73,17 +73,24 @@ namespace BE
                     return true;
                 }
             }
-            //if (MyVehicles.Any(t => t == vehicle))
-            //    return true;
             return false;
+        }
+        public int getWeek(DateTime dateTime)
+        {
+            int weeks = (dateTime - DateTime.Now).Days / 7;
+            if(dateTime.DayOfWeek < DateTime.Now.DayOfWeek)
+            {
+                weeks++;
+            }
+            return weeks;
         }
         public bool hasTestByDate(DateTime dateTime)
         {
-            if(MyWorkHours.Length <= ((dateTime.DayOfYear - DateTime.Now.DayOfYear) / 7 + 1))
+            if(MyWorkHours.Length <= getWeek(dateTime))
             {
                 return false;
             }
-            if(MyWorkHours[(int)((dateTime.DayOfYear - DateTime.Now.DayOfYear) / 7)][dateTime])
+            if(MyWorkHours[getWeek(dateTime)][dateTime])
             {
                 return true;
             }

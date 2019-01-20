@@ -36,7 +36,7 @@
             <Label Content="Choose a test to cancel:"/>
             <ComboBox Name="testOptions" SelectionChanged="testOptions_SelectionChanged"/>
         </StackPanel>
-        <Button Name="deleteButton" Content="Delete Test" Margin="10" FontSize="30" Click="deleteButton_Click">
+        <Button Name="deleteButton" Content="Cancel" Margin="10" FontSize="30" Click="deleteButton_Click">
             <Button.Style>
                 <Style>
                     <Style.Triggers>
