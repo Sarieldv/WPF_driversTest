@@ -634,11 +634,6 @@ namespace BL
             Trainee trainee = (from t in ReturnTrainees()
                                where t.IDNumber == updatedTest.TraineeId
                                select t).FirstOrDefault();
-
-            //if (trainee.HaveTest)
-            //{
-            //    throw new Exception("Trainee already has a test in the system.");
-            //}
             if (trainee.AmountOfClasses[updatedTest.TestVehicle.Index()] < Configuration.MinimumClasses)
             {
                 throw new Exception("Not enough classes.");
@@ -881,20 +876,5 @@ namespace BL
                      select t);
             return k as List<Tester>;
         }
-
-
-
-        //public void SendAMessage(string mySubject, string myBody, Person person)
-        //{
-        //    MailMessage mail = new MailMessage("you@yourcompany.com", "user@hotmail.com");
-        //    SmtpClient client = new SmtpClient();
-        //    client.Port = 25;
-        //    client.DeliveryMethod = SmtpDeliveryMethod.Network;
-        //    client.UseDefaultCredentials = false;
-        //    client.Host = "smtp.gmail.com";
-        //    mail.Subject = mySubject;
-        //    mail.Body = myBody;
-        //    client.Send(mail);
-        //}
     }
 }
