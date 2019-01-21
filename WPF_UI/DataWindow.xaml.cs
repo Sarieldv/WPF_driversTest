@@ -38,18 +38,21 @@ namespace WPF_UI
         private void byTeacherButton_Click(object sender, RoutedEventArgs e)
         {
             DataPresentWindow window = new DataPresentWindow(FactoryBL.Instance.TraineesGroupedByTeacher(true), true);
+            window.Show();
         }
 
         private void bySchoolButton_Click(object sender, RoutedEventArgs e)
         {
 
             DataPresentWindow window = new DataPresentWindow(FactoryBL.Instance.TraineesGroupedBySchool(true), false);
+            window.Show();
         }
 
         private void byTestAmountButton_Click(object sender, RoutedEventArgs e)
         {
 
             DataPresentWindow window = new DataPresentWindow(FactoryBL.Instance.TraineesGroupedByTestAmount(true), null);
+            window.Show();
         }
     }
 }

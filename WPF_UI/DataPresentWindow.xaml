@@ -14,10 +14,13 @@
             </LinearGradientBrush>
             <Style TargetType="Label">
                 <Setter  Property="Background" Value="{StaticResource MyBackground}"/>
+                <Setter Property="FontSize" Value="40"/>
             </Style>
         </StackPanel.Resources>
-        <Label Name="TitleLabel"/>
-        <DataGrid Name="data"/>
+        
+        <StackPanel>
+            <Label Name="TitleLabel" FontWeight="Bold"/>
+        </StackPanel>
         <Button Name="closeButton" Content="Close" Click="closeButton_Click" Margin="10" FontSize="30"/>
     </StackPanel>
     

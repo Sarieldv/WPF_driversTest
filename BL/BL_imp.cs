@@ -541,55 +541,51 @@ namespace BL
         /// </summary>
         /// <param name="_extraSorted"></param>
         /// <returns></returns>
-        public List<List<Trainee>> TraineesGroupedBySchool(bool _extraSorted)
+        public IEnumerable<List<Trainee>> TraineesGroupedBySchool(bool _extraSorted)
         {
-            var k = (from t in ReturnTrainees()
-                     group t by t.SchoolName);
+            List<Trainee> list = ReturnTrainees();
+            IEnumerable<List<Trainee>> results;
             if (_extraSorted)
             {
-                foreach (var item in k)
-                {
-                    item.OrderBy(t => t.Name);
-                }
+                results = list.GroupBy(p => p.SchoolName).OrderBy(t => t.Count()).Select(x => new List<Trainee>(x));
             }
-            return k as List<List<Trainee>>;
-
+            else
+                results = list.GroupBy(p => p.SchoolName).Select(x => new List<Trainee>(x));
+            return results;
         }
         /// <summary>
         /// Returns all the trainees grouped by teacher
         /// </summary>
         /// <param name="_extraSorted"></param>
         /// <returns></returns>
-        public List<List<Trainee>> TraineesGroupedByTeacher(bool _extraSorted)
+        public IEnumerable<List<Trainee>> TraineesGroupedByTeacher(bool _extraSorted)
         {
-            var k = (from t in ReturnTrainees()
-                     group t by t.Teacher);
+            List<Trainee> list = ReturnTrainees();
+            IEnumerable<List<Trainee>> results;
             if (_extraSorted)
             {
-                foreach (var item in k)
-                {
-                    item.OrderBy(t => t.Name);
-                }
+                results = list.GroupBy(p => p.Teacher).OrderBy(t => t.Count()).Select(x => new List<Trainee>(x));
             }
-            return k as List<List<Trainee>>;
+            else
+                results = list.GroupBy(p => p.Teacher).Select(x => new List<Trainee>(x));
+            return results;
         }
         /// <summary>
         /// Returns all the trainees grouped by test amount
         /// </summary>
         /// <param name="_extraSorted"></param>
         /// <returns></returns>
-        public List<List<Trainee>> TraineesGroupedByTestAmount(bool _extraSorted)
+        public IEnumerable<List<Trainee>> TraineesGroupedByTestAmount(bool _extraSorted)
         {
-            var k = (from t in ReturnTrainees()
-                     group t by t.AmountOfTests);
-            if (_extraSorted)
+            List<Trainee> list = ReturnTrainees();
+            IEnumerable<List<Trainee>> results;
+            if(_extraSorted)
             {
-                foreach (var item in k)
-                {
-                    item.OrderBy(t => t.Name);
-                }
+                results = list.GroupBy(p => p.AmountOfTests).OrderBy(t => t.Count()).Select(x => new List<Trainee>(x));
             }
-            return k as List<List<Trainee>>;
+            else
+                results = list.GroupBy(p => p.AmountOfTests).Select(x => new List<Trainee>(x));
+            return results;
         }
         /// <summary>
         /// Function to update a test
