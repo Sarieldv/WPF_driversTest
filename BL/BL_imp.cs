@@ -476,20 +476,17 @@ namespace BL
         /// </summary>
         /// <param name="_extraSorted"></param>
         /// <returns></returns>
-        public IEnumerable<IEnumerable<List<Tester>>> TestersGroupedBySpecialty(bool _extraSorted)
+        public IEnumerable<List<Tester>> TestersGroupedBySpecialty(bool _extraSorted)
         {
-            var k = (from t in ReturnTesters()
-                     group t by t.MyVehicles.Count);
-            var g = (from t in k
-                     group t by t.OrderByDescending(a => a.MyVehicles));
+            List<Tester> list = ReturnTesters();
+            IEnumerable<List<Tester>> results;
             if (_extraSorted)
             {
-                foreach (var item in g)
-                {
-                    item.OrderByDescending(t => t.OrderByDescending(a => a.Name));
-                }
+                results = list.GroupBy(p => p.MyVehicles).OrderBy(t => t.Count()).Select(x => new List<Tester>(x));
             }
-            return g as List<List<List<Tester>>>;
+            else
+                results = list.GroupBy(p => p.MyVehicles).Select(x => new List<Tester>(x));
+            return results;
         }
         /// <summary>
         /// Function that returns all tests that apply for a given condition
