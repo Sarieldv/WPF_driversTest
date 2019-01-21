@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace BE
 {
@@ -11,7 +12,27 @@ namespace BE
         public int YearsOfExperience       { get; set;}
         public int MaximumWeeklyTests      { get; set;}
         public List <VehicleParams> MyVehicles     { get; set;}
+        [XmlIgnore]
         public WeeklyWorkHours[] MyWorkHours { get; set;}
+
+        public string MyWorkHoursString
+        {
+            get
+            {
+                string str;
+                foreach (var a in MyWorkHours)
+                {
+                    foreach (var b in a)
+                    {
+                        foreach (var c in b)
+                        {
+
+                        }
+                    }
+                }
+            }
+            private set;
+        }
         public int MaxDistanceFromTest     { get; set;}
 
         private int _testsSignedUpFor;
