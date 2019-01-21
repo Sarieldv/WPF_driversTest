@@ -25,9 +25,9 @@ namespace WPF_UI
     {
         public MainWindow()
         {
-            DispatcherTimer dispatcherTimer = new DispatcherTimer();
-            dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick);
-            dispatcherTimer.Interval = new TimeSpan(7, 0, 0);
+            dispatcherTimer = new DispatcherTimer();
+            dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick_Hour);
+            dispatcherTimer.Interval = new TimeSpan(0, 1, 0);
             dispatcherTimer.Start();
             InitializeComponent();
             #region Addition of 2 testers and 2 trainees
@@ -80,12 +80,34 @@ namespace WPF_UI
             }
             #endregion
             MainWindowStack.Children.Add(new openingWindow());
-            void dispatcherTimer_Tick(object sender, EventArgs e)
+            
+        }
+        DispatcherTimer dispatcherTimer;
+        void dispatcherTimer_Tick_Hour(object sender, EventArgs e)
+        {
+            if(DateTime.Now.Hour == 0)
             {
-                List<Tester> testers;
+                dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick_Day);
+                dispatcherTimer.Tick -= dispatcherTimer_Tick_Hour;
+                dispatcherTimer.Interval = new TimeSpan(1, 0, 0);
             }
         }
-
-
+        void dispatcherTimer_Tick_Day(object sender, EventArgs e)
+        {
+            if(DateTime.Now.DayOfWeek == DayOfWeek.Sunday)
+            {
+                dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick_Week);
+                dispatcherTimer.Tick -= dispatcherTimer_Tick_Day;
+                dispatcherTimer.Interval = new TimeSpan(7, 0, 0);
+            }
+        }
+        void dispatcherTimer_Tick_Week(object sender, EventArgs e)
+        {
+            List<Tester> testers = Utilities.ReturnTesters();
+            foreach (var tester in testers)
+            {
+                FactoryBL.Instance.RemoveFirstWeek(tester);
+            }
+        }
     }
 }
