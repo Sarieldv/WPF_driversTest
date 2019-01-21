@@ -476,7 +476,7 @@ namespace BL
         /// </summary>
         /// <param name="_extraSorted"></param>
         /// <returns></returns>
-        public List<List<List<Tester>>> TestersGroupedBySpecialty(bool _extraSorted)
+        public IEnumerable<IEnumerable<List<Tester>>> TestersGroupedBySpecialty(bool _extraSorted)
         {
             var k = (from t in ReturnTesters()
                      group t by t.MyVehicles.Count);
