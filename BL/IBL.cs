@@ -64,7 +64,7 @@ namespace BL
        
         int CalcDistance(Address address1, Address address2);
 
-        IEnumerable<IEnumerable<List<Tester>>> TestersGroupedBySpecialty(bool _extraSorted);
+        IEnumerable<List<Tester>> TestersGroupedBySpecialty(bool _extraSorted);
         IEnumerable<List<Trainee>> TraineesGroupedBySchool(bool _extraSorted);
         IEnumerable<List<Trainee>> TraineesGroupedByTeacher(bool _extraSorted);
         IEnumerable<List<Trainee>> TraineesGroupedByTestAmount(bool _extraSorted);
