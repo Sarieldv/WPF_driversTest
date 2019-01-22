@@ -13,25 +13,50 @@ namespace BE
         public int MaximumWeeklyTests      { get; set;}
         public List <VehicleParams> MyVehicles     { get; set;}
         [XmlIgnore]
-        public WeeklyWorkHours[] MyWorkHours { get; set;}
+        public WeeklyWorkHours[] MyWorkHours
+        {
+            get => MyWorkHours;
+            set
+            {
+                MyWorkHours = value;
+                string str = "";
+                foreach (var item in MyWorkHours)
+                {
+                    str += item.WeeklyWorkHoursString;
+                }
+                if(str!=MyWorkHoursString)
+                {
+                    MyWorkHoursString = str;
+                }
+            }
+        }
 
         public string MyWorkHoursString
         {
-            get
+            get => MyWorkHoursString;
+            set
             {
-                string str;
-                foreach (var a in MyWorkHours)
+                MyWorkHoursString = value;
+                WeeklyWorkHours[] arr = new WeeklyWorkHours[MyWorkHoursString.Length / 65];
+                for (int i = 0; i < arr.Length; i++)
                 {
-                    foreach (var b in a)
+                    for (int j = 0; j < 5; j++)
                     {
-                        foreach (var c in b)
+                        for (int n = 0; n < 6; n++)
                         {
-
+                            if (MyWorkHoursString[65 * i + 12 * j + 2*i] == '1')
+                            {
+                                arr[i][j, n] = true;
+                            }
+                            else if (MyWorkHoursString[65 * i + 12 * j + 2*i] == '0')
+                            {
+                                arr[i][j, n] = false;
+                            }
                         }
                     }
                 }
+                MyWorkHours = arr;
             }
-            private set;
         }
         public int MaxDistanceFromTest     { get; set;}
 

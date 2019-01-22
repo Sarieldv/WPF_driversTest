@@ -10,18 +10,79 @@ namespace BE
 {
     public class WeeklyWorkHours : IEnumerable
     {
+        
         [XmlIgnore]
-        public bool[,] MyWeekHours = new bool[5,6];
+        public bool[,] MyWeekHours
+        {
+            get => MyWeekHours;
+            set
+            {
+                MyWeekHours = value;
+                string str = "";
+                for (int i = 0; i < 5; i++)
+                {
+                    for (int j = 0; j < 6; j++)
+                    {
+                        if(MyWeekHours[i,j])
+                        {
+                            str += 1;
+                        }
+                        else
+                        {
+                            str += 0;
+                        }
+                        str += ",";
+                    }
+                    str+=".";
+                }
+                if (WeeklyWorkHoursString!=str)
+                {
+                    WeeklyWorkHoursString = str;
+                }
+                
+            }
+        }
         public string WeeklyWorkHoursString
         {
-            get
+            get => WeeklyWorkHoursString;
+            set
             {
-                foreach (var a in MyWeekHours)
+                WeeklyWorkHoursString = value;
+                bool[,] arr = new bool[5, 6];
+                int i = 0;
+                int j = 0;
+                for (int n = 0; n < WeeklyWorkHoursString.Length; n++)
                 {
-                    
+                    if (WeeklyWorkHoursString[n] == '1')
+                    {
+                        arr[i, j] = true;
+                    }
+                    else if(WeeklyWorkHoursString[n] == '0')
+                    {
+                        arr[i, j] = false;
+                    }
+                    else if(WeeklyWorkHoursString[n] == ',')
+                    {
+                        j++;
+                    }
+                    else if(WeeklyWorkHoursString[n] == '.')
+                    {
+                        i++;
+                    }
                 }
+                for (i = 0; i < 5; i++)
+                {
+                    for (j = 0; j < 6; j++)
+                    {
+                        if(arr[i,j] != MyWeekHours[i,j])
+                        {
+                            MyWeekHours = arr;
+                            return;
+                        }
+                    }
+                }
+
             }
-            private set;
         }
         
         public IEnumerator GetEnumerator()
@@ -37,8 +98,24 @@ namespace BE
             }
             set
             {
-                value = MyWeekHours[(int)dateTime.DayOfWeek, (dateTime.Hour - 9)];
+                 MyWeekHours[(int)dateTime.DayOfWeek, (dateTime.Hour - 9)] = value;
             }
+        }
+        [XmlIgnore]
+        public bool this[int num1, int num2]
+        {
+            get
+            {
+                return MyWeekHours[num1, num2];
+            }
+            set
+            {
+                 MyWeekHours[num1, num2)] = value;
+            }
+        }
+        public WeeklyWorkHours()
+        {
+            MyWeekHours = new bool[5, 6];
         }
     }
 }
