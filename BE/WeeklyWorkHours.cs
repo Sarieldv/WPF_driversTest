@@ -110,7 +110,7 @@ namespace BE
             }
             set
             {
-                 MyWeekHours[num1, num2)] = value;
+                 MyWeekHours[num1, num2] = value;
             }
         }
         public WeeklyWorkHours()
