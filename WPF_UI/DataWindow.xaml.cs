@@ -37,21 +37,27 @@ namespace WPF_UI
 
         private void byTeacherButton_Click(object sender, RoutedEventArgs e)
         {
-            DataPresentWindow window = new DataPresentWindow(FactoryBL.Instance.TraineesGroupedByTeacher(true), true);
+            DataPresentWindow window = new DataPresentWindow(FactoryBL.Instance.TraineesGroupedByTeacher(true), 1);
             window.Show();
         }
 
         private void bySchoolButton_Click(object sender, RoutedEventArgs e)
         {
 
-            DataPresentWindow window = new DataPresentWindow(FactoryBL.Instance.TraineesGroupedBySchool(true), false);
+            DataPresentWindow window = new DataPresentWindow(FactoryBL.Instance.TraineesGroupedBySchool(true), 2);
             window.Show();
         }
 
         private void byTestAmountButton_Click(object sender, RoutedEventArgs e)
         {
 
-            DataPresentWindow window = new DataPresentWindow(FactoryBL.Instance.TraineesGroupedByTestAmount(true), null);
+            DataPresentWindow window = new DataPresentWindow(FactoryBL.Instance.TraineesGroupedByTestAmount(true), 0);
+            window.Show();
+        }
+
+        private void allTests_Click(object sender, RoutedEventArgs e)
+        {
+            DataPresentWindow window = new DataPresentWindow(FactoryBL.Instance.TraineesGroupedByTestAmount(true), 3);
             window.Show();
         }
     }

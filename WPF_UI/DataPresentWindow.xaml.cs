@@ -20,58 +20,89 @@ namespace WPF_UI
     /// </summary>
     public partial class DataPresentWindow : Window
     {
-        public DataPresentWindow(IEnumerable<List<Trainee>> traineeListList, bool? flag)
+        public DataPresentWindow(IEnumerable<List<Trainee>> traineeListList, int flag)
         {
             InitializeComponent();
-            if (flag == null)
+            if (flag == 0)//by amount of tests
             {
                 TitleLabel.Content = "Trainees grouped by amount of tests done:";
             }
-            else if (flag == true)
+            else if (flag == 1)//by teacher
             {
                 TitleLabel.Content = "Trainees grouped by teacher:";
             }
-            else if (flag == false)
+            else if (flag == 2)//by school
             {
                 TitleLabel.Content = "Trainees grouped by school name:";
             }
-            foreach (var traineeList in traineeListList)
+            else if (flag == 3)//all tests
             {
-                if (flag == null)
+                TitleLabel.Content = "All future tests in the system:";
+            }
+            if (flag >= 0 && flag <= 2)
+            {
+
+
+                foreach (var traineeList in traineeListList)
                 {
-                    Label cell = new Label();
-                    cell.Content = traineeList.First().AmountOfTests.ToString() + " tests done:";
-                    (TitleLabel.Parent as StackPanel).Children.Add(cell);
-                    foreach (var trainee in traineeList)
+                    if (flag == 0)
                     {
-                        cell = new Label();
-                        cell.Content = trainee.ToString();
+                        Label cell = new Label();
+                        cell.Content = traineeList.First().AmountOfTests.ToString() + " tests done:";
                         (TitleLabel.Parent as StackPanel).Children.Add(cell);
+                        foreach (var trainee in traineeList)
+                        {
+                            cell = new Label();
+                            cell.Content = trainee.ToString();
+                            (TitleLabel.Parent as StackPanel).Children.Add(cell);
+                        }
                     }
+                    else if (flag == 1)
+                    {
+                        Label cell = new Label();
+                        cell.Content = traineeList.First().Teacher.ToString() + " 's students:";
+                        (TitleLabel.Parent as StackPanel).Children.Add(cell);
+                        foreach (var trainee in traineeList)
+                        {
+                            cell = new Label();
+                            cell.Content = trainee.ToString();
+                            (TitleLabel.Parent as StackPanel).Children.Add(cell);
+                        }
+                    }
+                    else if (flag == 2)
+                    {
+                        Label cell = new Label();
+                        cell.Content = "Students that learnt at " + traineeList.First().SchoolName + ":";
+                        (TitleLabel.Parent as StackPanel).Children.Add(cell);
+                        foreach (var trainee in traineeList)
+                        {
+                            cell = new Label();
+                            cell.Content = trainee.ToString();
+                            (TitleLabel.Parent as StackPanel).Children.Add(cell);
+                        }
+                    }
+
                 }
-                else if (flag == true)
+            }
+            else if (flag == 3)
+            {
+                try
                 {
-                    Label cell = new Label();
-                    cell.Content = traineeList.First().Teacher.ToString() + " 's students:";
-                    (TitleLabel.Parent as StackPanel).Children.Add(cell);
-                    foreach (var trainee in traineeList)
-                    {
-                        cell = new Label();
-                        cell.Content = trainee.ToString();
-                        (TitleLabel.Parent as StackPanel).Children.Add(cell);
-                    }
+                    Utilities.ReturnTests();
                 }
-                else if (flag == false)
+                catch
                 {
-                    Label cell = new Label();
-                    cell.Content = "Students that learnt at " + traineeList.First().SchoolName + ":";
+                    this.Close();
+                }
+                var tests = (from t in Utilities.ReturnTests()
+                             where t.Grade == null
+                             select t.ToString());
+                Label cell = new Label();
+                foreach (var test in tests)
+                {
+                    cell = new Label();
+                    cell.Content = test;
                     (TitleLabel.Parent as StackPanel).Children.Add(cell);
-                    foreach (var trainee in traineeList)
-                    {
-                        cell = new Label();
-                        cell.Content = trainee.ToString();
-                        (TitleLabel.Parent as StackPanel).Children.Add(cell);
-                    }
                 }
             }
         }
