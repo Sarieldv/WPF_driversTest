@@ -12,51 +12,52 @@ namespace BE
         public int YearsOfExperience       { get; set;}
         public int MaximumWeeklyTests      { get; set;}
         public List <VehicleParams> MyVehicles     { get; set;}
+        //private WeeklyWorkHours[] PrivateMyWorkHours;
         [XmlIgnore]
         public WeeklyWorkHours[] MyWorkHours
         {
-            get => MyWorkHours;
-            set
-            {
-                MyWorkHours = value;
-                string str = "";
-                foreach (var item in MyWorkHours)
-                {
-                    str += item.WeeklyWorkHoursString;
-                }
-                if(str!=MyWorkHoursString)
-                {
-                    MyWorkHoursString = str;
-                }
-            }
+            get;/*=> PrivateMyWorkHours;*/
+            set;
+            //{
+            //    PrivateMyWorkHours = value;
+            //    string str = "";
+            //    foreach (var item in MyWorkHours)
+            //    {
+            //        str += item.WeeklyWorkHoursString;
+            //    }
+            //    if(str!=MyWorkHoursString)
+            //    {
+            //        MyWorkHoursString = str;
+            //    }
+            //}
         }
 
         public string MyWorkHoursString
         {
-            get => MyWorkHoursString;
-            set
-            {
-                MyWorkHoursString = value;
-                WeeklyWorkHours[] arr = new WeeklyWorkHours[MyWorkHoursString.Length / 65];
-                for (int i = 0; i < arr.Length; i++)
-                {
-                    for (int j = 0; j < 5; j++)
-                    {
-                        for (int n = 0; n < 6; n++)
-                        {
-                            if (MyWorkHoursString[65 * i + 12 * j + 2*i] == '1')
-                            {
-                                arr[i][j, n] = true;
-                            }
-                            else if (MyWorkHoursString[65 * i + 12 * j + 2*i] == '0')
-                            {
-                                arr[i][j, n] = false;
-                            }
-                        }
-                    }
-                }
-                MyWorkHours = arr;
-            }
+            get;/*=> MyWorkHoursString;*/
+            set;
+            //{
+            //    MyWorkHoursString = value;
+            //    WeeklyWorkHours[] arr = new WeeklyWorkHours[MyWorkHoursString.Length / 65];
+            //    for (int i = 0; i < arr.Length; i++)
+            //    {
+            //        for (int j = 0; j < 5; j++)
+            //        {
+            //            for (int n = 0; n < 6; n++)
+            //            {
+            //                if (MyWorkHoursString[65 * i + 12 * j + 2*i] == '1')
+            //                {
+            //                    arr[i][j, n] = true;
+            //                }
+            //                else if (MyWorkHoursString[65 * i + 12 * j + 2*i] == '0')
+            //                {
+            //                    arr[i][j, n] = false;
+            //                }
+            //            }
+            //        }
+            //    }
+            //    MyWorkHours = arr;
+            //}
         }
         public int MaxDistanceFromTest     { get; set;}
 
@@ -92,7 +93,6 @@ namespace BE
             MaximumWeeklyTests = _maximumWeeklyTests;
             MyVehicles = _myVehicles;
             MyWorkHours = _myWorkHours;
-            
             MaxDistanceFromTest = _maximumDistance;
         }
         public Tester(string _ID, FullName _name, DateTime _birthDate, Gender _gender, PhoneNumber _phoneNumber, Address _address, int _yearsOfExperience, int _maximumWeeklyTests, List<VehicleParams> _myVehicles, int _maximumDistance)
