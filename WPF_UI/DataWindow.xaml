@@ -34,6 +34,7 @@
             </Grid.RowDefinitions>
             <Button Name="byTeacherButton" Content="Trainees sorted by teacher" Click="byTeacherButton_Click" Grid.Column="0" Grid.Row="0"/>
             <Button Name="bySchoolButton" Content="Trainees sorted by school" Click="bySchoolButton_Click" Grid.Column="0" Grid.Row="1"/>
+            <Button Name="PassedByVehicle" Content="Check if a trainee has a certain license" Click="PassedByVehicle_Click" Grid.Column="1" Grid.Row="1"/>
             <Button Name="byTestAmountButton" Content="Trainees sorted by amount of tests" Click="byTestAmountButton_Click" Grid.Column="1" Grid.Row="0"/>
             <Button Name="allTests" Content="See All future tests" Click="allTests_Click" Grid.Column="0" Grid.Row="2"/>
             <Button Name="backButton" Content="Back" Click="backButton_Click" BorderBrush="Black" BorderThickness="3" Grid.Column="1" Grid.Row="2"/>

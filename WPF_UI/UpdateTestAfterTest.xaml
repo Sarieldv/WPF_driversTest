@@ -60,7 +60,7 @@
             </Grid>
             <Label Content="Note:"/>
             <TextBox Name="testersNote"/>
-            <CheckBox Name="passed" Content="Check if the trainee passed the test"/>
+            <CheckBox Name="passed" Content="Passed" FontSize="30" FontWeight="Bold" HorizontalAlignment="Center"/>
         </StackPanel>
         <Button Name="gradeButton" Content="Grade" Click="gradeButton_Click" Margin="10" FontSize="30">
             <Button.Style>

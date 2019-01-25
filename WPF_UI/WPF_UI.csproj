@@ -90,6 +90,9 @@
     <Compile Include="TraineeOptions.xaml.cs">
       <DependentUpon>TraineeOptions.xaml</DependentUpon>
     </Compile>
+    <Compile Include="TraineePassedWindow.xaml.cs">
+      <DependentUpon>TraineePassedWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UpdateTest.xaml.cs">
       <DependentUpon>UpdateTest.xaml</DependentUpon>
     </Compile>
@@ -171,6 +174,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="TraineeOptions.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TraineePassedWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

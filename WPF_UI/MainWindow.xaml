@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:WPF_UI"
         mc:Ignorable="d"
-        Title="Dring Test System"
+        Title="Driving Test System"
         WindowState="Maximized"
         WindowStyle="ThreeDBorderWindow">
     <StackPanel x:Name="MainWindowStack">

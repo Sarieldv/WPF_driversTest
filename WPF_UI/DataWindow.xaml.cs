@@ -58,10 +58,20 @@ namespace WPF_UI
         private void allTests_Click(object sender, RoutedEventArgs e)
         {
            if(Utilities.ReturnTests() == null)
+           {
+                return;
+           }
+            TestDataPresntWindow window = new TestDataPresntWindow();
+            window.Show();
+        }
+
+        private void PassedByVehicle_Click(object sender, RoutedEventArgs e)
+        {
+            if (Utilities.ReturnTrainees() == null)
             {
                 return;
             }
-            TestDataPresntWindow window = new TestDataPresntWindow();
+            TraineePassedWindow window = new TraineePassedWindow();
             window.Show();
         }
     }
