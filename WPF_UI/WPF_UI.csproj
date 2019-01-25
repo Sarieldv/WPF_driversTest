@@ -63,8 +63,11 @@
     <Compile Include="CancelTest.xaml.cs">
       <DependentUpon>CancelTest.xaml</DependentUpon>
     </Compile>
-    <Compile Include="DataPresentWindow.xaml.cs">
-      <DependentUpon>DataPresentWindow.xaml</DependentUpon>
+    <Compile Include="TestDataPresntWindow.xaml.cs">
+      <DependentUpon>TestDataPresntWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="TraineeDataPresentWindow.xaml.cs">
+      <DependentUpon>TraineeDataPresentWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="DataWindow.xaml.cs">
       <DependentUpon>DataWindow.xaml</DependentUpon>
@@ -116,7 +119,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="DataPresentWindow.xaml">
+    <Page Include="TestDataPresntWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TraineeDataPresentWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

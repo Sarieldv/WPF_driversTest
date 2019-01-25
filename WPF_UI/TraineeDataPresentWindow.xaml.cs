@@ -18,34 +18,26 @@ namespace WPF_UI
     /// <summary>
     /// Interaction logic for DataPresentWindow.xaml
     /// </summary>
-    public partial class DataPresentWindow : Window
+    public partial class TraineeDataPresentWindow : Window
     {
-        public DataPresentWindow(IEnumerable<List<Trainee>> traineeListList, int flag)
+        public TraineeDataPresentWindow(IEnumerable<List<Trainee>> traineeListList, bool? flag)
         {
             InitializeComponent();
-            if (flag == 0)//by amount of tests
+            if (flag == null)//by amount of tests
             {
                 TitleLabel.Content = "Trainees grouped by amount of tests done:";
             }
-            else if (flag == 1)//by teacher
+            else if (flag == true)//by teacher
             {
                 TitleLabel.Content = "Trainees grouped by teacher:";
             }
-            else if (flag == 2)//by school
+            else if (flag == false)//by school
             {
                 TitleLabel.Content = "Trainees grouped by school name:";
             }
-            else if (flag == 3)//all tests
-            {
-                TitleLabel.Content = "All future tests in the system:";
-            }
-            if (flag >= 0 && flag <= 2)
-            {
-
-
                 foreach (var traineeList in traineeListList)
                 {
-                    if (flag == 0)
+                    if (flag == null)
                     {
                         Label cell = new Label();
                         cell.Content = traineeList.First().AmountOfTests.ToString() + " tests done:";
@@ -57,7 +49,7 @@ namespace WPF_UI
                             (TitleLabel.Parent as StackPanel).Children.Add(cell);
                         }
                     }
-                    else if (flag == 1)
+                    else if (flag == true)
                     {
                         Label cell = new Label();
                         cell.Content = traineeList.First().Teacher.ToString() + " 's students:";
@@ -69,7 +61,7 @@ namespace WPF_UI
                             (TitleLabel.Parent as StackPanel).Children.Add(cell);
                         }
                     }
-                    else if (flag == 2)
+                    else if (flag == false)
                     {
                         Label cell = new Label();
                         cell.Content = "Students that learnt at " + traineeList.First().SchoolName + ":";
@@ -83,28 +75,8 @@ namespace WPF_UI
                     }
 
                 }
-            }
-            else if (flag == 3)
-            {
-                try
-                {
-                    Utilities.ReturnTests();
-                }
-                catch
-                {
-                    this.Close();
-                }
-                var tests = (from t in Utilities.ReturnTests()
-                             where t.Grade == null
-                             select t.ToString());
-                Label cell = new Label();
-                foreach (var test in tests)
-                {
-                    cell = new Label();
-                    cell.Content = test;
-                    (TitleLabel.Parent as StackPanel).Children.Add(cell);
-                }
-            }
+            
+            
         }
 
         private void closeButton_Click(object sender, RoutedEventArgs e)

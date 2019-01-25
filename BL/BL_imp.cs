@@ -632,7 +632,7 @@ namespace BL
                              where t.IDNumber == updatedTest.TesterId
                              select t).FirstOrDefault();
 
-            if (tester.hasTestByDate(updatedTest.DateAndTime))
+            if (tester.hasTestByDate(updatedTest.DateAndTime) && updatedTest.Grade==null)
             {
                 throw new Exception("That time is not available.");
             }
@@ -668,7 +668,7 @@ namespace BL
                 }
 
             }
-            if (count == tester.MaximumWeeklyTests)
+            if (count - 1 == tester.MaximumWeeklyTests)//we have to include the current test in the count
             {
                 throw new Exception("Tester cannot test any more this week.");
             }
