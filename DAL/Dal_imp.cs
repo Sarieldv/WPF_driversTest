@@ -187,8 +187,8 @@ namespace DAL
                 throw new Exception("Trainee does not exist.");
             }
             EraseTrainee(k);
-            k = updatedTrainee.DeepClone();
-            AddTrainee(k);
+            //k = updatedTrainee.DeepClone();
+            AddTrainee(updatedTrainee);
         }
         #endregion
     }
