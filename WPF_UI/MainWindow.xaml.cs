@@ -15,6 +15,8 @@ using System.Windows.Shapes;
 using BL;
 using BE;
 using System.Windows.Threading;
+using System.ComponentModel;
+using System.Threading;
 
 namespace WPF_UI
 {
@@ -25,11 +27,12 @@ namespace WPF_UI
     {
         public MainWindow()
         {
+            InitializeComponent();
             dispatcherTimer = new DispatcherTimer();
             dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick_Hour);
             dispatcherTimer.Interval = new TimeSpan(0, 1, 0);
             dispatcherTimer.Start();
-            InitializeComponent();
+             
             #region Addition of 2 testers and 2 trainees
             //Valid ids:
             //242516987
@@ -108,6 +111,28 @@ namespace WPF_UI
             {
                 FactoryBL.Instance.RemoveFirstWeek(tester);
             }
+        }
+        /// <summary>
+        /// Function that gets an Action and starts it in a delay of few seconds
+        /// </summary>
+        /// <param name="action">The action to do</param>
+        internal static void doFunctionInFewSecond(Action action)
+        {
+            BackgroundWorker backgroundWorker = new BackgroundWorker();
+            backgroundWorker.DoWork += BackgroundWorker_DoWork;
+            backgroundWorker.RunWorkerCompleted += BackgroundWorker_RunWorkerCompleted;
+            backgroundWorker.RunWorkerAsync(action);
+        }
+
+        private static void BackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            (e.Result as Action)();
+        }
+
+        private static void BackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            Thread.Sleep(10000);
+            e.Result = e.Argument;
         }
     }
 }

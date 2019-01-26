@@ -30,6 +30,7 @@ namespace WPF_UI
                              select t).FirstOrDefault();
                 cell = new Label();
                 cell.Content = "Test Number: " + test.Number;
+                cell.FontWeight = FontWeights.DemiBold;
                 (TitleLabel.Parent as StackPanel).Children.Add(cell);
                 cell = new Label();
                 cell.Content = "Trainee: " + myTrainee.ToString();

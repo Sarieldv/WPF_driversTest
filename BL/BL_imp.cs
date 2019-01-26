@@ -214,7 +214,7 @@ namespace BL
             else/* if (xmldoc.GetElementsByTagName("statusCode")[0].ChildNodes[0].InnerText == "402")*/
             //we have an answer that an error occurred, one of the addresses is not found busy network or other error...
             {
-                return -1;
+                return 5;
             }
         }
         /// <summary>
@@ -391,8 +391,7 @@ namespace BL
         /// <returns></returns>
         public Address BestTestAddress(Tester _tester, Trainee _trainee)
         {
-            int d = CalcDistance(_tester.MyAddress, _trainee.MyAddress);
-            if (d <= _tester.MaxDistanceFromTest && d!=-1)
+            if (CalcDistance(_tester.MyAddress, _trainee.MyAddress) <= _tester.MaxDistanceFromTest)
             {
                 return _trainee.MyAddress;
             }
