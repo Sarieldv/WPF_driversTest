@@ -159,8 +159,8 @@ namespace DAL
                 throw new Exception("Test does not exist.");
             }
             CancelTest(k);
-            k = updatedTest.DeepClone();
-            AddTest(k);
+            //k = updatedTest.DeepClone();
+            AddTest(updatedTest);
         }
 
         public void UpdateTester(Tester updatedTester)
@@ -173,8 +173,8 @@ namespace DAL
                 throw new Exception("Tester does not exist.");
             }
             EraseTester(k);
-            k = updatedTester.DeepClone();
-            AddTester(k);
+            //k = updatedTester.DeepClone();
+            AddTester(updatedTester);
         }
 
         public void UpdateTrainee(Trainee updatedTrainee)
@@ -187,7 +187,6 @@ namespace DAL
                 throw new Exception("Trainee does not exist.");
             }
             EraseTrainee(k);
-            //k = updatedTrainee.DeepClone();
             AddTrainee(updatedTrainee);
         }
         #endregion
