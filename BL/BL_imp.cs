@@ -6,6 +6,10 @@ using System.Threading.Tasks;
 using System.Net.Mail;
 using BE;
 using DAL;
+using System.Net;
+using System.IO;
+using System.Xml;
+
 namespace BL
 {
     internal class BL_imp : IBL
@@ -97,16 +101,8 @@ namespace BL
             catch (Exception ex)
             {
                 throw ex;
-            }
-            //if ((NewTest.DateAndTime.DayOfWeek - DateTime.Now.DayOfWeek + 1) >= 0)
-            //if((NewTest.DateAndTime - DateTime.Now).Days % 7 > 0)
-            //{
+            }         
                 (tester.MyWorkHours[tester.getWeek(NewTest.DateAndTime)])[NewTest.DateAndTime] = true;
-            //}
-            //else
-            //{
-            //    (tester.MyWorkHours[(NewTest.DateAndTime - DateTime.Now).Days / 7 - 1])[NewTest.DateAndTime] = true;
-            //}
             tester.TestsSignedUpFor = 1;
             UpdateTester(tester);
             trainee.HaveTest = true;
@@ -187,8 +183,39 @@ namespace BL
         /// <returns></returns>
         public int CalcDistance(Address address1, Address address2)
         {
-            Random r = new Random();
-            return r.Next(0, 21);
+            string firstAddress = address1.StreetName + " " + address1.AddressNumber + " st. " + address1.CityName;
+            string secondAddresss = address2.StreetName + " " + address2.AddressNumber + " st. " + address2.CityName;
+            string KEY = @"SCQY2qj4j3aaF5jfdfTHydqPIGvh1MFt";
+            string url = @"https://www.mapquestapi.com/directions/v2/route" +
+             @"?key=" + KEY +
+             @"&from=" + firstAddress +
+             @"&to=" + secondAddresss +
+             @"&outFormat=xml" +
+             @"&ambiguities=ignore&routeType=fastest&doReverseGeocode=false" +
+             @"&enhancedNarrative=false&avoidTimedConditions=false";
+            //request from MapQuest service the distance between the 2 addresses
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
+            WebResponse response = request.GetResponse();
+            Stream dataStream = response.GetResponseStream();
+            StreamReader sreader = new StreamReader(dataStream);
+            string responsereader = sreader.ReadToEnd();
+            response.Close();
+            //the response is given in an XML format
+            XmlDocument xmldoc = new XmlDocument();
+            xmldoc.LoadXml(responsereader);
+            if (xmldoc.GetElementsByTagName("statusCode")[0].ChildNodes[0].InnerText == "0")
+            //we have the expected answer
+            {
+                //display the returned distance
+                XmlNodeList distance = xmldoc.GetElementsByTagName("distance");
+                double distInMiles = Convert.ToDouble(distance[0].ChildNodes[0].InnerText);
+                return (int)(distInMiles * 1.609344);
+            }
+            else/* if (xmldoc.GetElementsByTagName("statusCode")[0].ChildNodes[0].InnerText == "402")*/
+            //we have an answer that an error occurred, one of the addresses is not found busy network or other error...
+            {
+                return -1;
+            }
         }
         /// <summary>
         /// Function to cancel a test
@@ -364,7 +391,8 @@ namespace BL
         /// <returns></returns>
         public Address BestTestAddress(Tester _tester, Trainee _trainee)
         {
-            if (CalcDistance(_tester.MyAddress, _trainee.MyAddress) <= _tester.MaxDistanceFromTest)
+            int d = CalcDistance(_tester.MyAddress, _trainee.MyAddress);
+            if (d <= _tester.MaxDistanceFromTest && d!=-1)
             {
                 return _trainee.MyAddress;
             }
