@@ -29,13 +29,16 @@ namespace WPF_UI
                              where t.IDNumber == test.TraineeId
                              select t).FirstOrDefault();
                 cell = new Label();
-                cell.Content = "Test number: " + test.Number;
+                cell.Content = "Test Number: " + test.Number;
                 (TitleLabel.Parent as StackPanel).Children.Add(cell);
                 cell = new Label();
                 cell.Content = "Trainee: " + myTrainee.ToString();
                 (TitleLabel.Parent as StackPanel).Children.Add(cell);
                 cell = new Label();
-                cell.Content = "Date " + test.DateAndTime.ToString();
+                cell.Content = "Date: " + test.DateAndTime.ToString();
+                (TitleLabel.Parent as StackPanel).Children.Add(cell);
+                cell = new Label();
+                cell.Content =  test.AddressOfDeparture.ToString();
                 (TitleLabel.Parent as StackPanel).Children.Add(cell);
                 cell = new Label();
                 (TitleLabel.Parent as StackPanel).Children.Add(cell);

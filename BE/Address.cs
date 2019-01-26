@@ -21,5 +21,9 @@ namespace BE
             AddressNumber = _addressNumber;
             CityName = _cityName;
         }
+        public override string ToString()
+        {
+            return "City: " + CityName + "    Street: " + StreetName + "    Address Number: " + AddressNumber;
+        }
     }
 }

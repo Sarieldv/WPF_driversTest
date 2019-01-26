@@ -47,7 +47,7 @@ namespace WPF_UI
             vehicles.Add(new VehicleParams(Vehicle.TwoWheelVehicle, GearBox.Manual));
             try
             {
-                FactoryBL.Instance.AddTester(new Tester("242516987", new FullName("John", "Doe"), new DateTime(1970, 1, 5), Gender.Male, new PhoneNumber("0546235582", KindOfPhoneNumber.Mobile), new Address("Hanasi", 7, "Jerusalem"), 3, 1, vehicles, 21));
+                FactoryBL.Instance.AddTester(new Tester("242516987", new FullName("John", "Doe"), new DateTime(1970, 1, 5), Gender.Male, new PhoneNumber("0546235582", KindOfPhoneNumber.Mobile), new Address("pisga", 7, "jerusalem"), 3, 1, vehicles, 21));
             }
             catch (Exception ex)
             {
@@ -55,7 +55,7 @@ namespace WPF_UI
             }
             try
             {
-                FactoryBL.Instance.AddTester(new Tester("314569245", new FullName("Margo", "Smith"), new DateTime(1972, 3, 22), Gender.Female, new PhoneNumber("0543846759", KindOfPhoneNumber.Mobile), new Address("HaErez", 8, "Jerusalem"), 4, 1, vehicles, 21));
+                FactoryBL.Instance.AddTester(new Tester("314569245", new FullName("Margo", "Smith"), new DateTime(1972, 3, 22), Gender.Female, new PhoneNumber("0543846759", KindOfPhoneNumber.Mobile), new Address("gilgal", 8, "ramat-gan"), 4, 1, vehicles, 21));
             }
             catch (Exception ex)
             {
@@ -64,7 +64,7 @@ namespace WPF_UI
             int[] classArr = { 22, 8, 12, 0, 24, 0, 0, 0 };
             try
             {
-                FactoryBL.Instance.AddTrainee(new Trainee("015692486", new FullName("Naama", "Vazanna"), new DateTime(1990, 7, 23), Gender.Female, new PhoneNumber("086423751", KindOfPhoneNumber.Home), new Address("HaTamar", 19, "Jerusalem"), new VehicleParams(Vehicle.PrivateVehicle, GearBox.Automatic), "Horen Et Yosef", new FullName("Eli", "Jones"), classArr));
+                FactoryBL.Instance.AddTrainee(new Trainee("015692486", new FullName("Naama", "Vazanna"), new DateTime(1990, 7, 23), Gender.Female, new PhoneNumber("086423751", KindOfPhoneNumber.Home), new Address("pisga", 19, "haifa"), new VehicleParams(Vehicle.PrivateVehicle, GearBox.Automatic), "Horen Et Yosef", new FullName("Eli", "Jones"), classArr));
             }
             catch (Exception ex)
             {
@@ -72,7 +72,7 @@ namespace WPF_UI
             }
             try
             {
-                FactoryBL.Instance.AddTrainee(new Trainee("234910768", new FullName("Moti", "Yaakovi"), new DateTime(1994, 8, 15), Gender.Female, new PhoneNumber("0506249371", KindOfPhoneNumber.Mobile), new Address("HaTnufa", 17, "Jerusalem"), new VehicleParams(Vehicle.PrivateVehicle, GearBox.Automatic), "Horen Et Yosef", new FullName("Adina", "Margi"), classArr));
+                FactoryBL.Instance.AddTrainee(new Trainee("234910768", new FullName("Moti", "Yaakovi"), new DateTime(1994, 8, 15), Gender.Male, new PhoneNumber("0506249371", KindOfPhoneNumber.Mobile), new Address("gilgal", 17, "Jerusalem"), new VehicleParams(Vehicle.PrivateVehicle, GearBox.Automatic), "Horen Et Yosef", new FullName("Adina", "Margi"), classArr));
             }
             catch (Exception ex)
             {

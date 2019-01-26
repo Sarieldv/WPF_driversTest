@@ -240,14 +240,5 @@
   <ItemGroup>
     <Resource Include="Properties\Main window background.jpg" />
   </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Properties\Open Road.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Properties\Summer-Road-Trip.jpg" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Properties\Tester Background.jpg" />
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
