@@ -42,12 +42,13 @@ namespace BE
                 
             //}
         }
+        private string privateWeeklyWorkHoursString;
         public string WeeklyWorkHoursString
         {
-            get => WeeklyWorkHoursString;
+            get => privateWeeklyWorkHoursString;
             set
             {
-                WeeklyWorkHoursString = value;
+                privateWeeklyWorkHoursString = value;
                 bool[,] arr = new bool[5, 6];
                 int i = 0;
                 int j = 0;
