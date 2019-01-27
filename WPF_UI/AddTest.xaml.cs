@@ -69,7 +69,6 @@ namespace WPF_UI
             try
             {
                 Worker.RunWorkerAsync(instance);
-                
             }
             catch(Exception ex)
             {

@@ -14,33 +14,33 @@ namespace BE
         [XmlIgnore]
         public bool[,] MyWeekHours
         {
-            get;/*=> MyWeekHours;*/
-            set;
-            //{
-            //    MyWeekHours = value;
-            //    string str = "";
-            //    for (int i = 0; i < 5; i++)
-            //    {
-            //        for (int j = 0; j < 6; j++)
-            //        {
-            //            if(MyWeekHours[i,j])
-            //            {
-            //                str += 1;
-            //            }
-            //            else
-            //            {
-            //                str += 0;
-            //            }
-            //            str += ",";
-            //        }
-            //        str+=".";
-            //    }
-            //    if (WeeklyWorkHoursString!=str)
-            //    {
-            //        WeeklyWorkHoursString = str;
-            //    }
-                
-            //}
+            get => privateMyWeekHours;
+            set
+            {
+                privateMyWeekHours = value;
+                string str = "";
+                for (int i = 0; i < 5; i++)
+                {
+                    for (int j = 0; j < 6; j++)
+                    {
+                        if (MyWeekHours[i, j])
+                        {
+                            str += 1;
+                        }
+                        else
+                        {
+                            str += 0;
+                        }
+                        str += ",";
+                    }
+                    str += ".";
+                }
+                if (WeeklyWorkHoursString != str)
+                {
+                    WeeklyWorkHoursString = str;
+                }
+
+            }
         }
         private string privateWeeklyWorkHoursString;
         public string WeeklyWorkHoursString
@@ -116,7 +116,8 @@ namespace BE
         }
         public WeeklyWorkHours()
         {
-            MyWeekHours = new bool[5, 6];
+            privateMyWeekHours = new bool[5, 6];
+            privateWeeklyWorkHoursString = "0,0,0,0,0,0,.0,0,0,0,0,0,.0,0,0,0,0,0,.0,0,0,0,0,0,.0,0,0,0,0,0,.";
         }
     }
 }

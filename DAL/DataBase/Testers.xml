@@ -53,6 +53,7 @@
         <GearBoxType>Manual</GearBoxType>
       </VehicleParams>
     </MyVehicles>
+    <MyWorkHoursString>0,0,0,0,0,0,.0,0,0,0,0,0,.0,0,0,0,0,0,.0,0,0,0,0,0,.0,0,0,0,0,0,.</MyWorkHoursString>
     <MaxDistanceFromTest>21</MaxDistanceFromTest>
     <TestsSignedUpFor>0</TestsSignedUpFor>
   </Tester>
@@ -109,6 +110,7 @@
         <GearBoxType>Manual</GearBoxType>
       </VehicleParams>
     </MyVehicles>
+    <MyWorkHoursString>0,0,0,0,0,0,.0,0,0,0,0,0,.0,0,0,0,0,0,.0,0,0,0,0,0,.0,0,0,0,0,0,.</MyWorkHoursString>
     <MaxDistanceFromTest>21</MaxDistanceFromTest>
     <TestsSignedUpFor>0</TestsSignedUpFor>
   </Tester>
