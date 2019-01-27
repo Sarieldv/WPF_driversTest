@@ -101,7 +101,7 @@ namespace BL
             catch (Exception ex)
             {
                 throw ex;
-            }         
+            }
                 (tester.MyWorkHours[tester.getWeek(NewTest.DateAndTime)])[NewTest.DateAndTime] = true;
             tester.TestsSignedUpFor = 1;
             UpdateTester(tester);
@@ -603,7 +603,7 @@ namespace BL
         {
             List<Trainee> list = ReturnTrainees();
             IEnumerable<List<Trainee>> results;
-            if(_extraSorted)
+            if (_extraSorted)
             {
                 results = list.GroupBy(p => p.AmountOfTests).OrderBy(t => t.Count()).Select(x => new List<Trainee>(x));
             }
@@ -659,7 +659,7 @@ namespace BL
                              where t.IDNumber == updatedTest.TesterId
                              select t).FirstOrDefault();
 
-            if (tester.hasTestByDate(updatedTest.DateAndTime) && updatedTest.Grade==null)
+            if (tester.hasTestByDate(updatedTest.DateAndTime) && updatedTest.Grade == null)
             {
                 throw new Exception("That time is not available.");
             }
@@ -671,7 +671,7 @@ namespace BL
                 throw new Exception("Not enough classes.");
             }
             var k = (from t in ReturnTests()
-                     where t.TraineeId == trainee.IDNumber
+                     where t.TraineeId == trainee.IDNumber && t.Grade != null
                      select t);
             Test mostRecentTest = k.OrderByDescending(e => e.DateAndTime).FirstOrDefault();//gives the most recent (verified)
             if (mostRecentTest != null && mostRecentTest.Number != updatedTest.Number)
@@ -682,11 +682,6 @@ namespace BL
                 }
             }
             int count = 0;
-            //int week = (updatedTest.DateAndTime - DateTime.Now).Days / 7;
-            //if(updatedTest.DateAndTime.DayOfWeek < DateTime.Now.DayOfWeek)
-            //{
-            //    week++;
-            //}
             foreach (bool d in tester.MyWorkHours[tester.getWeek(updatedTest.DateAndTime)])
             {
                 if (d)
@@ -707,9 +702,19 @@ namespace BL
             {
                 throw new Exception("Trainee already passed this test.");
             }
-            if (CalcDistance(tester.MyAddress, updatedTest.AddressOfDeparture) > tester.MaxDistanceFromTest)
+            Test originalTest = (from t in ReturnTests()
+                                 where t.Number == updatedTest.Number
+                                 select t).FirstOrDefault();
+            if (originalTest == null)
             {
-                throw new Exception("Test is too far for tester.");
+                throw new Exception("This test does not exist in the system to update.");
+            }
+            if (originalTest.AddressOfDeparture.AddressNumber != updatedTest.AddressOfDeparture.AddressNumber || originalTest.AddressOfDeparture.StreetName != updatedTest.AddressOfDeparture.StreetName || originalTest.AddressOfDeparture.CityName != updatedTest.AddressOfDeparture.CityName)
+            {
+                if (CalcDistance(tester.MyAddress, updatedTest.AddressOfDeparture) > tester.MaxDistanceFromTest)
+                {
+                    throw new Exception("Test is too far for tester.");
+                }
             }
 
             if (updatedTest.Grade != null)

@@ -32,7 +32,9 @@ namespace WPF_UI
             dispatcherTimer.Tick += new EventHandler(dispatcherTimer_Tick_Hour);
             dispatcherTimer.Interval = new TimeSpan(0, 1, 0);
             dispatcherTimer.Start();
-             
+            BackgroundWorker addTestWorker = new BackgroundWorker();
+            addTestWorker.DoWork +=  AddTestWorker_DoWork;
+            addTestWorker.RunWorkerCompleted +=  AddTestWorker_RunWorkerCompleted;
             #region Addition of 2 testers and 2 trainees
             //Valid ids:
             //242516987
@@ -85,6 +87,17 @@ namespace WPF_UI
             MainWindowStack.Children.Add(new openingWindow());
             
         }
+
+        private void AddTestWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void AddTestWorker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            throw new NotImplementedException();
+        }
+        #region dipatch time
         DispatcherTimer dispatcherTimer;
         void dispatcherTimer_Tick_Hour(object sender, EventArgs e)
         {
@@ -112,6 +125,7 @@ namespace WPF_UI
                 FactoryBL.Instance.RemoveFirstWeek(tester);
             }
         }
+        #endregion
         /// <summary>
         /// Function that gets an Action and starts it in a delay of few seconds
         /// </summary>
