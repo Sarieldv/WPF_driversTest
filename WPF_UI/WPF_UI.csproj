@@ -66,6 +66,7 @@
     <Compile Include="TestDataPresntWindow.xaml.cs">
       <DependentUpon>TestDataPresntWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="traineeAndDate.cs" />
     <Compile Include="TraineeDataPresentWindow.xaml.cs">
       <DependentUpon>TraineeDataPresentWindow.xaml</DependentUpon>
     </Compile>

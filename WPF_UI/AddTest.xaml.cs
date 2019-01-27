@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,6 +26,9 @@ namespace WPF_UI
         public AddTest()
         {
             InitializeComponent();
+            Worker = new BackgroundWorker();
+            Worker.DoWork += Worker_DoWork;
+            Worker.RunWorkerCompleted += Worker_RunWorkerCompleted;
             List<Trainee> trainees = Utilities.ReturnTrainees();
             if (trainees == null)
             {
@@ -39,6 +43,7 @@ namespace WPF_UI
             }
             thisTrainee = new Trainee();
         }
+        BackgroundWorker Worker;
         Trainee thisTrainee;
         private void addButton_Click(object sender, RoutedEventArgs e)
         {
@@ -58,18 +63,17 @@ namespace WPF_UI
                 return;
             }
             DateTime chosenDate = new DateTime(datePicker.SelectedDate.Value.Year, datePicker.SelectedDate.Value.Month, datePicker.SelectedDate.Value.Day, timeChoice.SelectedIndex + 9, 0, 0);
+            traineeAndDate instance = new traineeAndDate(thisTrainee, chosenDate);
             try
             {
-                FactoryBL.Instance.GetTest(thisTrainee, chosenDate);
+                Worker.RunWorkerAsync(instance);
+                
             }
             catch(Exception ex)
             {
                 Utilities.ErrorBox(ex.Message);
                 return;
             }
-            Utilities.InformationBox("You have successfully added a test");
-            (this.Parent as StackPanel).Children.Add(new TestOptions());
-            (this.Parent as StackPanel).Children.Remove(this);
         }
 
         private void backButton_Click(object sender, RoutedEventArgs e)
@@ -91,6 +95,30 @@ namespace WPF_UI
                 }
             }
 
+        }
+        private void Worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            Exception result = e.Result as Exception;
+            if (result != null)
+            {
+                Utilities.ErrorBox(result.Message);
+                return;
+            }
+            Utilities.InformationBox("You have successfully added a test");
+            (this.Parent as StackPanel).Children.Add(new TestOptions());
+            (this.Parent as StackPanel).Children.Remove(this);
+        }
+
+        private void Worker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            try
+            {
+                FactoryBL.Instance.GetTest((e.Argument as traineeAndDate).trainee, (e.Argument as traineeAndDate).date);
+            }
+            catch (Exception ex)
+            {
+                e.Result = ex;
+            }
         }
     }
 }
