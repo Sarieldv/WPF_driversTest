@@ -10,7 +10,7 @@ namespace BE
 {
     public class WeeklyWorkHours : IEnumerable
     {
-        
+        private bool[,] privateMyWeekHours;
         [XmlIgnore]
         public bool[,] MyWeekHours
         {
@@ -58,15 +58,15 @@ namespace BE
                     {
                         arr[i, j] = true;
                     }
-                    else if(WeeklyWorkHoursString[n] == '0')
+                    else if (WeeklyWorkHoursString[n] == '0')
                     {
                         arr[i, j] = false;
                     }
-                    else if(WeeklyWorkHoursString[n] == ',')
+                    else if (WeeklyWorkHoursString[n] == ',')
                     {
                         j++;
                     }
-                    else if(WeeklyWorkHoursString[n] == '.')
+                    else if (WeeklyWorkHoursString[n] == '.')
                     {
                         i++;
                     }
@@ -75,7 +75,7 @@ namespace BE
                 {
                     for (j = 0; j < 6; j++)
                     {
-                        if(arr[i,j] != MyWeekHours[i,j])
+                        if (arr[i, j] != MyWeekHours[i, j])
                         {
                             MyWeekHours = arr;
                             return;
@@ -85,7 +85,7 @@ namespace BE
 
             }
         }
-        
+
         public IEnumerator GetEnumerator()
         {
             return MyWeekHours.GetEnumerator();

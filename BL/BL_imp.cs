@@ -352,12 +352,7 @@ namespace BL
         /// <returns></returns>
         public bool IsDateAvailable(Tester tester, DateTime dateTime)
         {
-            //TimeSpan span = dateTime - DateTime.Now; //opperation does not count today
             int weeks = tester.getWeek(dateTime);
-            //if (dateTime.DayOfWeek-DateTime.Now.DayOfWeek < 0)
-            //{
-            //    weeks++;
-            //}
             if (weeks < tester.MyWorkHours.Length)
             {
                 if (tester.MyWorkHours[weeks][dateTime])

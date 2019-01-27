@@ -12,6 +12,10 @@ namespace DAL
 {
     class Dal_XML_imp : IDAL
     {
+        private const string TESTFILE = "..\\..\\..\\DAL\\DataBase\\Tests.xml";
+        private const string TESTERFILE = "..\\..\\..\\DAL\\DataBase\\Testers.xml";
+        private const string TRAINEEFILE = "..\\..\\..\\DAL\\DataBase\\Trainees.xml";
+
         public static void SaveToXML<T>(T source, string path)
         {
             FileStream file = new FileStream(path, FileMode.Create);
@@ -77,7 +81,7 @@ namespace DAL
                 throw new Exception("Tester does not exist.");
             }
             DataSource.TestsList.Add(NewTest);
-            SaveToXML<List<Test>>(DataSource.TestsList, "..\\..\\..\\DataBase\\Tests.xml");
+            SaveToXML<List<Test>>(DataSource.TestsList, TESTFILE);
 
         }
 
@@ -88,7 +92,7 @@ namespace DAL
                 throw new Exception("A person with this ID number already exists in the system.");
             }
             DataSource.TestersList.Add(NewTester);
-            SaveToXML<List<Tester>>(DataSource.TestersList, "..\\..\\Testers.xml");
+            SaveToXML<List<Tester>>(DataSource.TestersList, TESTERFILE);
         }
 
         public void AddTrainee(Trainee NewTrainee)
@@ -98,7 +102,7 @@ namespace DAL
                 throw new Exception("A person with this ID number already exists in the system.");
             }
             DataSource.TraineesList.Add(NewTrainee);
-            SaveToXML<List<Trainee>>(DataSource.TraineesList, "..\\DataBase\\Trainees.xml");
+            SaveToXML<List<Trainee>>(DataSource.TraineesList, TRAINEEFILE);
         }
         #endregion
         #region erase
@@ -109,7 +113,7 @@ namespace DAL
                 throw new Exception("Test does not exist");
             }
             DataSource.TestsList.Remove(_test);
-            SaveToXML<List<Test>>(DataSource.TestsList, "..\\..\\DataBase\\Tests.xml");
+            SaveToXML<List<Test>>(DataSource.TestsList, TESTFILE);
         }
 
         public void EraseTester(Tester tester)
@@ -119,7 +123,7 @@ namespace DAL
                 throw new Exception("Tester does not exist.");
             }
             DataSource.TestersList.Remove(tester);
-            SaveToXML<List<Tester>>(DataSource.TestersList, "..\\..\\DataBase\\Testers.xml");
+            SaveToXML<List<Tester>>(DataSource.TestersList, TESTERFILE);
         }
         public void EraseTrainee(Trainee trainee)
         {
@@ -128,7 +132,7 @@ namespace DAL
                 throw new Exception("Trainee does not exist.");
             }
             DataSource.TraineesList.Remove(trainee);
-            SaveToXML<List<Trainee>>(DataSource.TraineesList, "..\\..\\DataBase\\Trainees.xml");
+            SaveToXML<List<Trainee>>(DataSource.TraineesList, TRAINEEFILE);
         }
 
 
@@ -140,7 +144,7 @@ namespace DAL
             {
                 throw new Exception("There are no testers in the system.");
             }
-            return LoadFromXML<List<Tester>>("..\\..\\DataBase\\Testers.xml");
+            return LoadFromXML<List<Tester>>(TESTERFILE);
         }
 
         public List<Test> ReturnTests()
@@ -149,7 +153,7 @@ namespace DAL
             {
                 throw new Exception("There are no tests in the system.");
             }
-            return LoadFromXML<List<Test>>("..\\..\\DataBase\\Tests.xml");
+            return LoadFromXML<List<Test>>(TESTFILE);
         }
 
         public List<Trainee> ReturnTrainees()
@@ -158,7 +162,7 @@ namespace DAL
             {
                 throw new Exception("There are no trainees in the system.");
             }
-            return LoadFromXML<List<Trainee>>("..\\..\\DataBase\\Trainees.xml");
+            return LoadFromXML<List<Trainee>>(TRAINEEFILE);
         }
         #endregion
         #region update

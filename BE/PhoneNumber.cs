@@ -8,13 +8,17 @@ namespace BE
 {
     public class PhoneNumber
     {
-        public readonly string number;
-        public readonly KindOfPhoneNumber kind;
+        public string number { get; set; }
+        public KindOfPhoneNumber kind { get; set; }
        public PhoneNumber(string _number, KindOfPhoneNumber _kind)
        {
             number = _number;
             kind = _kind;
        }
+        public PhoneNumber()
+        {
+
+        }
         public PhoneNumber(PhoneNumber phone)
         {
             this.kind = phone.kind;
