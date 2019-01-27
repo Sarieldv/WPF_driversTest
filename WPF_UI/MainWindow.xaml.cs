@@ -33,8 +33,8 @@ namespace WPF_UI
             dispatcherTimer.Interval = new TimeSpan(0, 1, 0);
             dispatcherTimer.Start();
             BackgroundWorker addTestWorker = new BackgroundWorker();
-            addTestWorker.DoWork +=  AddTestWorker_DoWork;
-            addTestWorker.RunWorkerCompleted +=  AddTestWorker_RunWorkerCompleted;
+            addTestWorker.DoWork += AddTestWorker_DoWork;
+            addTestWorker.RunWorkerCompleted += AddTestWorker_RunWorkerCompleted;
             #region Addition of 2 testers and 2 trainees
             //Valid ids:
             //242516987
@@ -85,7 +85,6 @@ namespace WPF_UI
             }
             #endregion
             MainWindowStack.Children.Add(new openingWindow());
-            
         }
 
         private void AddTestWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -95,7 +94,8 @@ namespace WPF_UI
 
         private void AddTestWorker_DoWork(object sender, DoWorkEventArgs e)
         {
-            throw new NotImplementedException();
+            FactoryBL.Instance.AddTest(e.Argument as Test);
+            Thread.Sleep(10000);
         }
         #region dipatch time
         DispatcherTimer dispatcherTimer;
@@ -126,27 +126,27 @@ namespace WPF_UI
             }
         }
         #endregion
-        /// <summary>
-        /// Function that gets an Action and starts it in a delay of few seconds
-        /// </summary>
-        /// <param name="action">The action to do</param>
-        internal static void doFunctionInFewSecond(Action action)
-        {
-            BackgroundWorker backgroundWorker = new BackgroundWorker();
-            backgroundWorker.DoWork += BackgroundWorker_DoWork;
-            backgroundWorker.RunWorkerCompleted += BackgroundWorker_RunWorkerCompleted;
-            backgroundWorker.RunWorkerAsync(action);
-        }
+        ///// <summary>
+        ///// Function that gets an Action and starts it in a delay of few seconds
+        ///// </summary>
+        ///// <param name="action">The action to do</param>
+        //internal static void doFunctionInFewSecond(Action action)
+        //{
+        //    BackgroundWorker backgroundWorker = new BackgroundWorker();
+        //    backgroundWorker.DoWork += BackgroundWorker_DoWork;
+        //    backgroundWorker.RunWorkerCompleted += BackgroundWorker_RunWorkerCompleted;
+        //    backgroundWorker.RunWorkerAsync(action);
+        //}
 
-        private static void BackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
-        {
-            (e.Result as Action)();
-        }
+        //private static void BackgroundWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        //{
+        //    (e.Result as Action)();
+        //}
 
-        private static void BackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
-        {
-            Thread.Sleep(10000);
-            e.Result = e.Argument;
-        }
+        //private static void BackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
+        //{
+        //    Thread.Sleep(10000);
+        //    e.Result = e.Argument;
+        //}
     }
 }
