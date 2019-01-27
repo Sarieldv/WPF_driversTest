@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,6 +24,9 @@ namespace WPF_UI
     {
         public UpdateTester()
         {
+            Worker = new BackgroundWorker();
+            Worker.DoWork += Worker_DoWork;
+            Worker.RunWorkerCompleted += Worker_RunWorkerCompleted;
             InitializeComponent();
             List<Tester> testers = Utilities.ReturnTesters();
             if (testers == null)
@@ -39,10 +43,38 @@ namespace WPF_UI
             thisTester = new Tester();
             copyTester = new Tester();
         }
+
+        private void Worker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            try
+            {
+                FactoryBL.Instance.UpdateTester(thisTester);
+            }
+            catch (Exception ex)
+            {
+                e.Result = ex;
+            }
+        }
+
+        private void Worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            Exception result = e.Result as Exception;
+            if (result != null)
+            {
+                Utilities.ErrorBox(result.Message);
+                return;
+            }
+            Utilities.InformationBox(thisTester.ToString() + " has been successfully updated.");
+            stack.Children.Add(new TesterOptions());
+            stack.Children.Remove(this);
+        }
+        StackPanel stack;
+        BackgroundWorker Worker;
         Tester thisTester;
         Tester copyTester;
         private void UpdateButton_Click(object sender, RoutedEventArgs e)
         {
+            stack = this.Parent as StackPanel;
             if (!(bool)ManualHeavyTruck.IsChecked && !(bool)ManualMediumTruck.IsChecked && !(bool)ManualPrivateVehicle.IsChecked && !(bool)ManualTwoWheelVehicle.IsChecked && !(bool)AutomaticHeavyTruck.IsChecked && !(bool)AutomaticMediumTruck.IsChecked && !(bool)AutomaticPrivateVehicle.IsChecked && !(bool)AutomaticTwoWheelVehicle.IsChecked)
             {
                 Utilities.ErrorBox("At least one vehicle must be selected!");
@@ -123,15 +155,12 @@ namespace WPF_UI
             thisTester.YearsOfExperience = (int)MaxDistance.Value;
             try
             {
-                FactoryBL.Instance.UpdateTester(thisTester);
+                Worker.RunWorkerAsync();
             }
             catch (Exception ex)
             {
                 Utilities.ErrorBox(ex.Message);
             }
-            Utilities.InformationBox(thisTester.ToString() + " has been successfully updated.");
-            (this.Parent as StackPanel).Children.Add(new TesterOptions());
-            (this.Parent as StackPanel).Children.Remove(this);
         }
 
         private void BackButton_Click(object sender, RoutedEventArgs e)

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -25,6 +26,9 @@ namespace WPF_UI
         public UpdateTrainee()
         {
             InitializeComponent();
+            Worker = new BackgroundWorker();
+            Worker.DoWork += Worker_DoWork;
+            Worker.RunWorkerCompleted += Worker_RunWorkerCompleted;
             List<Trainee> trainees = Utilities.ReturnTrainees();
             if (trainees == null)
             {
@@ -40,8 +44,34 @@ namespace WPF_UI
             thisTrainee = new Trainee();
             copyTrainee = new Trainee();
         }
+
+        private void Worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            Exception result = e.Result as Exception;
+            if (result != null)
+            {
+                Utilities.ErrorBox(result.Message);
+                return;
+            }
+            Utilities.InformationBox(thisTrainee.ToString() + " has been successfully updated.");
+            stack.Children.Add(new TraineeOptions());
+            stack.Children.Remove(this);
+        }
+
+        private void Worker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            try
+            {
+                FactoryBL.Instance.UpdateTrainee(thisTrainee);
+            }
+            catch (Exception ex)
+            {
+                e.Result = ex;
+            }
+        }
+        StackPanel stack;
         Trainee thisTrainee, copyTrainee;
-   
+        BackgroundWorker Worker;
 
         private void updateValue_Click(object sender, RoutedEventArgs e)
         {
@@ -52,6 +82,7 @@ namespace WPF_UI
 
         private void UpdateButton_Click(object sender, RoutedEventArgs e)
         {
+            stack = Parent as StackPanel;
             if (AutomaticPrivateVehicle.IsChecked.Value)
             {
                 thisTrainee.TraineeVehicle = new VehicleParams(Vehicle.PrivateVehicle, GearBox.Automatic);
@@ -92,9 +123,7 @@ namespace WPF_UI
             {
                 Utilities.ErrorBox(ex.Message);
             }
-            Utilities.InformationBox(thisTrainee.ToString() + " has been successfully updated.");
-            (this.Parent as StackPanel).Children.Add(new TraineeOptions());
-            (this.Parent as StackPanel).Children.Remove(this);
+
         }
         #region stuffIsChanged
         private void TraineeOptions_SelectionChanged(object sender, SelectionChangedEventArgs e)
