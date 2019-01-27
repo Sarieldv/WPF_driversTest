@@ -50,8 +50,6 @@ namespace BE
             get { return timeBetweenTests; }
             set { timeBetweenTests = value; }
         }
-
-
         static Configuration()
         {
             MaximumTesterAge = 80;
