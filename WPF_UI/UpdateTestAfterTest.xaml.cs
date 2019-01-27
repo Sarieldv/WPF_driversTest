@@ -14,6 +14,8 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using BL;
 using BE;
+using System.ComponentModel;
+
 namespace WPF_UI
 {
     /// <summary>
@@ -24,6 +26,9 @@ namespace WPF_UI
         public UpdateTestAfterTest()
         {
             InitializeComponent();
+            Worker = new BackgroundWorker();
+            Worker.DoWork += Worker_DoWork;
+            Worker.RunWorkerCompleted += Worker_RunWorkerCompleted;
             List<Test> tests = Utilities.ReturnTests();
             if (tests == null)
             {
@@ -40,11 +45,40 @@ namespace WPF_UI
             }
             thisTest = new Test();
         }
+
+        private void Worker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            Exception result = e.Result as Exception;
+            if (result != null)
+            {
+                Utilities.ErrorBox(result.Message);
+                return;
+            }
+            Utilities.InformationBox("You have successfully graded this test!");
+            stack.Children.Add(new TestOptions());
+            stack.Children.Remove(this);
+        }
+
+        private void Worker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            try
+            {
+                FactoryBL.Instance.UpdateTest(e.Argument as Test);
+            }
+            catch (Exception ex)
+            {
+                e.Result = ex;
+            }
+        }
+
+        BackgroundWorker Worker;
         Trainee thisTrainee;
         Test thisTest;
+        StackPanel stack;
 
         private void gradeButton_Click(object sender, RoutedEventArgs e)
         {
+            stack = Parent as StackPanel;
             thisTest.DistanceKeep = distanceKeep.IsChecked;
             thisTest.ReverseParking = reverseParking.IsChecked;
             thisTest.Parking = parking.IsChecked;
@@ -58,16 +92,14 @@ namespace WPF_UI
             thisTest.Grade = passed.IsChecked;
             try
             {
-                FactoryBL.Instance.UpdateTest(thisTest);
+                Worker.RunWorkerAsync(thisTest);
             }
             catch(Exception ex)
             {
                 Utilities.ErrorBox(ex.Message);
                 return;
             }
-            Utilities.InformationBox("You have successfully graded this test!");
-            (this.Parent as StackPanel).Children.Add(new TestOptions());
-            (this.Parent as StackPanel).Children.Remove(this);
+            
         }
 
         private void backButton_Click(object sender, RoutedEventArgs e)

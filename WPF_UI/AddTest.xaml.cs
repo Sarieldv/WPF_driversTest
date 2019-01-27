@@ -45,8 +45,10 @@ namespace WPF_UI
         }
         BackgroundWorker Worker;
         Trainee thisTrainee;
+        StackPanel stack;
         private void addButton_Click(object sender, RoutedEventArgs e)
         {
+            stack = this.Parent as StackPanel;
             if((datePicker.SelectedDate == null))
             {
                 Utilities.ErrorBox("You have not selected a date.");
@@ -105,8 +107,9 @@ namespace WPF_UI
                 return;
             }
             Utilities.InformationBox("You have successfully added a test");
-            (this.Parent as StackPanel).Children.Add(new TestOptions());
-            (this.Parent as StackPanel).Children.Remove(this);
+            stack.Children.Add(new TestOptions());
+            stack.Children.Remove(this);
+      
         }
 
         private void Worker_DoWork(object sender, DoWorkEventArgs e)
