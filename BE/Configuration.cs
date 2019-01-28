@@ -32,8 +32,12 @@ namespace BE
             get
             {
                 testId++;
-
-                return TestId;
+                XElement element = (from e in configRoot.Elements()
+                                    where e.Name == "number"
+                                    select e).FirstOrDefault();
+                element.Value = testId.ToString();
+                configRoot.Save(CONFIGFILE);
+                return testId;
             }
             private set { testId = value; }
         }
@@ -78,6 +82,7 @@ namespace BE
             {
                 throw new Exception("File upload problem"); ;
             }
+            
             //TestId = 10000000;
             MinimumTraineeAge = 18;
             MinimumClasses = 20;

@@ -791,10 +791,10 @@ namespace BL
             {
                 throw new Exception(tester.Name.ToString() + " is too young.");
             }
-            if (k.Any(t => !updatedTester.hasTestByDate(t.DateAndTime)))
-            {
-                throw new Exception(tester.Name.ToString() + " is signed up to Tests that need to be canceled in order to change their schedule.");
-            }
+            //if (k.Any(t => !updatedTester.hasTestByDate(t.DateAndTime)))
+            //{
+            //    throw new Exception(tester.Name.ToString() + " is signed up to Tests that need to be canceled in order to change their schedule.");
+            //}
             try
             {
                 FactoryDAL.Instance.UpdateTester(updatedTester);

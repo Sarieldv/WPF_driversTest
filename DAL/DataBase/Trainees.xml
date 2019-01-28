@@ -1,45 +1,6 @@
 <?xml version="1.0"?>
 <ArrayOfTrainee xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Trainee>
-    <IDNumber>015692486</IDNumber>
-    <Name>
-      <FirstName>Naama</FirstName>
-      <LastName>Vazanna</LastName>
-    </Name>
-    <BirthDate>1990-07-23T00:00:00</BirthDate>
-    <MyGender>Female</MyGender>
-    <MyPhoneNumber>
-      <number>086423751</number>
-      <kind>Home</kind>
-    </MyPhoneNumber>
-    <MyAddress>
-      <StreetName>pisga</StreetName>
-      <AddressNumber>19</AddressNumber>
-      <CityName>haifa</CityName>
-    </MyAddress>
-    <TraineeVehicle>
-      <VehicleType>PrivateVehicle</VehicleType>
-      <GearBoxType>Automatic</GearBoxType>
-    </TraineeVehicle>
-    <SchoolName>Horen Et Yosef</SchoolName>
-    <Teacher>
-      <FirstName>Eli</FirstName>
-      <LastName>Jones</LastName>
-    </Teacher>
-    <AmountOfTests>0</AmountOfTests>
-    <HaveTest>false</HaveTest>
-    <AmountOfClasses>
-      <int>22</int>
-      <int>8</int>
-      <int>12</int>
-      <int>0</int>
-      <int>24</int>
-      <int>0</int>
-      <int>0</int>
-      <int>0</int>
-    </AmountOfClasses>
-  </Trainee>
-  <Trainee>
     <IDNumber>234910768</IDNumber>
     <Name>
       <FirstName>Moti</FirstName>
@@ -65,8 +26,67 @@
       <FirstName>Adina</FirstName>
       <LastName>Margi</LastName>
     </Teacher>
-    <AmountOfTests>0</AmountOfTests>
+    <AmountOfTests>1</AmountOfTests>
     <HaveTest>false</HaveTest>
+    <PassedByVehicleParams>
+      <boolean>false</boolean>
+      <boolean>false</boolean>
+      <boolean>false</boolean>
+      <boolean>false</boolean>
+      <boolean>false</boolean>
+      <boolean>false</boolean>
+      <boolean>false</boolean>
+      <boolean>false</boolean>
+    </PassedByVehicleParams>
+    <AmountOfClasses>
+      <int>22</int>
+      <int>8</int>
+      <int>12</int>
+      <int>0</int>
+      <int>24</int>
+      <int>0</int>
+      <int>0</int>
+      <int>0</int>
+    </AmountOfClasses>
+  </Trainee>
+  <Trainee>
+    <IDNumber>015692486</IDNumber>
+    <Name>
+      <FirstName>Naama</FirstName>
+      <LastName>Vazanna</LastName>
+    </Name>
+    <BirthDate>1990-07-23T00:00:00</BirthDate>
+    <MyGender>Female</MyGender>
+    <MyPhoneNumber>
+      <number>086423751</number>
+      <kind>Home</kind>
+    </MyPhoneNumber>
+    <MyAddress>
+      <StreetName>pisga</StreetName>
+      <AddressNumber>19</AddressNumber>
+      <CityName>haifa</CityName>
+    </MyAddress>
+    <TraineeVehicle>
+      <VehicleType>PrivateVehicle</VehicleType>
+      <GearBoxType>Automatic</GearBoxType>
+    </TraineeVehicle>
+    <SchoolName>Horen Et Yosef</SchoolName>
+    <Teacher>
+      <FirstName>Eli</FirstName>
+      <LastName>Jones</LastName>
+    </Teacher>
+    <AmountOfTests>1</AmountOfTests>
+    <HaveTest>false</HaveTest>
+    <PassedByVehicleParams>
+      <boolean>false</boolean>
+      <boolean>false</boolean>
+      <boolean>false</boolean>
+      <boolean>false</boolean>
+      <boolean>false</boolean>
+      <boolean>false</boolean>
+      <boolean>false</boolean>
+      <boolean>false</boolean>
+    </PassedByVehicleParams>
     <AmountOfClasses>
       <int>22</int>
       <int>8</int>
