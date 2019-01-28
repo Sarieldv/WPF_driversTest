@@ -117,7 +117,7 @@ namespace WPF_UI
             }
             try
             {
-                FactoryBL.Instance.UpdateTrainee(thisTrainee);
+                Worker.RunWorkerAsync();
             }
             catch (Exception ex)
             {

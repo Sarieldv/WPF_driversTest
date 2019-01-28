@@ -57,7 +57,7 @@
       <CityName>haifa</CityName>
     </MyAddress>
     <TraineeVehicle>
-      <VehicleType>PrivateVehicle</VehicleType>
+      <VehicleType>TwoWheelVehicle</VehicleType>
       <GearBoxType>Automatic</GearBoxType>
     </TraineeVehicle>
     <SchoolName>Horen Et Yosef</SchoolName>
@@ -66,7 +66,7 @@
       <LastName>Jones</LastName>
     </Teacher>
     <AmountOfTests>1</AmountOfTests>
-    <HaveTest>true</HaveTest>
+    <HaveTest>false</HaveTest>
     <PassedByVehicleParams>
       <boolean>false</boolean>
       <boolean>false</boolean>
@@ -78,9 +78,9 @@
       <boolean>false</boolean>
     </PassedByVehicleParams>
     <AmountOfClasses>
-      <int>22</int>
+      <int>25</int>
       <int>8</int>
-      <int>12</int>
+      <int>13</int>
       <int>0</int>
       <int>24</int>
       <int>0</int>

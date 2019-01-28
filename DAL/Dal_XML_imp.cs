@@ -118,7 +118,9 @@ namespace DAL
             {
                 throw new Exception("Test does not exist");
             }
-            DataSource.TestsList.Remove(_test);
+            DataSource.TestsList.Remove((from t in DataSource.TestsList
+                                        where t.Number==_test.Number
+                                        select t).FirstOrDefault());
             SaveToXML<List<Test>>(DataSource.TestsList, TESTFILE);
         }
 
@@ -128,7 +130,9 @@ namespace DAL
             {
                 throw new Exception("Tester does not exist.");
             }
-            DataSource.TestersList.Remove(tester);
+            DataSource.TestersList.Remove((from t in DataSource.TestersList
+                                           where t.IDNumber == tester.IDNumber
+                                           select t).FirstOrDefault());
             SaveToXML<List<Tester>>(DataSource.TestersList, TESTERFILE);
         }
         public void EraseTrainee(Trainee trainee)
@@ -137,7 +141,9 @@ namespace DAL
             {
                 throw new Exception("Trainee does not exist.");
             }
-            DataSource.TraineesList.Remove(trainee);
+            DataSource.TraineesList.Remove((from t in DataSource.TraineesList
+                                            where t.IDNumber == trainee.IDNumber
+                                            select t).FirstOrDefault());
             SaveToXML<List<Trainee>>(DataSource.TraineesList, TRAINEEFILE);
         }
 

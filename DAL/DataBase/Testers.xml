@@ -60,7 +60,7 @@
   <Tester>
     <IDNumber>242516987</IDNumber>
     <Name>
-      <FirstName>John</FirstName>
+      <FirstName>Jen</FirstName>
       <LastName>Doe</LastName>
     </Name>
     <BirthDate>1970-01-05T00:00:00</BirthDate>
@@ -74,11 +74,11 @@
       <AddressNumber>7</AddressNumber>
       <CityName>jerusalem</CityName>
     </MyAddress>
-    <YearsOfExperience>3</YearsOfExperience>
-    <MaximumWeeklyTests>1</MaximumWeeklyTests>
+    <YearsOfExperience>21</YearsOfExperience>
+    <MaximumWeeklyTests>21</MaximumWeeklyTests>
     <MyVehicles>
       <VehicleParams>
-        <VehicleType>PrivateVehicle</VehicleType>
+        <VehicleType>HeavyTruck</VehicleType>
         <GearBoxType>Automatic</GearBoxType>
       </VehicleParams>
       <VehicleParams>
@@ -86,7 +86,7 @@
         <GearBoxType>Automatic</GearBoxType>
       </VehicleParams>
       <VehicleParams>
-        <VehicleType>HeavyTruck</VehicleType>
+        <VehicleType>PrivateVehicle</VehicleType>
         <GearBoxType>Automatic</GearBoxType>
       </VehicleParams>
       <VehicleParams>
@@ -94,7 +94,7 @@
         <GearBoxType>Automatic</GearBoxType>
       </VehicleParams>
       <VehicleParams>
-        <VehicleType>PrivateVehicle</VehicleType>
+        <VehicleType>HeavyTruck</VehicleType>
         <GearBoxType>Manual</GearBoxType>
       </VehicleParams>
       <VehicleParams>
@@ -102,7 +102,7 @@
         <GearBoxType>Manual</GearBoxType>
       </VehicleParams>
       <VehicleParams>
-        <VehicleType>HeavyTruck</VehicleType>
+        <VehicleType>PrivateVehicle</VehicleType>
         <GearBoxType>Manual</GearBoxType>
       </VehicleParams>
       <VehicleParams>
@@ -110,8 +110,8 @@
         <GearBoxType>Manual</GearBoxType>
       </VehicleParams>
     </MyVehicles>
-    <MyWorkHoursString>000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000</MyWorkHoursString>
+    <MyWorkHoursString>000000000000000000000000000000</MyWorkHoursString>
     <MaxDistanceFromTest>21</MaxDistanceFromTest>
-    <TestsSignedUpFor>1</TestsSignedUpFor>
+    <TestsSignedUpFor>0</TestsSignedUpFor>
   </Tester>
 </ArrayOfTester>
