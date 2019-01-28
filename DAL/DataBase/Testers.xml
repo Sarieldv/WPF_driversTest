@@ -1,6 +1,63 @@
 <?xml version="1.0"?>
 <ArrayOfTester xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <Tester>
+    <IDNumber>242516987</IDNumber>
+    <Name>
+      <FirstName>John</FirstName>
+      <LastName>Doe</LastName>
+    </Name>
+    <BirthDate>1970-01-05T00:00:00</BirthDate>
+    <MyGender>Male</MyGender>
+    <MyPhoneNumber>
+      <number>0546235582</number>
+      <kind>Mobile</kind>
+    </MyPhoneNumber>
+    <MyAddress>
+      <StreetName>pisga</StreetName>
+      <AddressNumber>7</AddressNumber>
+      <CityName>jerusalem</CityName>
+    </MyAddress>
+    <YearsOfExperience>3</YearsOfExperience>
+    <MaximumWeeklyTests>1</MaximumWeeklyTests>
+    <MyVehicles>
+      <VehicleParams>
+        <VehicleType>PrivateVehicle</VehicleType>
+        <GearBoxType>Automatic</GearBoxType>
+      </VehicleParams>
+      <VehicleParams>
+        <VehicleType>MediumTruck</VehicleType>
+        <GearBoxType>Automatic</GearBoxType>
+      </VehicleParams>
+      <VehicleParams>
+        <VehicleType>HeavyTruck</VehicleType>
+        <GearBoxType>Automatic</GearBoxType>
+      </VehicleParams>
+      <VehicleParams>
+        <VehicleType>TwoWheelVehicle</VehicleType>
+        <GearBoxType>Automatic</GearBoxType>
+      </VehicleParams>
+      <VehicleParams>
+        <VehicleType>PrivateVehicle</VehicleType>
+        <GearBoxType>Manual</GearBoxType>
+      </VehicleParams>
+      <VehicleParams>
+        <VehicleType>MediumTruck</VehicleType>
+        <GearBoxType>Manual</GearBoxType>
+      </VehicleParams>
+      <VehicleParams>
+        <VehicleType>HeavyTruck</VehicleType>
+        <GearBoxType>Manual</GearBoxType>
+      </VehicleParams>
+      <VehicleParams>
+        <VehicleType>TwoWheelVehicle</VehicleType>
+        <GearBoxType>Manual</GearBoxType>
+      </VehicleParams>
+    </MyVehicles>
+    <MyWorkHoursString>000000000000000000000000000000</MyWorkHoursString>
+    <MaxDistanceFromTest>21</MaxDistanceFromTest>
+    <TestsSignedUpFor>0</TestsSignedUpFor>
+  </Tester>
+  <Tester>
     <IDNumber>314569245</IDNumber>
     <Name>
       <FirstName>Margo</FirstName>
@@ -46,63 +103,6 @@
       </VehicleParams>
       <VehicleParams>
         <VehicleType>HeavyTruck</VehicleType>
-        <GearBoxType>Manual</GearBoxType>
-      </VehicleParams>
-      <VehicleParams>
-        <VehicleType>TwoWheelVehicle</VehicleType>
-        <GearBoxType>Manual</GearBoxType>
-      </VehicleParams>
-    </MyVehicles>
-    <MyWorkHoursString>000000000000000000000000000000</MyWorkHoursString>
-    <MaxDistanceFromTest>21</MaxDistanceFromTest>
-    <TestsSignedUpFor>0</TestsSignedUpFor>
-  </Tester>
-  <Tester>
-    <IDNumber>242516987</IDNumber>
-    <Name>
-      <FirstName>Jen</FirstName>
-      <LastName>Doe</LastName>
-    </Name>
-    <BirthDate>1970-01-05T00:00:00</BirthDate>
-    <MyGender>Male</MyGender>
-    <MyPhoneNumber>
-      <number>0546235582</number>
-      <kind>Mobile</kind>
-    </MyPhoneNumber>
-    <MyAddress>
-      <StreetName>pisga</StreetName>
-      <AddressNumber>7</AddressNumber>
-      <CityName>jerusalem</CityName>
-    </MyAddress>
-    <YearsOfExperience>21</YearsOfExperience>
-    <MaximumWeeklyTests>21</MaximumWeeklyTests>
-    <MyVehicles>
-      <VehicleParams>
-        <VehicleType>HeavyTruck</VehicleType>
-        <GearBoxType>Automatic</GearBoxType>
-      </VehicleParams>
-      <VehicleParams>
-        <VehicleType>MediumTruck</VehicleType>
-        <GearBoxType>Automatic</GearBoxType>
-      </VehicleParams>
-      <VehicleParams>
-        <VehicleType>PrivateVehicle</VehicleType>
-        <GearBoxType>Automatic</GearBoxType>
-      </VehicleParams>
-      <VehicleParams>
-        <VehicleType>TwoWheelVehicle</VehicleType>
-        <GearBoxType>Automatic</GearBoxType>
-      </VehicleParams>
-      <VehicleParams>
-        <VehicleType>HeavyTruck</VehicleType>
-        <GearBoxType>Manual</GearBoxType>
-      </VehicleParams>
-      <VehicleParams>
-        <VehicleType>MediumTruck</VehicleType>
-        <GearBoxType>Manual</GearBoxType>
-      </VehicleParams>
-      <VehicleParams>
-        <VehicleType>PrivateVehicle</VehicleType>
         <GearBoxType>Manual</GearBoxType>
       </VehicleParams>
       <VehicleParams>

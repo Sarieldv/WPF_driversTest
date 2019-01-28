@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace BE
 {
@@ -12,7 +13,8 @@ namespace BE
         private static int testId;
         private static int minTesterAge;
         private static int minimumTraineeAge;
-
+        private const string CONFIGFILE = "..\\..\\..\\DAL\\DataBase\\config.xml";
+        private static XElement configRoot;
         public static int MaximumTesterAge
         {
             get { return maxTesterAge; }
@@ -27,12 +29,18 @@ namespace BE
 
         public static int TestId
         {
-            get { return testId++; }
+            get
+            {
+                testId++;
+
+                return TestId;
+            }
             private set { testId = value; }
         }
         public static int MinimumTraineeAge
         {
-            get { return minimumTraineeAge; }
+            get
+            { return minimumTraineeAge; }
             private set { minimumTraineeAge = value; }
         }
         private static int minimumClasses;
@@ -54,7 +62,23 @@ namespace BE
         {
             MaximumTesterAge = 80;
             MinimumTesterAge = 40;
-            TestId = 10000000;
+            try
+            {
+                configRoot = XElement.Load(CONFIGFILE);
+            }
+            catch
+            {
+                throw new Exception("File upload problem");
+            }
+            try
+            {
+                TestId = int.Parse(configRoot.Element("number").Value);     
+            }
+            catch 
+            {
+                throw new Exception("File upload problem"); ;
+            }
+            //TestId = 10000000;
             MinimumTraineeAge = 18;
             MinimumClasses = 20;
             TimeBetweenTests=new TimeSpan(7,0,0,0);

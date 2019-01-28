@@ -45,10 +45,6 @@ namespace DAL
                 temp[i] = tester.MyWorkHours[i];
             }
             temp[tester.MyWorkHours.Length] = new WeeklyWorkHours();
-            //for (int i = 0; i < temp.Length; i++)
-            //{
-            //    tester.MyWorkHours[i] = temp[i];
-            //}
             tester.MyWorkHours = temp/*[temp.Length] = new WeeklyWorkHours()*/;
             UpdateTester(tester);
         }
@@ -152,6 +148,7 @@ namespace DAL
         #region returnFromXml
         public List<Tester> ReturnTesters()
         {
+            DataSource.TestersList = LoadFromXML<List<Tester>>(TESTERFILE);
             if (DataSource.TestersList.FirstOrDefault() == null)
             {
                 throw new Exception("There are no testers in the system.");
@@ -161,6 +158,7 @@ namespace DAL
 
         public List<Test> ReturnTests()
         {
+            DataSource.TestsList = LoadFromXML<List<Test>>(TESTFILE);
             if (DataSource.TestsList.FirstOrDefault() == null)
             {
                 throw new Exception("There are no tests in the system.");
@@ -170,6 +168,7 @@ namespace DAL
 
         public List<Trainee> ReturnTrainees()
         {
+            DataSource.TraineesList = LoadFromXML<List<Trainee>>(TRAINEEFILE);
             if (DataSource.TraineesList.FirstOrDefault() == null)
             {
                 throw new Exception("There are no trainees in the system.");
