@@ -28,7 +28,8 @@ namespace DAL
         {
             FileStream file = new FileStream(path, FileMode.Open);
             XmlSerializer xmlSerializer = new XmlSerializer(typeof(T));
-            T result = (T)xmlSerializer.Deserialize(file); file.Close();
+            T result = (T)xmlSerializer.Deserialize(file);
+            file.Close();
             return result;
         }
         public void AddAnotherWeek(Tester tester)
@@ -37,13 +38,18 @@ namespace DAL
             {
                 throw new Exception("Tester does not exist");
             }
-            WeeklyWorkHours[] temp = tester.MyWorkHours;
-            tester.MyWorkHours = new WeeklyWorkHours[temp.Length + 1];
-            for (int i = 0; i < temp.Length; i++)
+
+            WeeklyWorkHours[] temp = new WeeklyWorkHours[tester.MyWorkHours.Length + 1];
+            for (int i = 0; i < tester.MyWorkHours.Length; i++)
             {
-                tester.MyWorkHours[i] = temp[i];
+                temp[i] = tester.MyWorkHours[i];
             }
-            tester.MyWorkHours[temp.Length] = new WeeklyWorkHours();
+            temp[tester.MyWorkHours.Length] = new WeeklyWorkHours();
+            //for (int i = 0; i < temp.Length; i++)
+            //{
+            //    tester.MyWorkHours[i] = temp[i];
+            //}
+            tester.MyWorkHours = temp/*[temp.Length] = new WeeklyWorkHours()*/;
             UpdateTester(tester);
         }
         public void RemoveFirstWeek(Tester tester)

@@ -717,7 +717,7 @@ namespace BL
                 trainee.AmountOfTests = 1;
                 trainee.PassedByVehicleParams[trainee.TraineeVehicle.Index()] = (bool)updatedTest.Grade;
                 trainee.HaveTest = false;
-                (tester.MyWorkHours[tester.getWeek(mostRecentTest.DateAndTime)])[mostRecentTest.DateAndTime] = false;
+                //(tester.MyWorkHours[tester.getWeek(mostRecentTest.DateAndTime)])[mostRecentTest.DateAndTime] = false;
 
                 try
                 {
@@ -727,14 +727,14 @@ namespace BL
                 {
                     throw ex;
                 }
-                try
-                {
-                    UpdateTester(tester);
-                }
-                catch (Exception ex)
-                {
-                    throw ex;
-                }
+                //try
+                //{
+                //    UpdateTester(tester);
+                //}
+                //catch (Exception ex)
+                //{
+                //    throw ex;
+                //}
 
             }
             try
@@ -776,13 +776,13 @@ namespace BL
             {
                 throw new Exception(tester.Name.ToString() + " is already signed up to more tests then will be possible. Please manually cancel those tests before changing the amount of tests possible.\n At least " + (tester.TestsSignedUpFor - updatedTester.MaximumWeeklyTests).ToString() + " will need to be canceled to allow this action.");
             }
-            if (tester.MyVehicles != updatedTester.MyVehicles && k.Any(t => updatedTester.hasVehicle(t.TestVehicle) == false))
+            if (/*tester.MyVehicles != updatedTester.MyVehicles && tester.MyVehicles != updatedTester.MyVehicles && */k.Any(t => updatedTester.hasVehicle(t.TestVehicle) == false))
             {
-                throw new Exception(tester.Name.ToString() + " is signed up to tests he will not be able to do because he will no longer specialize in the needed vehicle.\n Please manually cancel those tests before updating the tester.");
+                throw new Exception(tester.Name.ToString() + " is signed up to tests they will not be able to do because they will no longer specialize in the needed vehicle.\n Please manually cancel those tests before updating the tester.");
             }
             if ((tester.MaxDistanceFromTest > updatedTester.MaxDistanceFromTest || tester.MyAddress != updatedTester.MyAddress) && k.Any(t => CalcDistance(updatedTester.MyAddress, t.AddressOfDeparture) > updatedTester.MaxDistanceFromTest))
             {
-                throw new Exception(tester.Name.ToString() + " is signed up to tests he will not be able to do because his address will be too far from the test.\n Please manually cancel those tests before updating the tester.");
+                throw new Exception(tester.Name.ToString() + " is signed up to tests they will not be able to do because their address will be too far from the test.\n Please manually cancel those tests before updating the tester.");
             }
             if (updatedTester.Age() > Configuration.MaximumTesterAge)
             {
@@ -794,7 +794,7 @@ namespace BL
             }
             if (updatedTester.MyWorkHours != tester.MyWorkHours && k.Any(t => !updatedTester.hasTestByDate(t.DateAndTime)))
             {
-                throw new Exception(tester.Name.ToString() + " is signed up to Tests that need to be canceled in order to change his schedule.");
+                throw new Exception(tester.Name.ToString() + " is signed up to Tests that need to be canceled in order to change their schedule.");
             }
             try
             {
@@ -834,11 +834,11 @@ namespace BL
             {
                 throw new Exception("The ID number is not valid.");
             }
-            if (trainee.HaveTest != updatedTrainee.HaveTest)
-            {
-                throw new Exception(trainee.Name.ToString() + " has a test in the system.");
-            }
-            if (trainee.TraineeVehicle != updatedTrainee.TraineeVehicle && trainee.HaveTest)
+            //if (trainee.HaveTest != updatedTrainee.HaveTest)
+            //{
+            //    throw new Exception(trainee.Name.ToString() + " has a test in the system.");
+            //}
+            if (trainee.TraineeVehicle.GearBoxType != updatedTrainee.TraineeVehicle.GearBoxType &&trainee.TraineeVehicle.VehicleType!=updatedTrainee.TraineeVehicle.VehicleType && trainee.HaveTest)
             {
                 throw new Exception(trainee.Name.ToString() + " has a test in the system on a specific vehicle. In order to change the vehicle, please update the test.");
             }

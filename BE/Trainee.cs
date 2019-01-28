@@ -16,11 +16,12 @@ namespace BE
             set => _amountOfTests++;
         }
         public bool HaveTest { get; set; }
-        public bool[] PassedByVehicleParams = new bool[8];
-        public int[] AmountOfClasses = new int[8];
+        public bool[] PassedByVehicleParams { get; set; }
+        public int[] AmountOfClasses { get; set; }
         public Trainee()
         {
-
+            PassedByVehicleParams = new bool[8];
+            AmountOfClasses = new int[8];
         }
         public Trainee(string _ID, FullName _name, DateTime _birthDate, Gender _gender, PhoneNumber _phoneNumber, Address _address, VehicleParams _traineeVehicle, string _schoolName, FullName _teacher, int[] _amountOfClasses)
         {

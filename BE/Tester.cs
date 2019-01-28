@@ -19,16 +19,20 @@ namespace BE
             get => PrivateMyWorkHours;
             set
             {
-                PrivateMyWorkHours = value;
+                //PrivateMyWorkHours = value;
+                PrivateMyWorkHours = new WeeklyWorkHours[value.Length];
+                for (int i = 0; i < value.Length; i++)
+                {
+                    PrivateMyWorkHours[i] = value[i];
+                }
                 string str = "";
-                foreach (var item in MyWorkHours)
+                string temp;
+                foreach (var item in value)
                 {
-                    str += item.WeeklyWorkHoursString;
+                    temp = item.WeeklyWorkHoursString;
+                    str += temp;
                 }
-                if (str != PrivateMyWorkHoursString)
-                {
-                    PrivateMyWorkHoursString = str;
-                }
+                PrivateMyWorkHoursString = str;
             }
         }
         private string PrivateMyWorkHoursString;
@@ -38,7 +42,7 @@ namespace BE
             set
             {
                 PrivateMyWorkHoursString = value;
-                WeeklyWorkHours[] arr = new WeeklyWorkHours[MyWorkHoursString.Length / 65 + 1];
+                WeeklyWorkHours[] arr = new WeeklyWorkHours[value.Length / 30];
                 for (int i = 0; i < arr.Length; i++)
                 {
                     arr[i] = new WeeklyWorkHours();
@@ -49,11 +53,11 @@ namespace BE
                     {
                         for (int n = 0; n < 6; n++)
                         {
-                            if (MyWorkHoursString[65 * i + 12 * j + 2 * i] == '1')
+                            if (MyWorkHoursString[30 * i + 6 * j + n] == '1')
                             {
                                 arr[i][j, n] = true;
                             }
-                            else if (MyWorkHoursString[65 * i + 12 * j + 2 * i] == '0')
+                            else if (MyWorkHoursString[30 * i + 6 * j + n] == '0')
                             {
                                 arr[i][j, n] = false;
                             }
@@ -113,7 +117,7 @@ namespace BE
             MyVehicles = _myVehicles;
             PrivateMyWorkHours = new WeeklyWorkHours[1];
             PrivateMyWorkHours[0] = new WeeklyWorkHours();
-            PrivateMyWorkHoursString = "0,0,0,0,0,0,.0,0,0,0,0,0,.0,0,0,0,0,0,.0,0,0,0,0,0,.0,0,0,0,0,0,.";
+            PrivateMyWorkHoursString = "000000000000000000000000000000";
             MaxDistanceFromTest = _maximumDistance;
         }
         public bool hasVehicle(VehicleParams vehicle)

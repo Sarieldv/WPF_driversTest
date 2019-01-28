@@ -25,20 +25,15 @@ namespace BE
                     {
                         if (MyWeekHours[i, j])
                         {
-                            str += 1;
+                            str += "1";
                         }
                         else
                         {
-                            str += 0;
+                            str += "0";
                         }
-                        str += ",";
                     }
-                    str += ".";
                 }
-                if (WeeklyWorkHoursString != str)
-                {
-                    WeeklyWorkHoursString = str;
-                }
+                privateWeeklyWorkHoursString = str;
 
             }
         }
@@ -50,39 +45,21 @@ namespace BE
             {
                 privateWeeklyWorkHoursString = value;
                 bool[,] arr = new bool[5, 6];
-                int i = 0;
-                int j = 0;
-                for (int n = 0; n < WeeklyWorkHoursString.Length; n++)
+                for (int i = 0; i < 5; i++)
                 {
-                    if (WeeklyWorkHoursString[n] == '1')
+                    for (int j = 0; j < 6; j++)
                     {
-                        arr[i, j] = true;
-                    }
-                    else if (WeeklyWorkHoursString[n] == '0')
-                    {
-                        arr[i, j] = false;
-                    }
-                    else if (WeeklyWorkHoursString[n] == ',')
-                    {
-                        j++;
-                    }
-                    else if (WeeklyWorkHoursString[n] == '.')
-                    {
-                        i++;
-                    }
-                }
-                for (i = 0; i < 5; i++)
-                {
-                    for (j = 0; j < 6; j++)
-                    {
-                        if (arr[i, j] != MyWeekHours[i, j])
+                        if(value[6*i + j]=='1')
                         {
-                            MyWeekHours = arr;
-                            return;
+                            arr[i, j] = true;
+                        }
+                        else
+                        {
+                            arr[i, j] = false;
                         }
                     }
                 }
-
+                privateMyWeekHours = arr;
             }
         }
 
@@ -117,7 +94,7 @@ namespace BE
         public WeeklyWorkHours()
         {
             privateMyWeekHours = new bool[5, 6];
-            privateWeeklyWorkHoursString = "0,0,0,0,0,0,.0,0,0,0,0,0,.0,0,0,0,0,0,.0,0,0,0,0,0,.0,0,0,0,0,0,.";
+            privateWeeklyWorkHoursString = "000000000000000000000000000000";//string started with 30 zeros (a week with no test)
         }
     }
 }

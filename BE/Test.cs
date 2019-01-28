@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Xml.Serialization;
 
 namespace BE
 {
@@ -22,7 +23,49 @@ namespace BE
         public bool? Turning { get; set; }
         public string TesterNote { get; set; }
         public DateTime DateAndTime { get; set; }
-        public bool? Grade { get; set; }
+        [XmlIgnore]
+        public bool? Grade
+        {
+            get=>PrivateGrade;
+            set
+            {
+                PrivateGrade = value;
+                if (value == null)
+                {
+                    PrivateGradeAccessor = 0;
+                }
+                if (value == true)
+                {
+                    PrivateGradeAccessor = 1;
+                }
+                if (value == false)
+                {
+                    PrivateGradeAccessor = 2;
+                }
+            }
+        }
+        private bool? PrivateGrade { get; set; }
+        private int PrivateGradeAccessor { get; set; }
+        public int GradeAccessor
+        {
+            get => PrivateGradeAccessor;
+            set
+            {
+                PrivateGradeAccessor = value;
+                if(value == 0)
+                {
+                    PrivateGrade = null;
+                }
+                if(value == 1)
+                {
+                    PrivateGrade = true;
+                }
+                if(value == 2)
+                {
+                    PrivateGrade = false;
+                }
+            }
+        }
         public Test(string _testerId, VehicleParams vehicle, string _traineeId, Address _addressOfDeparture, DateTime _dateAndTime)
         {
             Number = Configuration.TestId;
@@ -31,7 +74,17 @@ namespace BE
             TraineeId = _traineeId;
             AddressOfDeparture = _addressOfDeparture;
             DateAndTime = _dateAndTime;
-
+            DistanceKeep = null;
+            ReverseParking = null;
+            Parking = null;
+            LookingAtMirrors = null;
+            Junction = null;
+            Reversing = null;
+            Roundabout = null;
+            Overtaking = null;
+            Turning = null;
+            TesterNote = "";
+            Grade = null;
         }
         public Test(Test t, bool _distanceKeep, bool _reverseParking, bool _parking, bool _lookingAtMirrors, bool _junction, bool _reversing, bool _roundabout, bool _overtaking, bool _turning, string _testerNote, bool _grade)
         {
