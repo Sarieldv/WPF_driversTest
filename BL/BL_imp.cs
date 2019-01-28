@@ -223,7 +223,6 @@ namespace BL
         /// <param name="_test">Test to cancel</param>
         public void CancelTest(Test _test)
         {
-
             try
             {
                 FactoryDAL.Instance.CancelTest(_test);

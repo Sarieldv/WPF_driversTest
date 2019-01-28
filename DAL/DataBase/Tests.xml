@@ -23,7 +23,7 @@
     <Overtaking xsi:nil="true" />
     <Turning xsi:nil="true" />
     <TesterNote />
-    <DateAndTime>2019-02-05T11:00:00</DateAndTime>
+    <DateAndTime>2019-02-05T10:00:00</DateAndTime>
     <GradeAccessor>0</GradeAccessor>
   </Test>
 </ArrayOfTest>
